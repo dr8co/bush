@@ -1,0 +1,6 @@
+# Cmake files and Directories
+CMake*
+cmake*
+
+# Hidden Directories
+.*/
