@@ -2,30 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-void execute_pipe() {
-
-    int i, n = 1, input, first;
-
-    input = 0;
-    first = 1;
-
-    cmd_exec[0] = strtok(input_buffer, "|");
-
-    while ((cmd_exec[n] = strtok(NULL, "|")) != NULL)
-        n++;
-    cmd_exec[n] = NULL;
-    pipe_count = n - 1;
-    for (i = 0; i < n - 1; i++) {
-        input = split(cmd_exec[i], input, first, 0);
-        first = 0;
-    }
-    input = split(cmd_exec[i], input, first, 1);
-    input = 0;
-    return;
-
-}
-
+#include <fcntl.h>
+#include <sys/wait.h>
 
 void echo_calling(char *echo_val) {
     int i = 0, index = 0;
@@ -114,7 +92,7 @@ void history_execute_with_constants() {
 
 void bang_execute() {
     char bang_val[1000];
-    char *tokenise_bang[100], *num_ch[10];
+    char *tokenize_bang[100], *num_ch[10];
     int i, n = 1, num, index = 0;
     i = 1;
     if (input_buffer[i] == '!') {
@@ -135,13 +113,105 @@ void bang_execute() {
         num = atoi(num_ch[0]);
         strcpy(bang_val, history_data[num - 1]);
     }
-    tokenise_bang[0] = strtok(bang_val, " ");
-    while ((tokenise_bang[n] = strtok(NULL, "")) != NULL)
+    tokenize_bang[0] = strtok(bang_val, " ");
+    while ((tokenize_bang[n] = strtok(NULL, "")) != NULL)
         n++;
-    tokenise_bang[n] = NULL;
-    strcpy(bang_val, tokenise_bang[1]);
+    tokenize_bang[n] = NULL;
+    strcpy(bang_val, tokenize_bang[1]);
     printf("%s\n", bang_val);
     strcpy(input_buffer, bang_val);
 
+}
 
+int command(int input, int first, int last, char *cmdExec) {
+    int my_pipe_fd[2], ret, input_fd, output_fd;
+    ret = pipe(my_pipe_fd);
+    if (ret == -1) {
+        perror("pipe");
+        return 1;
+    }
+    pid = fork();
+
+    if (pid == 0) {
+        if (first == 1 && last == 0 && input == 0) {
+            dup2(my_pipe_fd[1], 1);
+        } else if (first == 0 && last == 0 && input != 0) {
+            dup2(input, 0);
+            dup2(my_pipe_fd[1], 1);
+        } else {
+            dup2(input, 0);
+        }
+        if (strchr(cmdExec, '<') && strchr(cmdExec, '>')) {
+            input_redirection = 1;
+            output_redirection = 1;
+            tokenize_redirect_input_output(cmdExec);
+        } else if (strchr(cmdExec, '<')) {
+            input_redirection = 1;
+            tokenize_redirect_input(cmdExec);
+        } else if (strchr(cmdExec, '>')) {
+            output_redirection = 1;
+            tokenize_redirect_output(cmdExec);
+        }
+        if (output_redirection == 1) {
+            output_fd = creat(output_redirection_file, 0644);
+            if (output_fd < 0) {
+                fprintf(stderr, "Failed to open %s for writing\n", output_redirection_file);
+                return (EXIT_FAILURE);
+            }
+            dup2(output_fd, 1);
+            close(output_fd);
+            output_redirection = 0;
+        }
+        if (input_redirection == 1) {
+            input_fd = open(input_redirection_file, O_RDONLY, 0);
+            if (input_fd < 0) {
+                fprintf(stderr, "Failed to open %s for reading\n", input_redirection_file);
+                return (EXIT_FAILURE);
+            }
+            dup2(input_fd, 0);
+            close(input_fd);
+            input_redirection = 0;
+        }
+        if (strcmp(args[0], "export") == 0) {
+            set_environment_variables();
+            return 1;
+        }
+        if (strcmp(args[0], "echo") == 0) {
+            echo_calling(cmdExec);
+        } else if (strcmp(args[0], "history") == 0) {
+            history_execute_with_constants();
+        } else if (execvp(args[0], args) < 0) printf("%s: command not found\n", args[0]);
+        exit(0);
+    } else {
+        waitpid(pid, 0, 0);
+    }
+
+    if (last == 1)
+        close(my_pipe_fd[0]);
+    if (input != 0)
+        close(input);
+    close(my_pipe_fd[1]);
+    return my_pipe_fd[0];
+
+}
+
+void execute_pipe() {
+
+    int i, n = 1, input, first;
+
+    input = 0;
+    first = 1;
+
+    cmd_exec[0] = strtok(input_buffer, "|");
+
+    while ((cmd_exec[n] = strtok(NULL, "|")) != NULL)
+        n++;
+    cmd_exec[n] = NULL;
+    pipe_count = n - 1;
+    for (i = 0; i < n - 1; i++) {
+        input = split(cmd_exec[i], input, first, 0);
+        first = 0;
+    }
+    input = split(cmd_exec[i], input, first, 1);
+    input = 0;
 }

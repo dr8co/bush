@@ -3,7 +3,6 @@
 #include <string.h>
 #include "main.h"
 
-
 void environ_ment() {
     int i = 1, index = 0;
     char env_val[1000], *value;
@@ -27,7 +26,7 @@ void set_environment_variables() {
         char **env;
         for (env = environ; *env != 0; env++) {
             char *value = *env;
-            printf("declare -x %s\n", value);
+            printf("export %s\n", value);
         }
         return;
     }

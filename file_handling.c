@@ -10,7 +10,7 @@ void file_process() {
     history_file = (char *) malloc(100 * sizeof(char));
     strcpy(history_file, current_directory);
     strcat(history_file, "/");
-    strcat(history_file, "simple_shell_history");
+    strcat(history_file, ".simple_shell_history");
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
     int bytes_read, i, x = 0, index = 0;

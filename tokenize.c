@@ -8,10 +8,10 @@ void tokenize_commands(char *com_exec) {
         m++;
 }
 
-void tokenize_redirect_input_output(char *cmd_exec) {
+void tokenize_redirect_input_output(char *cmdExec) {
     char *io_token[100];
     char *new_cmd_exec1;
-    new_cmd_exec1 = strdup(cmd_exec);
+    new_cmd_exec1 = strdup(cmdExec);
     int m = 1;
     io_token[0] = strtok(new_cmd_exec1, "<");
     while ((io_token[m] = strtok(NULL, ">")) != NULL)
@@ -24,10 +24,10 @@ void tokenize_redirect_input_output(char *cmd_exec) {
 
 }
 
-void tokenize_redirect_input(char *cmd_exec) {
+void tokenize_redirect_input(char *cmdExec) {
     char *i_token[100];
     char *new_cmd_exec1;
-    new_cmd_exec1 = strdup(cmd_exec);
+    new_cmd_exec1 = strdup(cmdExec);
     int m = 1;
     i_token[0] = strtok(new_cmd_exec1, "<");
     while ((i_token[m] = strtok(NULL, "<")) != NULL)
@@ -37,10 +37,10 @@ void tokenize_redirect_input(char *cmd_exec) {
     tokenize_commands(i_token[0]);
 }
 
-void tokenize_redirect_output(char *cmd_exec) {
+void tokenize_redirect_output(char *cmdExec) {
     char *o_token[100];
     char *new_cmd_exec1;
-    new_cmd_exec1 = strdup(cmd_exec);
+    new_cmd_exec1 = strdup(cmdExec);
     int m = 1;
     o_token[0] = strtok(new_cmd_exec1, ">");
     while ((o_token[m] = strtok(NULL, ">")) != NULL)

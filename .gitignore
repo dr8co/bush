@@ -4,3 +4,7 @@ cmake*
 
 # Hidden Directories
 .*/
+
+# Other files
+/.simple_shell_history
+lsh

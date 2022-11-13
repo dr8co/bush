@@ -5,7 +5,7 @@
 
 /*GLOBAL VARIABLES*/
 extern int pipe_count, fd;
-static char *args[512];
+extern char *args[512];
 extern char *history_file;
 extern char input_buffer[1024];
 extern char *cmd_exec[100];
@@ -14,9 +14,10 @@ extern char cwd[1024];
 extern pid_t pid;
 extern int no_of_lines;
 extern int environ_flag;
-extern int flag_pipe, flag_without_pipe, output_redirection, input_redirection;
+extern int flag_pipe, flag_without_pipe;
+extern int output_redirection, input_redirection;
 extern int bang_flag;
-extern int pid, status;
+extern int status; //pid, status;
 extern char history_data[1000][1000];
 extern char current_directory[1000];
 extern char ret_file[3000];
@@ -50,11 +51,11 @@ char *skip_whitespaces(char *s);
 
 void tokenize_commands(char *com_exec);
 
-void tokenize_redirect_input_output(char *cmd_exec);
+void tokenize_redirect_input_output(char *cmdExec);
 
-void tokenize_redirect_input(char *cmd_exec);
+void tokenize_redirect_input(char *cmdExec);
 
-void tokenize_redirect_output(char *cmd_exec);
+void tokenize_redirect_output(char *cmdExec);
 
 char *skip_comma(char *str);
 
@@ -62,9 +63,13 @@ int split(char *cmd_exec, int, int, int);
 
 void execute_pipe();
 
-static int command(int, int, int, char *cmd_exec);
+int command(int, int, int, char *cmd_exec);
 
-void prompt();
+char *read_cmd(void);
+
+void print_prompt1();
+
+void print_prompt2();
 
 void sigintHandler(__attribute__((unused)) int sig_num);
 
