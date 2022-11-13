@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 
 void echo_calling(char *echo_val) {
-    int i = 0, index = 0;
+    int i, index = 0;
     environ_flag = 0;
     char new_args[1024], env_val[1000], *str[10];
     str[0] = strtok(echo_val, " ");
@@ -180,7 +180,10 @@ int command(int input, int first, int last, char *cmdExec) {
             echo_calling(cmdExec);
         } else if (strcmp(args[0], "history") == 0) {
             history_execute_with_constants();
-        } else if (execvp(args[0], args) < 0) printf("%s: command not found\n", args[0]);
+        } else if (execvp(args[0], args) < 0) {
+            printf("%s: %i: %s: not found\n", absolute_shell_name, cmd_count, args[0]);
+
+        }
         exit(0);
     } else {
         waitpid(pid, 0, 0);

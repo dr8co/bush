@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 void file_process() {
-    int fd;
+    //int fd;
     history_file = (char *) malloc(100 * sizeof(char));
     strcpy(history_file, current_directory);
     strcat(history_file, "/");
@@ -36,7 +36,7 @@ void file_process() {
 void file_write() {
 
     int fd_out, ret_write, str_len = 0;
-    char input_data[2000];
+    char input_data[2048];
     no_of_lines++;
     char no[10];
     sprintf(no, "%d", no_of_lines);

@@ -48,5 +48,4 @@ void tokenize_redirect_output(char *cmdExec) {
     o_token[1] = skip_whitespaces(o_token[1]);
     output_redirection_file = strdup(o_token[1]);
     tokenize_commands(o_token[0]);
-
 }

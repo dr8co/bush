@@ -2,6 +2,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "main.h"
 
 /*GLOBAL VARIABLES*/
@@ -11,7 +12,6 @@ char *history_file;
 char input_buffer[1024];
 char *cmd_exec[100];
 int flag = 0, len;
-char cwd[1024];
 int flag_pipe = 1;
 pid_t pid;
 int no_of_lines;
@@ -20,28 +20,33 @@ int flag_without_pipe;
 int output_redirection, input_redirection;
 int bang_flag;
 int status;//pid, status;
-char history_data[1000][1000];
-char current_directory[1000];
-char ret_file[3000];
-char his_var[2000];
+char history_data[1024][1024];
+char ret_file[3072];
+char his_var[2048];
 char *input_redirection_file;
 char *output_redirection_file;
+int cmd_count = 0;
 
 
-int main() {
+int main(__attribute__((unused)) int argc, char **argv) {
     //int status;
     char ch[2] = {"\n"};
     char *cmd;
-
+    shell_name = strdup(argv[0]);
     getcwd(current_directory, sizeof(current_directory));
+    absolute_shell_name = abs_name();
+    //printf("Absolute path: %s\n", absolute_shell_name);
     signal(SIGINT, sigintHandler);
     while (1) {
         clear_variables();
         print_prompt1();
         cmd = read_cmd();
-        /*if (!cmd){
-            exit(EXIT_SUCCESS);
-        }*/
+        if (cmd) {
+            ++cmd_count;
+        }
+        else{
+            exit(0);
+        }
         strcpy(input_buffer, cmd);
         if (strcmp(input_buffer, ch) == 0) {
             continue;
@@ -64,7 +69,6 @@ int main() {
         }
         execute_pipe();
         waitpid(pid, &status, 0);
-
     }
     if (flag == 1) {
         exit(0);

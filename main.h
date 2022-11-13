@@ -18,13 +18,17 @@ extern int flag_pipe, flag_without_pipe;
 extern int output_redirection, input_redirection;
 extern int bang_flag;
 extern int status; //pid, status;
-extern char history_data[1000][1000];
-extern char current_directory[1000];
-extern char ret_file[3000];
-extern char his_var[2000];
+extern char history_data[1024][1024];
+extern char current_directory[1024];
+extern char ret_file[3072];
+extern char his_var[2048];
 extern char *input_redirection_file;
 extern char *output_redirection_file;
 extern char **environ;
+extern char *shell_name;
+extern char *absolute_shell_name;
+extern int cmd_count;
+
 
 
 void clear_variables();
@@ -62,6 +66,8 @@ char *skip_comma(char *str);
 int split(char *cmd_exec, int, int, int);
 
 void execute_pipe();
+
+char *abs_name();
 
 int command(int, int, int, char *cmd_exec);
 
