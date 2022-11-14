@@ -48,7 +48,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
             exit(0);
         }
         strcpy(input_buffer, cmd);
-        if (strcmp(input_buffer, ch) == 0) {
+        if (strcmp(input_buffer, ch) == 0 || input_buffer[0] == '#') {
             continue;
         }
         if (input_buffer[0] != '!') {
