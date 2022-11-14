@@ -16,7 +16,7 @@ char *read_cmd(void)
     char *ptr = NULL;
     char ptr_len = 0;
 
-    while(fgets(buff, 1024, stdin))
+    while(fgets(buff, 1024, stdin) != NULL)
     {
         int buff_len = strlen(buff);
 
@@ -62,6 +62,10 @@ char *read_cmd(void)
         }
 
         ptr_len += buff_len;
+    }
+    if (ptr == NULL) {
+        printf("\n");
+        exit(0);
     }
 
     return ptr;
