@@ -12,22 +12,43 @@ char cwd[1024];
 void change_directory() {
     char *home_dir = getenv("HOME");
     char *old_dir = getenv("OLDPWD");
+    char cur_dir[1024];
+
+    getcwd(cur_dir, sizeof(cur_dir));
 
     if (home_dir == NULL) {
         home_dir = "/home";
     }
-    if ((args[1] == NULL) || (strcmp(args[1], "~") == 0) || (strcmp(args[1], "~/") == 0))
-        chdir(home_dir);
-    else if (strcmp(args[1], "-") == 0) {
-        if (old_dir != NULL) {
-            chdir(old_dir);
+    if ((args[1] == NULL) || (strcmp(args[1], "~") == 0) || (strcmp(args[1], "~/") == 0)) {
+        if (chdir(home_dir)) {
+            setenv("OLDPWD", cur_dir, 1);
+            setenv("PWD", home_dir, 1);
         }
-        else{
+    } else if (strcmp(args[1], "-") == 0) {
+        if (old_dir != NULL) {
+            if (chdir(old_dir)) {
+                setenv("PWD", old_dir, 1);
+                setenv("OLDPWD", cur_dir, 1);
+            }
+        }
+        else {
             printf("%s: %i: cd: OLDPWD not set\n", absolute_shell_name, cmd_count);
         }
+    } else if (strcmp(args[1], ".")==0) {
+        setenv("OLDPWD", cur_dir, 1);
+        setenv("PWD", cur_dir, 1);
     }
-    else if (chdir(args[1]) < 0)
-        printf("%s: %i: cd: can\'t cd to %s\n", absolute_shell_name, cmd_count, args[1]);
+    else {
+        if (chdir(args[1]) < 0) {
+            printf("%s: %i: cd: can\'t cd to %s\n", absolute_shell_name, cmd_count, args[1]);
+        } else {
+            char new_dir[1024];
+            getcwd(new_dir, sizeof(new_dir));
+            setenv("OLDPWD", cur_dir, 1);
+            setenv("PWD", new_dir, 1);
+        }
+
+    }
 
 }
 

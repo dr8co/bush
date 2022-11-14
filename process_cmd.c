@@ -27,7 +27,6 @@ char *skip_whitespaces(char *s) {
 int split(char *cmdExec, int input, int first, int last) {
     char *new_cmd_exec1;
     new_cmd_exec1 = strdup(cmdExec);
-    //else
     {
         int m = 1;
         args[0] = strtok(cmdExec, " ");
@@ -40,11 +39,11 @@ int split(char *cmdExec, int input, int first, int last) {
                 exit(0);
             if (strcmp(args[0], "echo") != 0) {
                 cmdExec = skip_comma(new_cmd_exec1);
-                int m = 1;
+                int n = 1;
                 args[0] = strtok(cmdExec, " ");
-                while ((args[m] = strtok(NULL, " ")) != NULL)
-                    m++;
-                args[m] = NULL;
+                while ((args[n] = strtok(NULL, " ")) != NULL)
+                    n++;
+                args[n] = NULL;
 
             }
             if (strcmp("cd", args[0]) == 0) {
