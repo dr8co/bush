@@ -20,25 +20,24 @@ void change_directory() {
         home_dir = "/home";
     }
     if ((args[1] == NULL) || (strcmp(args[1], "~") == 0) || (strcmp(args[1], "~/") == 0)) {
-        if (chdir(home_dir)) {
+        if (chdir(home_dir) == 0) {
             setenv("OLDPWD", cur_dir, 1);
             setenv("PWD", home_dir, 1);
+
         }
     } else if (strcmp(args[1], "-") == 0) {
         if (old_dir != NULL) {
-            if (chdir(old_dir)) {
+            if (chdir(old_dir) == 0) {
                 setenv("PWD", old_dir, 1);
                 setenv("OLDPWD", cur_dir, 1);
             }
-        }
-        else {
+        } else {
             printf("%s: %i: cd: OLDPWD not set\n", absolute_shell_name, cmd_count);
         }
-    } else if (strcmp(args[1], ".")==0) {
+    } else if (strcmp(args[1], ".") == 0) {
         setenv("OLDPWD", cur_dir, 1);
         setenv("PWD", cur_dir, 1);
-    }
-    else {
+    } else {
         if (chdir(args[1]) < 0) {
             printf("%s: %i: cd: can\'t cd to %s\n", absolute_shell_name, cmd_count, args[1]);
         } else {

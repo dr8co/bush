@@ -75,7 +75,7 @@ void history_execute_with_constants() {
         printf(" %d %s\n", no_of_lines, his_var);
     } else {
         if (args[1] != NULL)
-            num = atoi(args[1]);
+            num = _atoi(args[1]);
         if (num > no_of_lines) {
             for (i = 0; i < no_of_lines - 1; i++)
                 printf("%s\n", history_data[i]);
@@ -103,14 +103,14 @@ void bang_execute() {
         while ((num_ch[n] = strtok(NULL, "-")) != NULL)
             n++;
         num_ch[n] = NULL;
-        num = atoi(num_ch[1]);
+        num = _atoi(num_ch[1]);
 
         index = no_of_lines - num;
         strcpy(bang_val, history_data[index]);
 
     } else {
         num_ch[0] = strtok(input_buffer, "!");
-        num = atoi(num_ch[0]);
+        num = _atoi(num_ch[0]);
         strcpy(bang_val, history_data[num - 1]);
     }
     tokenize_bang[0] = strtok(bang_val, " ");
