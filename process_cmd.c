@@ -41,7 +41,7 @@ int split(char *cmdExec, int input, int first, int last) {
         if (args[0] != NULL) {
 
             if (_strcmp(args[0], "exit") == 0)
-                exit(0);
+                ex_it(0);
             if (_strcmp(args[0], "echo") != 0) {
                 cmdExec = skip_quotes(new_cmd_exec1);
                 int n = 1;

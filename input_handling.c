@@ -63,7 +63,7 @@ char *read_cmd(void)
     }
     if (ptr == NULL) {
         printf("\n");
-        exit(0);
+        ex_it(0);
     }
 
     return ptr;

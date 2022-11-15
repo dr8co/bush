@@ -42,7 +42,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
             ++cmd_count;
         }
         else{
-            exit(0);
+            ex_it(0);
         }
         _strcpy(input_buffer, cmd);
         if (_strcmp(input_buffer, ch) == 0 || input_buffer[0] == '#') {
@@ -68,7 +68,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
         waitpid(pid, &status, 0);
     }
     if (flag == 1) {
-        exit(0);
+        ex_it(0);
     }
     return 0;
 }

@@ -1,6 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "main.h"
+
+void (*__cleanup)() = NULL;
+struct atexit *__atexit;
+
 
 void environ_ment() {
     int i = 1, index = 0;
@@ -51,4 +56,21 @@ void clear_variables() {
     pid = 0;
     environ_flag = 0;
     bang_flag = 0;
+}
+
+/**
+ * ex_it - exit, flushing stdio buffers if necessary.
+ * @stat_us: exit status.
+ */
+void ex_it(int stat_us)
+{
+    register struct atexit *p;
+    register int n;
+
+    for (p = __atexit; p; p = p->next)
+        for (n = p->ind; --n >= 0;)
+            (*p->fns[n])();
+    if (__cleanup)
+        (*__cleanup)();
+    _exit(stat_us);
 }
