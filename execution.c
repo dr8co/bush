@@ -16,7 +16,7 @@ void echo_calling(char *echo_val) {
         printf("\n");
         return;
     }
-    if (strchr(str[1], '$')) {
+    if (_strchr(str[1], '$')) {
         environ_flag = 1;
     }
 
@@ -141,14 +141,14 @@ int command(int input, int first, int last, char *cmdExec) {
         } else {
             dup2(input, 0);
         }
-        if (strchr(cmdExec, '<') && strchr(cmdExec, '>')) {
+        if (_strchr(cmdExec, '<') && _strchr(cmdExec, '>')) {
             input_redirection = 1;
             output_redirection = 1;
             tokenize_redirect_input_output(cmdExec);
-        } else if (strchr(cmdExec, '<')) {
+        } else if (_strchr(cmdExec, '<')) {
             input_redirection = 1;
             tokenize_redirect_input(cmdExec);
-        } else if (strchr(cmdExec, '>')) {
+        } else if (_strchr(cmdExec, '>')) {
             output_redirection = 1;
             tokenize_redirect_output(cmdExec);
         }
