@@ -8,7 +8,7 @@
 void file_process() {
     //int fd;
     history_file = (char *) malloc(100 * sizeof(char));
-    strcpy(history_file, current_directory);
+    _strcpy(history_file, current_directory);
     strcat(history_file, "/");
     strcat(history_file, ".simple_shell_history");
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
@@ -24,7 +24,7 @@ void file_process() {
                 temp_data[index - 1] = '\0';
                 no_of_lines++;
                 index = 0;
-                strcpy(history_data[x], temp_data);
+                _strcpy(history_data[x], temp_data);
                 x++;
                 temp_data[0] = '\0';
             }
@@ -40,7 +40,7 @@ void file_write() {
     no_of_lines++;
     char no[10];
     sprintf(no, "%d", no_of_lines);
-    strcpy(input_data, " ");
+    _strcpy(input_data, " ");
     strcat(input_data, no);
     strcat(input_data, " ");
     strcat(input_data, input_buffer);

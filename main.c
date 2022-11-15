@@ -47,7 +47,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
         else{
             exit(0);
         }
-        strcpy(input_buffer, cmd);
+        _strcpy(input_buffer, cmd);
         if (strcmp(input_buffer, ch) == 0 || input_buffer[0] == '#') {
             continue;
         }
@@ -57,7 +57,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
         }
         len = _strlen(input_buffer);
         input_buffer[len - 1] = '\0';
-        strcpy(his_var, input_buffer);
+        _strcpy(his_var, input_buffer);
         if (strcmp(input_buffer, "exit") == 0 || strcmp(input_buffer, "exit\n") == 0) {
             flag = 1;
             break;

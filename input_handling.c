@@ -46,7 +46,7 @@ char *read_cmd(void)
             return NULL;
         }
 
-        strcpy(ptr + ptr_len, buff);
+        _strcpy(ptr + ptr_len, buff);
 
         if(buff[buff_len - 1] == '\n')
         {

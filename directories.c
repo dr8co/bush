@@ -64,7 +64,7 @@ char *abs_name() {
     char *tmp = malloc(sizeof(char) * 1024);
     char *tmp2 = malloc(sizeof(char) * 1024);
 
-    strcpy(tmp2, current_directory);
+    _strcpy(tmp2, current_directory);
 
     if (shell_name[0] == '.' && shell_name[1] == '/') {
         while (shell_name[i + 1] != '\0') {

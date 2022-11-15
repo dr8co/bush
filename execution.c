@@ -11,7 +11,7 @@ void echo_calling(char *echo_val) {
     char new_args[1024], env_val[1000], *str[10];
     str[0] = strtok(echo_val, " ");
     str[1] = strtok(NULL, "");
-    strcpy(env_val, args[1]);
+    _strcpy(env_val, args[1]);
     if (str[1] == NULL) {
         printf("\n");
         return;
@@ -55,7 +55,7 @@ void echo_calling(char *echo_val) {
     if ((strcmp(args[1], new_args) == 0) && (environ_flag == 0))
         printf("%s\n", new_args);
     else {
-        strcpy(args[1], new_args);
+        _strcpy(args[1], new_args);
         if (environ_flag == 1) {
             environ_ment();
         } else if (environ_flag == 0) {
@@ -96,7 +96,7 @@ void bang_execute() {
     int i, n = 1, num, index = 0;
     i = 1;
     if (input_buffer[i] == '!') {
-        strcpy(bang_val, history_data[no_of_lines - 1]);
+        _strcpy(bang_val, history_data[no_of_lines - 1]);
     } else if (input_buffer[i] == '-') {
         n = 1;
         num_ch[0] = strtok(input_buffer, "-");
@@ -106,20 +106,20 @@ void bang_execute() {
         num = _atoi(num_ch[1]);
 
         index = no_of_lines - num;
-        strcpy(bang_val, history_data[index]);
+        _strcpy(bang_val, history_data[index]);
 
     } else {
         num_ch[0] = strtok(input_buffer, "!");
         num = _atoi(num_ch[0]);
-        strcpy(bang_val, history_data[num - 1]);
+        _strcpy(bang_val, history_data[num - 1]);
     }
     tokenize_bang[0] = strtok(bang_val, " ");
     while ((tokenize_bang[n] = strtok(NULL, "")) != NULL)
         n++;
     tokenize_bang[n] = NULL;
-    strcpy(bang_val, tokenize_bang[1]);
+    _strcpy(bang_val, tokenize_bang[1]);
     printf("%s\n", bang_val);
-    strcpy(input_buffer, bang_val);
+    _strcpy(input_buffer, bang_val);
 
 }
 

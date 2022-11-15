@@ -81,6 +81,8 @@ int _atoi(const char *str);
 
 int _strlen(const char *s);
 
+char *_strcpy(char *dest, const char *src);
+
 void sigintHandler(__attribute__((unused)) int sig_num);
 
 #endif /* MAIN_H */
