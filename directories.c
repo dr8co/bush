@@ -23,16 +23,22 @@ void change_directory() {
         if (chdir(home_dir) == 0) {
             setenv("OLDPWD", cur_dir, 1);
             setenv("PWD", home_dir, 1);
-
         }
     } else if (_strcmp(args[1], "-") == 0) {
         if (old_dir != NULL) {
             if (chdir(old_dir) == 0) {
                 setenv("PWD", old_dir, 1);
                 setenv("OLDPWD", cur_dir, 1);
+                printf("%s\n", old_dir);
             }
         } else {
-            printf("%s: %i: cd: OLDPWD not set\n", absolute_shell_name, cmd_count);
+            if (chdir(home_dir) == 0) {
+                setenv("PWD", home_dir, 1);
+                setenv("OLDPWD", cur_dir, 1);
+                printf("%s\n", home_dir);
+            }
+
+            //printf("%s: %i: cd: OLDPWD not set\n", absolute_shell_name, cmd_count);
         }
     } else if (_strcmp(args[1], ".") == 0) {
         setenv("OLDPWD", cur_dir, 1);

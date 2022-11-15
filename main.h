@@ -61,7 +61,7 @@ void tokenize_redirect_input(char *cmdExec);
 
 void tokenize_redirect_output(char *cmdExec);
 
-char *skip_comma(char *str);
+char *skip_quotes(char *str);
 
 int split(char *cmd_exec, int, int, int);
 

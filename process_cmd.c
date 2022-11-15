@@ -1,8 +1,7 @@
 #include <stdlib.h>
-#include <ctype.h>
 #include "main.h"
 
-char *skip_comma(char *str) {
+char *skip_quotes(char *str) {
     int i = 0, j = 0;
     char temp[1000];
     while (str[i++] != '\0') {
@@ -15,8 +14,18 @@ char *skip_comma(char *str) {
     return str;
 }
 
+/**
+ * is_space - checks if a character is a whitespace.
+ * @c: the character to check.
+ * Return: 1 if character is a whitespace, 0 otherwise.
+ */
+int is_space(int c) {
+    return (c == '\t' || c == '\n' ||
+            c == '\v' || c == '\f' || c == '\r' || c == ' ' ? 1 : 0);
+}
+
 char *skip_whitespaces(char *s) {
-    while (isspace(*s)) ++s;
+    while (is_space(*s)) ++s;
     return s;
 }
 
@@ -34,7 +43,7 @@ int split(char *cmdExec, int input, int first, int last) {
             if (_strcmp(args[0], "exit") == 0)
                 exit(0);
             if (_strcmp(args[0], "echo") != 0) {
-                cmdExec = skip_comma(new_cmd_exec1);
+                cmdExec = skip_quotes(new_cmd_exec1);
                 int n = 1;
                 args[0] = _strtok(cmdExec, " ");
                 while ((args[n] = _strtok(NULL, " ")) != NULL)
