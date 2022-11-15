@@ -52,7 +52,7 @@ void echo_calling(char *echo_val) {
 
 
     new_args[index] = '\0';
-    if ((strcmp(args[1], new_args) == 0) && (environ_flag == 0))
+    if ((_strcmp(args[1], new_args) == 0) && (environ_flag == 0))
         printf("%s\n", new_args);
     else {
         _strcpy(args[1], new_args);
@@ -172,13 +172,13 @@ int command(int input, int first, int last, char *cmdExec) {
             close(input_fd);
             input_redirection = 0;
         }
-        if (strcmp(args[0], "export") == 0) {
+        if (_strcmp(args[0], "export") == 0) {
             set_environment_variables();
             return 1;
         }
-        if (strcmp(args[0], "echo") == 0) {
+        if (_strcmp(args[0], "echo") == 0) {
             echo_calling(cmdExec);
-        } else if (strcmp(args[0], "history") == 0) {
+        } else if (_strcmp(args[0], "history") == 0) {
             history_execute_with_constants();
         } else if (execvp(args[0], args) < 0) {
             printf("%s: %i: %s: not found\n", absolute_shell_name, cmd_count, args[0]);

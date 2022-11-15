@@ -1,7 +1,6 @@
 #include "main.h"
 #include <fcntl.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -9,8 +8,8 @@ void file_process() {
     //int fd;
     history_file = (char *) malloc(100 * sizeof(char));
     _strcpy(history_file, current_directory);
-    strcat(history_file, "/");
-    strcat(history_file, ".simple_shell_history");
+    _strcat(history_file, "/");
+    _strcat(history_file, ".simple_shell_history");
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
     int bytes_read, i, x = 0, index = 0;
@@ -41,9 +40,9 @@ void file_write() {
     char no[10];
     sprintf(no, "%d", no_of_lines);
     _strcpy(input_data, " ");
-    strcat(input_data, no);
-    strcat(input_data, " ");
-    strcat(input_data, input_buffer);
+    _strcat(input_data, no);
+    _strcat(input_data, " ");
+    _strcat(input_data, input_buffer);
 
     str_len = _strlen(input_data);
     fd_out = open(history_file, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);

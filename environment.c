@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+
 #include "main.h"
+#include <string.h>
 
 void environ_ment() {
     int i = 1, index = 0;

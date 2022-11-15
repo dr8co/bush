@@ -1,5 +1,5 @@
 #include "main.h"
-#include <string.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,13 +19,13 @@ void change_directory() {
     if (home_dir == NULL) {
         home_dir = "/home";
     }
-    if ((args[1] == NULL) || (strcmp(args[1], "~") == 0) || (strcmp(args[1], "~/") == 0)) {
+    if ((args[1] == NULL) || (_strcmp(args[1], "~") == 0) || (_strcmp(args[1], "~/") == 0)) {
         if (chdir(home_dir) == 0) {
             setenv("OLDPWD", cur_dir, 1);
             setenv("PWD", home_dir, 1);
 
         }
-    } else if (strcmp(args[1], "-") == 0) {
+    } else if (_strcmp(args[1], "-") == 0) {
         if (old_dir != NULL) {
             if (chdir(old_dir) == 0) {
                 setenv("PWD", old_dir, 1);
@@ -34,7 +34,7 @@ void change_directory() {
         } else {
             printf("%s: %i: cd: OLDPWD not set\n", absolute_shell_name, cmd_count);
         }
-    } else if (strcmp(args[1], ".") == 0) {
+    } else if (_strcmp(args[1], ".") == 0) {
         setenv("OLDPWD", cur_dir, 1);
         setenv("PWD", cur_dir, 1);
     } else {
@@ -76,6 +76,6 @@ char *abs_name() {
         return shell_name;
     }
 
-    strcat(tmp2, tmp);
+    _strcat(tmp2, tmp);
     return tmp2;
 }

@@ -83,6 +83,10 @@ int _strlen(const char *s);
 
 char *_strcpy(char *dest, const char *src);
 
+int _strcmp(const char *s1, const char *s2);
+
+char *_strcat(char *dest, char *src);
+
 void sigintHandler(__attribute__((unused)) int sig_num);
 
 #endif /* MAIN_H */

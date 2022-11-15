@@ -35,9 +35,9 @@ int split(char *cmdExec, int input, int first, int last) {
         args[m] = NULL;
         if (args[0] != NULL) {
 
-            if (strcmp(args[0], "exit") == 0)
+            if (_strcmp(args[0], "exit") == 0)
                 exit(0);
-            if (strcmp(args[0], "echo") != 0) {
+            if (_strcmp(args[0], "echo") != 0) {
                 cmdExec = skip_comma(new_cmd_exec1);
                 int n = 1;
                 args[0] = strtok(cmdExec, " ");
@@ -46,10 +46,10 @@ int split(char *cmdExec, int input, int first, int last) {
                 args[n] = NULL;
 
             }
-            if (strcmp("cd", args[0]) == 0) {
+            if (_strcmp("cd", args[0]) == 0) {
                 change_directory();
                 return 1;
-            } else if (strcmp("pwd", args[0]) == 0) {
+            } else if (_strcmp("pwd", args[0]) == 0) {
                 parent_directory();
                 return 1;
             }
