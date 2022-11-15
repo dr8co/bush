@@ -45,9 +45,9 @@ void file_write() {
     strcat(input_data, " ");
     strcat(input_data, input_buffer);
 
-    str_len = strlen(input_data);
+    str_len = _strlen(input_data);
     fd_out = open(history_file, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
-    len = strlen(input_buffer);
+    len = _strlen(input_buffer);
     ret_write = write(fd_out, input_data, str_len);
     if (ret_write < 0) {
         printf("Error in writing file\n");

@@ -55,7 +55,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
             file_process();
             file_write();
         }
-        len = strlen(input_buffer);
+        len = _strlen(input_buffer);
         input_buffer[len - 1] = '\0';
         strcpy(his_var, input_buffer);
         if (strcmp(input_buffer, "exit") == 0 || strcmp(input_buffer, "exit\n") == 0) {

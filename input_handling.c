@@ -18,7 +18,7 @@ char *read_cmd(void)
 
     while(fgets(buff, 1024, stdin) != NULL)
     {
-        int buff_len = strlen(buff);
+        int buff_len = _strlen(buff);
 
         if(!ptr)
         {

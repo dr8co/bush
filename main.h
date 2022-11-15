@@ -79,6 +79,8 @@ void print_prompt2();
 
 int _atoi(const char *str);
 
+int _strlen(const char *s);
+
 void sigintHandler(__attribute__((unused)) int sig_num);
 
 #endif /* MAIN_H */

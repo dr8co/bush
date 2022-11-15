@@ -1,4 +1,5 @@
 #include <string.h>
+#include "main.h"
 
 int _pow(int base, int exponent) {
 
@@ -30,7 +31,7 @@ int _atoi(const char *str) {
         *tmp = '0';
         k = -1;
     }
-    i = strlen(str);
+    i = _strlen(str);
 
     for (j = 0; j < i; ++j)
         n += (*(tmp + j) - '0') * _pow(10, i - j - 1);
