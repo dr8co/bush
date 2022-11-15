@@ -1,5 +1,4 @@
 #include "main.h"
-#include <string.h>
 
 void tokenize_commands(char *com_exec) {
     int m = 1;

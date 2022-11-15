@@ -1,4 +1,3 @@
-#include <string.h>
 #include "main.h"
 
 int _pow(int base, int exponent) {
@@ -25,7 +24,7 @@ int _atoi(const char *str) {
         return 0;
     }
     int j, i, n = 0, k = 1;
-    char *tmp = strdup(str);
+    char *tmp = _strdup(str);
 
     if (*str == '-') {
         *tmp = '0';

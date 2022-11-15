@@ -1,8 +1,6 @@
 #include <signal.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <errno.h>
 #include "main.h"
 
 void sigintHandler(__attribute__((unused)) int sig_num) {
@@ -42,7 +40,7 @@ char *read_cmd(void)
 
         if(!ptr)
         {
-            fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
+            perror("error: failed to alloc buffer");
             return NULL;
         }
 
