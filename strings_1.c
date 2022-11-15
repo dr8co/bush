@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * _strlen - calculate length of a string
@@ -127,4 +128,32 @@ char *_strchr(char *s, char c)
         return (s + i);
 
     return (0);
+}
+
+/**
+ * *_strdup - copies a string given as parameter
+ * @str: the string to be duplicated
+ *
+ * Return: pointer to the copied string (Success), NULL (Error)
+ */
+char *_strdup(const char *str)
+{
+    char *duplicate;
+    unsigned int i, l;
+
+    i = 0;
+    l = _strlen(str);
+
+    if (str == NULL)
+        return (NULL);
+
+    duplicate = malloc(sizeof(char) * (l + 1));
+
+    if (duplicate == NULL)
+        return (NULL);
+
+    while ((duplicate[i] = str[i]) != '\0')
+        i++;
+
+    return (duplicate);
 }

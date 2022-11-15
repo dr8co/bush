@@ -14,7 +14,7 @@ char *skip_comma(char *str) {
             temp[j++] = str[i - 1];
     }
     temp[j] = '\0';
-    str = strdup(temp);
+    str = _strdup(temp);
 
     return str;
 }
@@ -26,7 +26,7 @@ char *skip_whitespaces(char *s) {
 
 int split(char *cmdExec, int input, int first, int last) {
     char *new_cmd_exec1;
-    new_cmd_exec1 = strdup(cmdExec);
+    new_cmd_exec1 = _strdup(cmdExec);
     {
         int m = 1;
         args[0] = strtok(cmdExec, " ");

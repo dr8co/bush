@@ -32,10 +32,9 @@ int main(__attribute__((unused)) int argc, char **argv) {
     //int status;
     char ch[2] = {"\n"};
     char *cmd;
-    shell_name = strdup(argv[0]);
+    shell_name = _strdup(argv[0]);
     getcwd(current_directory, sizeof(current_directory));
     absolute_shell_name = abs_name();
-    //printf("Absolute path: %s\n", absolute_shell_name);
     signal(SIGINT, sigintHandler);
     while (1) {
         clear_variables();

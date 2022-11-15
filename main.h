@@ -91,6 +91,8 @@ char *_memset(char *s, char b, unsigned int n);
 
 char *_strchr(char *s, char c);
 
+char *_strdup(const char *str);
+
 void sigintHandler(__attribute__((unused)) int sig_num);
 
 #endif /* MAIN_H */
