@@ -95,6 +95,8 @@ char *_strdup(const char *str);
 
 char *_strtok(char *str, const char *delim);
 
+void *_realloc(void *ptr, unsigned int new_size);
+
 void sigintHandler(__attribute__((unused)) int sig_num);
 
 #endif /* MAIN_H */

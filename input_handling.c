@@ -26,7 +26,7 @@ char *read_cmd(void)
         }
         else
         {
-            char *ptr2 = realloc(ptr, ptr_len + buff_len + 1);
+            char *ptr2 = _realloc(ptr, ptr_len + buff_len + 1);
 
             if(ptr2)
             {
