@@ -87,6 +87,8 @@ int _strcmp(const char *s1, const char *s2);
 
 char *_strcat(char *dest, char *src);
 
+char *_memset(char *s, char b, unsigned int n);
+
 void sigintHandler(__attribute__((unused)) int sig_num);
 
 #endif /* MAIN_H */

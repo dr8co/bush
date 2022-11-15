@@ -20,7 +20,7 @@ void echo_calling(char *echo_val) {
         environ_flag = 1;
     }
 
-    memset(new_args, '\0', sizeof(new_args));
+    _memset(new_args, '\0', sizeof(new_args));
     i = 0;
     while (str[1][i] != '\0') {
         if (str[1][i] == '"') {
