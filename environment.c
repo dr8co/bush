@@ -31,8 +31,8 @@ void set_environment_variables() {
         }
         return;
     }
-    left_right[0] = strtok(args[1], "=");
-    while ((left_right[n] = strtok(NULL, "=")) != NULL)
+    left_right[0] = _strtok(args[1], "=");
+    while ((left_right[n] = _strtok(NULL, "=")) != NULL)
         n++;
     left_right[n] = NULL;
     setenv(left_right[0], left_right[1], 0);

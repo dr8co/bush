@@ -29,8 +29,8 @@ int split(char *cmdExec, int input, int first, int last) {
     new_cmd_exec1 = _strdup(cmdExec);
     {
         int m = 1;
-        args[0] = strtok(cmdExec, " ");
-        while ((args[m] = strtok(NULL, " ")) != NULL)
+        args[0] = _strtok(cmdExec, " ");
+        while ((args[m] = _strtok(NULL, " ")) != NULL)
             m++;
         args[m] = NULL;
         if (args[0] != NULL) {
@@ -40,8 +40,8 @@ int split(char *cmdExec, int input, int first, int last) {
             if (_strcmp(args[0], "echo") != 0) {
                 cmdExec = skip_comma(new_cmd_exec1);
                 int n = 1;
-                args[0] = strtok(cmdExec, " ");
-                while ((args[n] = strtok(NULL, " ")) != NULL)
+                args[0] = _strtok(cmdExec, " ");
+                while ((args[n] = _strtok(NULL, " ")) != NULL)
                     n++;
                 args[n] = NULL;
 

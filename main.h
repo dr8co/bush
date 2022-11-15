@@ -93,6 +93,8 @@ char *_strchr(char *s, char c);
 
 char *_strdup(const char *str);
 
+char *_strtok(char *str, const char *delim);
+
 void sigintHandler(__attribute__((unused)) int sig_num);
 
 #endif /* MAIN_H */
