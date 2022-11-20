@@ -7,15 +7,13 @@
  * Return: length of a string or 0 if string is NULL
  */
 
-int _strlen(const char *s)
-{
+int _strlen(const char *s) {
     int l = 0;
 
     if (!s)
         return (l);
 
-    while (*s != '\0')
-    {
+    while (*s != '\0') {
         s++;
         l++;
     }
@@ -29,14 +27,12 @@ int _strlen(const char *s)
  * Return: a pointer to the destination
  */
 
-char *_strcpy(char *dest, const char *src)
-{
+char *_strcpy(char *dest, const char *src) {
     int i;
     if (!src)
         dest = NULL;
 
-    for (i = 0; src[i] != '\0'; i++)
-    {
+    for (i = 0; src[i] != '\0'; i++) {
         dest[i] = src[i];
     }
     dest[i] = '\0';
@@ -50,8 +46,7 @@ char *_strcpy(char *dest, const char *src)
  *
  * Return: the difference of s1 and s2
  */
-int _strcmp(const char *s1, const char *s2)
-{
+int _strcmp(const char *s1, const char *s2) {
     int i = 0;
 
     while (*(s1 + i) && *(s2 + i) && (*(s1 + i) == *(s2 + i)))
@@ -67,22 +62,20 @@ int _strcmp(const char *s1, const char *s2)
  * Return: pointer to the resulting string dest,
  * or NULL if both strings are not present or NULL.
  */
-char *_strcat(char *dest, char *src)
-{
+char *_strcat(char *dest, char *src) {
     int i, j;
 
-    if (!dest && !src){
+    if (!dest && !src) {
         return NULL;
-    } else if (!dest){
+    } else if (!dest) {
         return src;
-    } else if (!src){
+    } else if (!src) {
         return dest;
     }
     i = j = 0;
     while (*(dest + i))
         i++;
-    while ((*(dest + i) = *(src + j)))
-    {
+    while ((*(dest + i) = *(src + j))) {
         i++;
         j++;
     }
@@ -97,12 +90,10 @@ char *_strcat(char *dest, char *src)
  *
  * Return: pointer to memory area s
  */
-char *_memset(char *s, char b, unsigned int n)
-{
+char *_memset(char *s, char b, unsigned int n) {
     unsigned int i;
 
-    for (i = 0; i < n; i++)
-    {
+    for (i = 0; i < n; i++) {
         *(s + i) = b;
     }
     return (s);
@@ -115,12 +106,10 @@ char *_memset(char *s, char b, unsigned int n)
  *
  * Return: pointer to first occurrence of c in s or null
  */
-char *_strchr(char *s, char c)
-{
+char *_strchr(char *s, char c) {
     int i;
 
-    for (i = 0; *(s + i); i++)
-    {
+    for (i = 0; *(s + i); i++) {
         if (*(s + i) == c)
             return (s + i);
     }
@@ -136,8 +125,7 @@ char *_strchr(char *s, char c)
  *
  * Return: pointer to the copied string (Success), NULL (Error)
  */
-char *_strdup(const char *str)
-{
+char *_strdup(const char *str) {
     char *duplicate;
     unsigned int i, l;
 
@@ -164,12 +152,10 @@ char *_strdup(const char *str)
  * @str: String To Check
  * Return: 1 Success, 0 Failed
  */
-unsigned int check_delim(char c, const char *str)
-{
+unsigned int check_delim(char c, const char *str) {
     unsigned int i;
 
-    for (i = 0; str[i] != '\0'; i++)
-    {
+    for (i = 0; str[i] != '\0'; i++) {
         if (c == str[i])
             return (1);
     }
@@ -182,8 +168,7 @@ unsigned int check_delim(char c, const char *str)
  * @delim: Delimiter
  * Return: Pointer To The Next Token Or NULL
  */
-char *_strtok(char *str, const char *delim)
-{
+char *_strtok(char *str, const char *delim) {
     static char *ts;
     static char *nt;
     unsigned int i;
@@ -193,27 +178,23 @@ char *_strtok(char *str, const char *delim)
     ts = nt;
     if (ts == NULL)
         return (NULL);
-    for (i = 0; ts[i] != '\0'; i++)
-    {
+    for (i = 0; ts[i] != '\0'; i++) {
         if (check_delim(ts[i], delim) == 0)
             break;
     }
-    if (nt[i] == '\0' || nt[i] == '#')
-    {
+    if (nt[i] == '\0' || nt[i] == '#') {
         nt = NULL;
         return (NULL);
     }
     ts = nt + i;
     nt = ts;
-    for (i = 0; nt[i] != '\0'; i++)
-    {
+    for (i = 0; nt[i] != '\0'; i++) {
         if (check_delim(nt[i], delim) == 1)
             break;
     }
     if (nt[i] == '\0')
         nt = NULL;
-    else
-    {
+    else {
         nt[i] = '\0';
         nt = nt + i + 1;
         if (*nt == '\0')
