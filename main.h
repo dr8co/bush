@@ -3,8 +3,6 @@
 
 #include <unistd.h>
 
-#define	ATEXIT_SIZE	50
-
 /*GLOBAL VARIABLES*/
 extern int pipe_count, fd;
 extern char *args[512];
@@ -30,12 +28,6 @@ extern char **environ;
 extern char *shell_name;
 extern char *absolute_shell_name;
 extern int cmd_count;
-
-struct atexit {
-    struct atexit *next;		/* next in the list */
-    int ind;			/* next index in this table */
-    void (*fns[ATEXIT_SIZE])();	/* the table itself */
-};
 
 void clear_variables();
 
@@ -104,7 +96,5 @@ char *_strtok(char *str, const char *delim);
 void *_realloc(void *ptr, unsigned int new_size);
 
 void sigintHandler(__attribute__((unused)) int sig_num);
-
-void ex_it(int stat_us);
 
 #endif /* MAIN_H */

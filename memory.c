@@ -8,24 +8,19 @@
  *
  * Return: pointer to newly allocated memory, or NULL if failure
  */
-void *_realloc(void *ptr, unsigned int new_size)
-{
+void *_realloc(void *ptr, unsigned int new_size) {
     char *p;
     unsigned int i, max = new_size;
     unsigned int old_size = sizeof(ptr);
     char *old_ptr = ptr;
 
-    if (ptr == NULL)
-    {
+    if (ptr == NULL) {
         p = malloc(new_size);
         return (p);
-    }
-    else if (new_size == 0)
-    {
+    } else if (new_size == 0) {
         free(ptr);
         return (NULL);
-    }
-    else if (new_size == old_size)
+    } else if (new_size == old_size)
         return (ptr);
 
     p = malloc(new_size);

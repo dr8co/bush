@@ -20,7 +20,7 @@ int _pow(int base, int exponent) {
 }
 
 int _atoi(const char *str) {
-    if (str == NULL){
+    if (str == NULL) {
         return 0;
     }
     int j, i, n = 0, k = 1;

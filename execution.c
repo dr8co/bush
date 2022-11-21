@@ -183,7 +183,7 @@ int command(int input, int first, int last, char *cmdExec) {
             printf("%s: %i: %s: not found\n", absolute_shell_name, cmd_count, args[0]);
 
         }
-        ex_it(0);
+        exit(0);
     } else {
         waitpid(pid, 0, 0);
     }

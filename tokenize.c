@@ -20,7 +20,6 @@ void tokenize_redirect_input_output(char *cmdExec) {
     input_redirection_file = _strdup(io_token[1]);
     output_redirection_file = _strdup(io_token[2]);
     tokenize_commands(io_token[0]);
-
 }
 
 void tokenize_redirect_input(char *cmdExec) {

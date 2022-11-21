@@ -54,7 +54,7 @@ char *read_cmd(void) {
     }
     if (ptr == NULL) {
         printf("\n");
-        ex_it(0);
+        exit(0);
     }
 
     return ptr;

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 project(simple_shell C)
 
-set(CMAKE_C_STANDARD 90)
+set(CMAKE_C_STANDARD 17)
 
 add_executable(simple_shell
         directories.c environment.c execution.c
