@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.23)
-project(simple_shell C)
+project(bush C)
 
 set(CMAKE_C_STANDARD 17)
 
-add_executable(simple_shell
+add_executable(bush
         directories.c environment.c execution.c
         file_handling.c input_handling.c main.h
         main.c memory.c numbers.c process_cmd.c

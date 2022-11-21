@@ -1,3 +1,3 @@
-# Simple_Shell
+# The Burning Bush: A simple UNIX command interpreter
 
-hold on, still under construction.
+![The Burning Bush](./media/burning_bush.png "The Burning Bush")
