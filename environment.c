@@ -50,7 +50,6 @@ void clear_variables() {
     input_buffer[0] = '\0';
     cwd[0] = '\0';
     pid = 0;
-    environ_flag = 0;
     bang_flag = 0;
 }
 

@@ -6,7 +6,7 @@
 
 void echo_calling(char *echo_val) {
     int i, index = 0;
-    environ_flag = 0;
+    int environ_flag = 0;
     char new_args[1024], env_val[1000], *str[10];
     str[0] = _strtok(echo_val, " ");
     str[1] = _strtok(NULL, "");
@@ -196,7 +196,7 @@ int command(int input, int first, int last, char *cmdExec) {
 }
 
 void execute_pipe() {
-
+    char *cmd_exec[100];
     int i, n = 1, input, first;
 
     input = 0;
