@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "main.h"
 
 void tokenize_commands(char *com_exec) {
@@ -13,6 +14,7 @@ void tokenize_redirect_input_output(char *cmdExec) {
     new_cmd_exec1 = _strdup(cmdExec);
     int m = 1;
     io_token[0] = _strtok(new_cmd_exec1, "<");
+    free(new_cmd_exec1);
     while ((io_token[m] = _strtok(NULL, ">")) != NULL)
         m++;
     io_token[1] = skip_whitespaces(io_token[1]);
@@ -33,6 +35,7 @@ void tokenize_redirect_input(char *cmdExec) {
     i_token[1] = skip_whitespaces(i_token[1]);
     input_redirection_file = _strdup(i_token[1]);
     tokenize_commands(i_token[0]);
+    free(new_cmd_exec1);
 }
 
 void tokenize_redirect_output(char *cmdExec) {
@@ -41,6 +44,7 @@ void tokenize_redirect_output(char *cmdExec) {
     new_cmd_exec1 = _strdup(cmdExec);
     int m = 1;
     o_token[0] = _strtok(new_cmd_exec1, ">");
+    free(new_cmd_exec1);
     while ((o_token[m] = _strtok(NULL, ">")) != NULL)
         m++;
     o_token[1] = skip_whitespaces(o_token[1]);

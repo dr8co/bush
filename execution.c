@@ -49,7 +49,6 @@ void echo_calling(char *echo_val) {
         } else i++;
     }
 
-
     new_args[index] = '\0';
     if ((_strcmp(args[1], new_args) == 0) && (environ_flag == 0))
         printf("%s\n", new_args);
@@ -87,7 +86,6 @@ void history_execute_with_constants() {
     }
 
 }
-
 
 void bang_execute() {
     char bang_val[1000];
@@ -214,6 +212,5 @@ void execute_pipe() {
         input = split(cmd_exec[i], input, first, 0);
         first = 0;
     }
-    input = split(cmd_exec[i], input, first, 1);
-    input = 0;
+    split(cmd_exec[i], input, first, 1);
 }

@@ -1,17 +1,16 @@
 #include <stdlib.h>
 #include "main.h"
 
-char *skip_quotes(char *str) {
+char *skip_quotes(const char *str) {
     int i = 0, j = 0;
-    char temp[1000];
+    char temp[1024];
     while (str[i++] != '\0') {
         if (str[i - 1] != '"')
             temp[j++] = str[i - 1];
     }
     temp[j] = '\0';
-    str = _strdup(temp);
 
-    return str;
+    return _strdup(temp);
 }
 
 /**
@@ -61,5 +60,10 @@ int split(char *cmdExec, int input, int first, int last) {
 
         }
     }
-    return command(input, first, last, new_cmd_exec1);
+    int x = command(input, first, last, new_cmd_exec1);
+    free(new_cmd_exec1);
+    if (cmdExec != NULL)
+        free(cmdExec);
+
+    return x;
 }

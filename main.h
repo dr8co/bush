@@ -59,7 +59,7 @@ void tokenize_redirect_input(char *cmdExec);
 
 void tokenize_redirect_output(char *cmdExec);
 
-char *skip_quotes(char *str);
+char *skip_quotes(const char *str);
 
 int split(char *cmd_exec, int, int, int);
 
@@ -95,6 +95,8 @@ char *_strtok(char *str, const char *delim);
 
 void *_realloc(void *ptr, unsigned int new_size);
 
-void sigintHandler(__attribute__((unused)) int sig_num);
+void sigintHandler(int sig_num);
+
+void free_global_vars();
 
 #endif /* MAIN_H */

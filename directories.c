@@ -60,14 +60,14 @@ void parent_directory() {
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
         printf("%s\n", cwd);
     } else
-        perror("getcwd() error");
+        perror("getcwdu() error");
 }
 
 char *abs_name() {
     unsigned int i = 0;
 
-    char *tmp = malloc(sizeof(char) * 1024);
-    char *tmp2 = malloc(sizeof(char) * 1024);
+    char tmp[1024];
+    char tmp2[1024];
 
     _strcpy(tmp2, current_directory);
 
@@ -82,5 +82,6 @@ char *abs_name() {
     }
 
     _strcat(tmp2, tmp);
-    return tmp2;
+
+    return _strdup(tmp2);
 }

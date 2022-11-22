@@ -27,26 +27,28 @@ int cmd_count = 0;
 
 
 int main(__attribute__((unused)) int argc, char **argv) {
-    //int status;
     char ch[2] = {"\n"};
-    char *cmd;
     shell_name = _strdup(argv[0]);
     getcwd(current_directory, sizeof(current_directory));
     absolute_shell_name = abs_name();
     signal(SIGINT, sigintHandler);
+
     while (1) {
         clear_variables();
         print_prompt1();
-        cmd = read_cmd();
+        char *cmd = read_cmd();
+
         if (cmd) {
             ++cmd_count;
         } else {
             exit(0);
         }
         _strcpy(input_buffer, cmd);
-        if (_strcmp(input_buffer, ch) == 0 || input_buffer[0] == '#') {
+        free(cmd);
+
+        if (_strcmp(input_buffer, ch) == 0 || input_buffer[0] == '#')
             continue;
-        }
+
         if (input_buffer[0] != '!') {
             file_process();
             file_write();
@@ -54,18 +56,24 @@ int main(__attribute__((unused)) int argc, char **argv) {
         len = _strlen(input_buffer);
         input_buffer[len - 1] = '\0';
         _strcpy(his_var, input_buffer);
+
         if (_strcmp(input_buffer, "exit") == 0 || _strcmp(input_buffer, "exit\n") == 0) {
             flag = 1;
             break;
         }
+
         if (input_buffer[0] == '!') {
             file_process();
+            free(history_file);
             bang_flag = 1;
             bang_execute();
         }
         execute_pipe();
         waitpid(pid, &status, 0);
     }
+
+    free_global_vars();
+
     if (flag == 1) {
         exit(0);
     }

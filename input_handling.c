@@ -19,7 +19,7 @@ char *read_cmd(void) {
         int buff_len = _strlen(buff);
 
         if (!ptr) {
-            ptr = malloc(buff_len + 1);
+            ptr = malloc(sizeof(buff) + 2);
         } else {
             char *ptr2 = _realloc(ptr, ptr_len + buff_len + 1);
 

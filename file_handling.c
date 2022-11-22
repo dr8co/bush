@@ -5,11 +5,9 @@
 #include <stdio.h>
 
 void file_process() {
-    //int fd;
-    history_file = (char *) malloc(100 * sizeof(char));
+    history_file = (char *) malloc(1024 * sizeof(char));
     _strcpy(history_file, current_directory);
-    _strcat(history_file, "/");
-    _strcat(history_file, ".simple_shell_history");
+    _strcat(history_file, "/.simple_shell_history");
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
     int bytes_read, i, x = 0, index = 0;
@@ -53,5 +51,6 @@ void file_write() {
         return;
     }
     close(fd_out);
+    free(history_file);
 
 }

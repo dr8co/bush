@@ -32,7 +32,7 @@ char *_strcpy(char *dest, const char *src) {
     if (!src)
         dest = NULL;
 
-    for (i = 0; src[i] != '\0'; i++) {
+    for (i = 0; src[i] != '\0'; ++i) {
         dest[i] = src[i];
     }
     dest[i] = '\0';
@@ -179,7 +179,7 @@ char *_strtok(char *str, const char *delim) {
     if (ts == NULL)
         return (NULL);
     for (i = 0; ts[i] != '\0'; i++) {
-        if (check_delim(ts[i], delim) == 0)
+        if (!check_delim(ts[i], delim))
             break;
     }
     if (nt[i] == '\0' || nt[i] == '#') {
@@ -189,7 +189,7 @@ char *_strtok(char *str, const char *delim) {
     ts = nt + i;
     nt = ts;
     for (i = 0; nt[i] != '\0'; i++) {
-        if (check_delim(nt[i], delim) == 1)
+        if (check_delim(nt[i], delim))
             break;
     }
     if (nt[i] == '\0')

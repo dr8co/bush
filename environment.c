@@ -53,3 +53,9 @@ void clear_variables() {
     environ_flag = 0;
     bang_flag = 0;
 }
+
+void free_global_vars() {
+    free(input_redirection_file);
+    free(output_redirection_file);
+    free(absolute_shell_name);
+}
