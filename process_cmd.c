@@ -54,7 +54,7 @@ int split(char *cmdExec, int input, int first, int last) {
                 change_directory();
                 return 1;
             } else if (_strcmp("pwd", args[0]) == 0) {
-                parent_directory();
+                print_working_dir();
                 return 1;
             }
 

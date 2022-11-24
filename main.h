@@ -41,7 +41,7 @@ void set_environment_variables();
 
 void change_directory();
 
-void parent_directory();
+void print_working_dir();
 
 void echo_calling(char *echo_val);
 
