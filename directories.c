@@ -78,7 +78,7 @@ void print_working_dir() {
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
         printf("%s\n", cwd);
     } else
-        perror("pwd error");
+        perror("error in reading current directory");
 }
 
 /**

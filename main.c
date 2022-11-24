@@ -22,6 +22,7 @@ char his_var[2048];
 char *input_redirection_file;
 char *output_redirection_file;
 int cmd_count = 0;
+char *user;
 
 
 int main(__attribute__((unused)) int argc, char **argv) {
@@ -29,6 +30,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
     shell_name = _strdup(argv[0]);
     getcwd(current_directory, sizeof(current_directory));
     absolute_shell_name = abs_name();
+    user = _strdup(getenv("USER"));
     signal(SIGINT, sigintHandler);
 
     while (1) {

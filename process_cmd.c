@@ -62,7 +62,7 @@ int split(char *cmdExec, int input, int first, int last) {
     }
     int x = command(input, first, last, new_cmd_exec1);
     free(new_cmd_exec1);
-    if (cmdExec != NULL)
+    if (cmdExec)
         free(cmdExec);
 
     return x;

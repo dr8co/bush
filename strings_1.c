@@ -135,7 +135,7 @@ char *_strdup(const char *str) {
     if (str == NULL)
         return (NULL);
 
-    duplicate = malloc(sizeof(char) * (l + 1));
+    duplicate = (char *) malloc(sizeof(char) * (l + 1));
 
     if (duplicate == NULL)
         return (NULL);

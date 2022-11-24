@@ -23,7 +23,7 @@ extern char his_var[2048];
 extern char *input_redirection_file;
 extern char *output_redirection_file;
 extern char **environ;
-extern char *shell_name;
+extern char *shell_name, *user, *device;
 extern char *absolute_shell_name;
 extern int cmd_count;
 
