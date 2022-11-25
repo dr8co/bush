@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "main.h"
 
 char *skip_quotes(const char *str) {
@@ -41,6 +40,11 @@ int split(char *cmdExec, int input, int first, int last) {
     while ((args[m] = strtok_skip(NULL, " ", open_chars, close_chars)) != NULL)
         m++;
     args[m] = NULL;
+
+    for (int i = 0; i < m; ++i) {
+        if (args[i][0] == '\"' || args[i][0] == '\'')
+            args[i] = skip_quotes(args[i]);
+    }
 
     if (args[0] != NULL) {
 
