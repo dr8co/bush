@@ -60,6 +60,7 @@ void clear_variables() {
 void free_global_vars() {
     free(input_redirection_file);
     free(output_redirection_file);
+    free(prompt);
 }
 
 void init_shell(){
