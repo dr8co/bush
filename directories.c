@@ -14,6 +14,9 @@ void change_directory() {
             setenv("OLDPWD", cwd, 1);
             setenv("PWD", home, 1);
             getcwd(cwd, sizeof(cwd));
+
+            // Update prompt.
+            free(prompt);
             prompt = replace_str(cwd, home, "~");
         }
     }
@@ -26,8 +29,11 @@ void change_directory() {
                 setenv("PWD", old_dir, 1);
                 setenv("OLDPWD", cwd, 1);
                 getcwd(cwd, sizeof(cwd));
-                prompt = replace_str(cwd, home, "~");
                 printf("%s\n", old_dir);
+
+                // Update prompt.
+                free(prompt);
+                prompt = replace_str(cwd, home, "~");
             }
         }
         // change shell working directory to home directory if the old directory does not exist.
@@ -36,8 +42,11 @@ void change_directory() {
                 setenv("PWD", home, 1);
                 setenv("OLDPWD", cwd, 1);
                 getcwd(cwd, sizeof(cwd));
-                prompt = replace_str(cwd, home, "~");
                 printf("%s\n", home);
+
+                // Update prompt.
+                free(prompt);
+                prompt = replace_str(cwd, home, "~");
             }
 
         }
@@ -58,6 +67,9 @@ void change_directory() {
             setenv("OLDPWD", cwd, 1);
             setenv("PWD", new_dir, 1);
             getcwd(cwd, sizeof(cwd));
+
+            // Update prompt.
+            free(prompt);
             prompt = replace_str(cwd, home, "~");
         }
 
