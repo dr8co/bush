@@ -15,7 +15,7 @@ extern int no_of_lines;
 extern int flag_pipe, flag_without_pipe;
 extern int output_redirection, input_redirection;
 extern int bang_flag;
-extern int status; //pid, status;
+extern int status;
 extern char history_data[1024][1024];
 extern char current_directory[1024];
 extern char ret_file[3072];
@@ -23,8 +23,7 @@ extern char his_var[2048];
 extern char *input_redirection_file;
 extern char *output_redirection_file;
 extern char **environ;
-extern char *shell_name, *user, *device;
-extern char *absolute_shell_name;
+extern char *user, hostname[256];
 extern int cmd_count;
 
 void clear_variables();
@@ -33,7 +32,7 @@ void file_process();
 
 void file_write();
 
-void bang_execute();
+void execute_event();
 
 void environ_ment();
 
@@ -45,7 +44,7 @@ void print_working_dir();
 
 void echo_calling(char *echo_val);
 
-void history_execute_with_constants();
+void execute_history();
 
 char *skip_whitespaces(char *s);
 
@@ -62,8 +61,6 @@ char *skip_quotes(const char *str);
 int split(char *cmd_exec, int, int, int);
 
 void execute_pipe();
-
-char *abs_name();
 
 int command(int, int, int, char *cmd_exec);
 
@@ -92,6 +89,10 @@ char *_strdup(const char *str);
 char *_strtok(char *str, const char *delim);
 
 void *_realloc(void *ptr, unsigned int new_size);
+
+char *_strstr(const char *haystack, const char *needle);
+
+char *replace_str(const char *str, const char *old, const char *new);
 
 void sigintHandler(int sig_num);
 

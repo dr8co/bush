@@ -202,3 +202,70 @@ char *_strtok(char *str, const char *delim) {
     }
     return (ts);
 }
+
+/**
+ * _strstr - locates a substring
+ * @haystack: string in which to check for needle
+ * @needle: substring to find in haystack
+ *
+ * Return: pointer to beginning of needle in haystack or NULL if no match
+ */
+char *_strstr(const char *haystack, const char *needle) {
+    unsigned int i = 0, j = 0;
+
+    while (haystack[i]) {
+        while (needle[j] && (haystack[i] == needle[0])) {
+            if (haystack[i + j] == needle[j])
+                j++;
+            else
+                break;
+        }
+        if (needle[j]) {
+            i++;
+            j = 0;
+        } else
+            return (haystack + i);
+    }
+    return (0);
+}
+
+/**
+ * replace_str - replace a substring in a string.
+ * @str: the parent string.
+ * @old: the substring in str to be replaced.
+ * @new: the string to replace old in str.
+ * Return: new str with the old replaced by new.
+ */
+char *replace_str(const char *str, const char *old, const char *new) {
+    char *result;
+    int i, count = 0;
+    int new_len = _strlen(new);
+    int old_len = _strlen(old);
+
+    // Count the number of times old word occurs in the string
+    for (i = 0; str[i] != '\0'; i++) {
+        if (_strstr(&str[i], old) == &str[i]) {
+            count++;
+
+            // Jump to index after the old word.
+            i += old_len - 1;
+        }
+    }
+
+    // Resize the new string
+    result = (char *) malloc(i + count * (new_len - old_len) + 1);
+
+    i = 0;
+    while (*str) {
+        // compare the substring with the result
+        if (_strstr(str, old) == str) {
+            _strcpy(&result[i], new);
+            i += new_len;
+            str += old_len;
+        } else
+            result[i++] = *str++;
+    }
+
+    result[i] = '\0';
+    return result;
+}

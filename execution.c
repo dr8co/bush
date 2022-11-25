@@ -62,7 +62,7 @@ void echo_calling(char *echo_val) {
     }
 }
 
-void history_execute_with_constants() {
+void execute_history() {
     int num, i, start_index;
     if (bang_flag == 1) {
         for (i = 0; i < no_of_lines; i++)
@@ -87,7 +87,7 @@ void history_execute_with_constants() {
 
 }
 
-void bang_execute() {
+void execute_event() {
     char bang_val[1000];
     char *tokenize_bang[100], *num_ch[10];
     int i, n = 1, num, index = 0;
@@ -124,7 +124,7 @@ int command(int input, int first, int last, char *cmdExec) {
     int my_pipe_fd[2], ret, input_fd, output_fd;
     ret = pipe(my_pipe_fd);
     if (ret == -1) {
-        perror("pipe");
+        perror("pipe error");
         return 1;
     }
     pid = fork();
@@ -176,9 +176,9 @@ int command(int input, int first, int last, char *cmdExec) {
         if (_strcmp(args[0], "echo") == 0) {
             echo_calling(cmdExec);
         } else if (_strcmp(args[0], "history") == 0) {
-            history_execute_with_constants();
+            execute_history();
         } else if (execvp(args[0], args) < 0) {
-            printf("%s: %i: %s: not found\n", absolute_shell_name, cmd_count, args[0]);
+            printf("burning bush: %i: command not found: %s\n", cmd_count, args[0]);
 
         }
         exit(0);

@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Global Variables */
-char *shell_name;
-char *absolute_shell_name;
 char current_directory[1024];
 char cwd[1024];
 
@@ -57,7 +54,7 @@ void change_directory() {
     }else {
         // The directory was not found.
         if (chdir(args[1]) < 0) {
-            printf("%s: %i: cd: no such file or directory: %s\n", absolute_shell_name, cmd_count, args[1]);
+            printf("burning bush: %i: cd: no such file or directory: %s\n", cmd_count, args[1]);
         }
         // Change working directory to the specified directory in the argument of the 'cd' command.
         else {
@@ -81,31 +78,3 @@ void print_working_dir() {
         perror("error in reading current directory");
 }
 
-/**
- * abs_name - finds the absolute name of the shell.
- * (Name of the shell including the path).
- *
- * @return: the absolute shell name.
- */
-char *abs_name() {
-    unsigned int i = 0;
-
-    char tmp[1024];
-    char tmp2[1024];
-
-    _strcpy(tmp2, current_directory);
-
-    if (shell_name[0] == '.' && shell_name[1] == '/') {
-        while (shell_name[i + 1] != '\0') {
-            *(tmp + i) = shell_name[i + 1];
-            i++;
-        }
-        tmp[i] = '\0';
-    } else {
-        return shell_name;
-    }
-
-    _strcat(tmp2, tmp);
-
-    return _strdup(tmp2);
-}
