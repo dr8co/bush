@@ -9,7 +9,7 @@ extern char *args[512];
 extern char *history_file;
 extern char input_buffer[1024];
 extern int flag, len;
-extern char cwd[1024];
+extern char cwd[1024], *home;
 extern pid_t pid;
 extern int no_of_lines;
 extern int flag_pipe, flag_without_pipe;
@@ -25,6 +25,7 @@ extern char *output_redirection_file;
 extern char **environ;
 extern char *user, hostname[256];
 extern int cmd_count;
+extern char *prompt;
 
 void clear_variables();
 
@@ -97,5 +98,7 @@ char *replace_str(const char *str, const char *old, const char *new);
 void sigintHandler(int sig_num);
 
 void free_global_vars();
+
+void init_shell();
 
 #endif /* MAIN_H */

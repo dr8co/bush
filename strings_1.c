@@ -224,7 +224,7 @@ char *_strstr(const char *haystack, const char *needle) {
             i++;
             j = 0;
         } else
-            return (haystack + i);
+            return (char *) (haystack + i);
     }
     return (0);
 }

@@ -3,6 +3,11 @@
 #include <unistd.h>
 #include "main.h"
 
+/* Global vars */
+char *user, hostname[256], cwd[1024];
+char *home, *prompt;
+
+
 void environ_ment() {
     int i = 1, index = 0;
     char env_val[1000], *value;
@@ -48,7 +53,6 @@ void clear_variables() {
     output_redirection = 0;
     input_redirection = 0;
     input_buffer[0] = '\0';
-    cwd[0] = '\0';
     pid = 0;
     bang_flag = 0;
 }
@@ -56,4 +60,19 @@ void clear_variables() {
 void free_global_vars() {
     free(input_redirection_file);
     free(output_redirection_file);
+}
+
+void init_shell(){
+    user = getenv("USER");
+    gethostname(hostname, sizeof(hostname));
+    getcwd(cwd, sizeof(cwd));
+    printf("cwd init: %s\n", cwd);
+    home = getenv("HOME");
+    if (home == NULL) {
+        home = "/home";
+    }
+    prompt = replace_str(cwd, home, "~");
+
+
+
 }

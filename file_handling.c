@@ -6,7 +6,7 @@
 
 void file_process() {
     history_file = (char *) malloc(1024 * sizeof(char));
-    _strcpy(history_file, current_directory);
+    _strcpy(history_file, home);
     _strcat(history_file, "/.burning_bush_history");
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 

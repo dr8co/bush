@@ -23,15 +23,11 @@ char his_var[2048];
 char *input_redirection_file;
 char *output_redirection_file;
 int cmd_count = 0;
-char *user, hostname[256];
 
 
 int main(__attribute__((unused)) int argc, char **argv) {
-    char ch[2] = {"\n"};
-    _strdup(argv[0]);
-    getcwd(current_directory, sizeof(current_directory));
-    user = _strdup(getenv("USER"));
-    gethostname(hostname, sizeof(hostname));
+    init_shell();
+    printf("cwd: %s\n", cwd);
     signal(SIGINT, sigintHandler);
 
     while (1) {
@@ -47,7 +43,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
         _strcpy(input_buffer, cmd);
         free(cmd);
 
-        if (_strcmp(input_buffer, ch) == 0 || input_buffer[0] == '#')
+        if (_strcmp(input_buffer, "\n") == 0 || input_buffer[0] == '#')
             continue;
 
         if (input_buffer[0] != '!') {
