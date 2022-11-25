@@ -27,7 +27,6 @@ int cmd_count = 0;
 
 int main(__attribute__((unused)) int argc, char **argv) {
     init_shell();
-    printf("cwd: %s\n", cwd);
     signal(SIGINT, sigintHandler);
 
     while (1) {

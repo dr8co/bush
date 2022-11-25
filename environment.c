@@ -66,7 +66,6 @@ void init_shell(){
     user = getenv("USER");
     gethostname(hostname, sizeof(hostname));
     getcwd(cwd, sizeof(cwd));
-    printf("cwd init: %s\n", cwd);
     home = getenv("HOME");
     if (home == NULL) {
         home = "/home";
