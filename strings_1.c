@@ -269,3 +269,44 @@ char *replace_str(const char *str, const char *old, const char *new) {
     result[i] = '\0';
     return result;
 }
+
+char *strtok_skip(char *str, char *delim, char *open_b, const char *close_b) {
+    static char *token = NULL;
+    char *lead = NULL;
+    char *block = NULL;
+    int iBlock = 0;
+    int iBlockIndex = 0;
+
+    if (str != NULL) {
+        token = str;
+        lead = str;
+    } else {
+        lead = token;
+        if (*token == '\0') {
+            lead = NULL;
+        }
+    }
+
+    while (*token != '\0') {
+        if (iBlock) {
+            if (close_b[iBlockIndex] == *token) {
+                iBlock = 0;
+            }
+            token++;
+            continue;
+        }
+        if ((block = _strchr(open_b, *token)) != NULL) {
+            iBlock = 1;
+            iBlockIndex = block - open_b;
+            token++;
+            continue;
+        }
+        if (_strchr(delim, *token) != NULL) {
+            *token = '\0';
+            token++;
+            break;
+        }
+        token++;
+    }
+    return lead;
+}

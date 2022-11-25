@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "main.h"
 
 char *skip_quotes(const char *str) {
@@ -30,12 +31,14 @@ char *skip_whitespaces(char *s) {
 
 int split(char *cmdExec, int input, int first, int last) {
     char *new_cmd_exec1;
-    new_cmd_exec1 = _strdup(cmdExec);
+    char open_chars[] = {"\"[<{"};
+    char close_chars[] = {"\"]>}"};
     int m = 1;
 
-    args[0] = _strtok(cmdExec, " ");
+    new_cmd_exec1 = _strdup(cmdExec);
+    args[0] = strtok_skip(cmdExec, " ", open_chars, close_chars);
 
-    while ((args[m] = _strtok(NULL, " ")) != NULL)
+    while ((args[m] = strtok_skip(NULL, " ", open_chars, close_chars)) != NULL)
         m++;
     args[m] = NULL;
 
@@ -47,16 +50,17 @@ int split(char *cmdExec, int input, int first, int last) {
         if (_strcmp("cd", args[0]) == 0) {
             change_directory();
             free(new_cmd_exec1);
+            cmdExec[0] = '\0';
             return 1;
         } else if (_strcmp("pwd", args[0]) == 0) {
             print_working_dir();
             free(new_cmd_exec1);
+            cmdExec[0] = '\0';
             return 1;
         }
     }
     int x = command(input, first, last, new_cmd_exec1);
     free(new_cmd_exec1);
     cmdExec[0] = '\0';
-
     return x;
 }

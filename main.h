@@ -95,6 +95,8 @@ char *_strstr(const char *haystack, const char *needle);
 
 char *replace_str(const char *str, const char *old, const char *new);
 
+char *strtok_skip(char *str, char *delim, char *open_b, const char *close_b);
+
 void sigintHandler(int sig_num);
 
 void free_global_vars();
