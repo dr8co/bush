@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "main.h"
 
 char *skip_quotes(const char *str) {
@@ -30,20 +31,24 @@ char *skip_whitespaces(char *s) {
 
 int split(char *cmdExec, int input, int first, int last) {
     char *new_cmd_exec1;
-    char open_chars[] = {"\"[<{"};
-    char close_chars[] = {"\"]>}"};
     int m = 1;
 
     new_cmd_exec1 = _strdup(cmdExec);
-    args[0] = strtok_skip(cmdExec, " ", open_chars, close_chars);
+    printf("command passed to split: \"%s\"\n", new_cmd_exec1);
+    args[0] = _strtok(cmdExec, " ");
+    printf("args[%i] before loop: \"%s\"\n", 0, args[0]);
 
-    while ((args[m] = strtok_skip(NULL, " ", open_chars, close_chars)) != NULL)
+
+
+    while ((args[m] = strtok_skip(NULL, " ")) != NULL)
         m++;
     args[m] = NULL;
+
 
     for (int i = 0; i < m; ++i) {
         if (args[i][0] == '\"' || args[i][0] == '\'')
             args[i] = skip_quotes(args[i]);
+        printf("args[%i]: \"%s\"\n", i, args[i]);
     }
 
     if (args[0] != NULL) {

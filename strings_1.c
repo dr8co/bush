@@ -1,5 +1,7 @@
 #include "main.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 /**
  * _strlen - calculate length of a string
@@ -163,7 +165,7 @@ unsigned int check_delim(char c, const char *str) {
 }
 
 /**
- * _strtok - split a string into tokens
+ * strtok_skip - split a string into tokens
  * @str: String to split
  * @delim: Delimiter
  * Return: Pointer To The Next Token Or NULL
@@ -270,10 +272,13 @@ char *replace_str(const char *str, const char *old, const char *new) {
     return result;
 }
 
-char *strtok_skip(char *str, char *delim, char *open_b, const char *close_b) {
+char *strtok_skip(char *str, char *delim) {
     static char *token = NULL;
     char *lead = NULL;
     char *block = NULL;
+    char open_b[] = {"\"[<{"};
+    char close_b[] = {"\"]>}"};
+
     int iBlock = 0;
     int iBlockIndex = 0;
 
@@ -284,6 +289,7 @@ char *strtok_skip(char *str, char *delim, char *open_b, const char *close_b) {
         lead = token;
         if (*token == '\0') {
             lead = NULL;
+            printf("executed\n");
         }
     }
 
@@ -303,10 +309,15 @@ char *strtok_skip(char *str, char *delim, char *open_b, const char *close_b) {
         }
         if (_strchr(delim, *token) != NULL) {
             *token = '\0';
+            printf("exx2\n");
             token++;
             break;
         }
         token++;
+    }
+    if (*token == '\0') {
+        lead = NULL;
+        printf("executed2\n");
     }
     return lead;
 }

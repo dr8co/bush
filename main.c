@@ -27,6 +27,8 @@ int cmd_count = 0;
 
 int main(__attribute__((unused)) int argc, char **argv) {
     init_shell();
+    char dr[]=" Draco Bad Guy";
+    printf("del: \"%s\"\n", strtok_skip(dr, " "));
     signal(SIGINT, sigintHandler);
 
     while (1) {
