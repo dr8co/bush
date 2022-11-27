@@ -43,7 +43,7 @@ void change_directory();
 
 void print_working_dir();
 
-void echo_calling(char *echo_val);
+void run_echo(char *echo_val);
 
 void execute_history();
 

@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
-void echo_calling(char *echo_val) {
+void run_echo(char *echo_val) {
     int i, index = 0;
     int environ_flag = 0;
     char new_args[1024], env_val[1000], *str[10];
@@ -174,7 +174,7 @@ int command(int input, int first, int last, char *cmdExec) {
             return 1;
         }
         if (_strcmp(args[0], "echo") == 0) {
-            echo_calling(cmdExec);
+            run_echo(cmdExec);
         } else if (_strcmp(args[0], "history") == 0) {
             execute_history();
         } else if (execvp(args[0], args) < 0) {
@@ -192,7 +192,6 @@ int command(int input, int first, int last, char *cmdExec) {
         close(input);
     close(my_pipe_fd[1]);
     return my_pipe_fd[0];
-
 }
 
 void execute_pipe() {
@@ -208,17 +207,11 @@ void execute_pipe() {
         n++;
     cmd_exec[n] = NULL;
     for (int j = 0; j < n; ++j) {
-        printf("cmd_exec[%i]: \"%s\"\n", j, cmd_exec[j]);
     }
     pipe_count = n - 1;
-    //printf("\nAfter:\n\n");
-    printf("\ninside first split\n");
     for (i = 0; i < n - 1; i++) {
         input = split(cmd_exec[i], input, first, 0);
         first = 0;
-        //printf("cmd_exec[%i]: %s\n", i, cmd_exec[i]);
     }
-    printf("\ninside second split\n");
     split(cmd_exec[i], input, first, 1);
-    //printf("cmd_exec[%i]: %s\n", i, cmd_exec[i]);
 }

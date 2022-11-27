@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 /**
@@ -289,7 +288,6 @@ char *strtok_skip(char *str, char *delim) {
         lead = token;
         if (*token == '\0') {
             lead = NULL;
-            printf("executed\n");
         }
     }
 
@@ -309,15 +307,10 @@ char *strtok_skip(char *str, char *delim) {
         }
         if (_strchr(delim, *token) != NULL) {
             *token = '\0';
-            printf("exx2\n");
             token++;
             break;
         }
         token++;
-    }
-    if (*token == '\0') {
-        lead = NULL;
-        printf("executed2\n");
     }
     return lead;
 }
