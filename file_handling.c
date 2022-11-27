@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <stdio.h>
 
+/**
+ * @brief process the shell history file.
+ */
 void file_process() {
     history_file = (char *) malloc(1024 * sizeof(char));
     _strcpy(history_file, home);
@@ -30,6 +33,9 @@ void file_process() {
     close(fd);
 }
 
+/**
+ * @brief record history of the shell in the history file.
+ */
 void file_write() {
 
     int fd_out, ret_write, str_len = 0;

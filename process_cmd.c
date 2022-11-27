@@ -1,6 +1,11 @@
 #include <stdlib.h>
 #include "main.h"
 
+/**
+ * @brief removes quotation marks from a string.
+ * @param str - the string to process.
+ * @return a string without quotation marks.
+ */
 char *skip_quotes(const char *str) {
     int i = 0, j = 0;
     char temp[1024];
@@ -9,25 +14,38 @@ char *skip_quotes(const char *str) {
             temp[j++] = str[i - 1];
     }
     temp[j] = '\0';
-
     return _strdup(temp);
 }
 
 /**
- * is_space - checks if a character is a whitespace.
- * @c: the character to check.
- * Return: 1 if character is a whitespace, 0 otherwise.
+ * @brief checks if a character is a whitespace.
+ * @param c - the character to check.
+ * @return 1 if character is a whitespace, 0 otherwise.
  */
 int is_space(int c) {
     return (c == '\t' || c == '\n' ||
             c == '\v' || c == '\f' || c == '\r' || c == ' ' ? 1 : 0);
 }
 
+/**
+ * @brief skips whitespaces in a string.
+ * @param s - the string to process.
+ * @return the string itself.
+ */
 char *skip_whitespaces(char *s) {
     while (is_space(*s)) ++s;
     return s;
 }
 
+/**
+ * @brief splits commands and then run them.
+ * @param cmdExec - the command to process.
+ * @param input - the input.
+ * @param first - the first piped command.
+ * @param last - the last piped command.
+ * @return 1 (SUCCESS) or 0 (FAILURE).
+ *
+ */
 int split(char *cmdExec, int input, int first, int last) {
     char *new_cmd_exec1;
     int m = 1;

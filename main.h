@@ -35,9 +35,9 @@ void file_write();
 
 void execute_event();
 
-void environ_ment();
+void print_env();
 
-void set_environment_variables();
+void set_environment_vars();
 
 void change_directory();
 
@@ -45,7 +45,7 @@ void print_working_dir();
 
 void run_echo(char *echo_val);
 
-void execute_history();
+void print_history();
 
 char *skip_whitespaces(char *s);
 
@@ -97,7 +97,7 @@ char *replace_str(const char *str, const char *old, const char *new);
 
 char *strtok_skip(char *str, char *delim);
 
-void sigintHandler(int sig_num);
+void signalHandler(int sig_num);
 
 void free_global_vars();
 

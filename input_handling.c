@@ -3,13 +3,21 @@
 #include <stdlib.h>
 #include "main.h"
 
-void sigintHandler(int sig_num) {
+/**
+ * @brief handle signals.
+ * @param sig_num - the signal number.
+ */
+void signalHandler(int sig_num) {
     if (sig_num == SIGINT) {
         printf("\n");
         print_prompt1();
     }
 }
 
+/**
+ * @brief read commands from user input.
+ * @return the commands entered, as a string.
+ */
 char *read_cmd(void) {
     char buff[1024];
     char *ptr = NULL;

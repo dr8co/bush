@@ -1,15 +1,24 @@
 #include <stdlib.h>
 #include "main.h"
 
+/**
+ * @brief tokenizes commands.
+ * @param com_exec - the command to tokenize.
+ */
 void tokenize_commands(char *com_exec) {
     int m = 1;
 
     args[0] = strtok_skip(com_exec, " ");
-    while ((args[m] = strtok_skip(NULL, " ")) != NULL){
+    while ((args[m] = strtok_skip(NULL, " ")) != NULL) {
         args[m] = skip_whitespaces(args[m]);
-        m++;}
+        m++;
+    }
 }
 
+/**
+ * @brief tokenize command for both input and output redirections.
+ * @param cmdExec - the command to tokenize.
+ */
 void tokenize_redirect_input_output(char *cmdExec) {
     char *io_token[100];
     char *new_cmd_exec1;
@@ -26,6 +35,10 @@ void tokenize_redirect_input_output(char *cmdExec) {
     tokenize_commands(io_token[0]);
 }
 
+/**
+ * @brief tokenize command for input redirections.
+ * @param cmdExec - the command to tokenize.
+ */
 void tokenize_redirect_input(char *cmdExec) {
     char *i_token[100];
     char *new_cmd_exec1;
@@ -40,6 +53,10 @@ void tokenize_redirect_input(char *cmdExec) {
     free(new_cmd_exec1);
 }
 
+/**
+ * @brief tokenize command for output redirections.
+ * @param cmdExec - the command to tokenize.
+ */
 void tokenize_redirect_output(char *cmdExec) {
     char *o_token[100];
     char *new_cmd_exec1;

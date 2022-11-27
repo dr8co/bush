@@ -3,11 +3,10 @@
 #include <string.h>
 
 /**
- * _strlen - calculate length of a string
- * @s: input string
- * Return: length of a string or 0 if string is NULL
+ * @brief calculates length of a string.
+ * @param s - input string.
+ * @return the length of a string or 0 if string is NULL.
  */
-
 int _strlen(const char *s) {
     int l = 0;
 
@@ -22,12 +21,11 @@ int _strlen(const char *s) {
 }
 
 /**
- * *_strcpy - copy string pointed to by src to string pointed to by dest
- * @dest: destination
- * @src: string to copy
- * Return: a pointer to the destination
+ * @brief copies string pointed to by src to string pointed to by dest.
+ * @param dest - destination.
+ * @param src - string to copy.
+ * Return: a pointer to the destination.
  */
-
 char *_strcpy(char *dest, const char *src) {
     int i;
     if (!src)
@@ -41,11 +39,11 @@ char *_strcpy(char *dest, const char *src) {
 }
 
 /**
- * _strcmp - compares two strings
- * @s1: first string
- * @s2: second string
+ * @brief compares two strings.
+ * @param s1 - first string.
+ * @param s2 - second string.
  *
- * Return: the difference of s1 and s2
+ * @return the difference of s1 and s2.
  */
 int _strcmp(const char *s1, const char *s2) {
     int i = 0;
@@ -56,11 +54,11 @@ int _strcmp(const char *s1, const char *s2) {
 }
 
 /**
- * _strcat - appends src string to the dest string
- * @dest: string to append by src
- * @src: string to append to dest
+ * @brief appends src string to the dest string
+ * @param dest - string to append by src
+ * @param src - string to append to dest
  *
- * Return: pointer to the resulting string dest,
+ * @eturn: pointer to the resulting string dest,
  * or NULL if both strings are not present or NULL.
  */
 char *_strcat(char *dest, char *src) {
@@ -84,12 +82,12 @@ char *_strcat(char *dest, char *src) {
 }
 
 /**
- * _memset - fills memory with a constant byte
- * @s: memory space to be filled
- * @b: byte to fill with
- * @n: number of spaces to fill
+ * @brief fills memory with a constant byte.
+ * @param s - the memory space to be filled.
+ * @param b - the byte to fill with.
+ * @param n - the number of spaces to fill.
  *
- * Return: pointer to memory area s
+ * @return a pointer to the filled memory area.
  */
 char *_memset(char *s, char b, unsigned int n) {
     unsigned int i;
@@ -101,11 +99,11 @@ char *_memset(char *s, char b, unsigned int n) {
 }
 
 /**
- * _strchr - locates a character in a string
- * @s: string to check
- * @c: character to check for
+ * @brief locates a character in a string.
+ * @param s - the string to check.
+ * @param c - the character to check for.
  *
- * Return: pointer to first occurrence of c in s or null
+ * @return a pointer to first occurrence of c in s or NULL.
  */
 char *_strchr(char *s, char c) {
     int i;
@@ -121,10 +119,10 @@ char *_strchr(char *s, char c) {
 }
 
 /**
- * *_strdup - copies a string given as parameter
- * @str: the string to be duplicated
+ * @brief copies a string given as parameter.
+ * @param str - the string to be duplicated.
  *
- * Return: pointer to the copied string (Success), NULL (Error)
+ * @return a pointer to the copied string (Success), NULL (Error).
  */
 char *_strdup(const char *str) {
     char *duplicate;
@@ -148,10 +146,10 @@ char *_strdup(const char *str) {
 }
 
 /**
- * check_delim - checks if a string contains a character
- * @c: Character To Check
- * @str: String To Check
- * Return: 1 Success, 0 Failed
+ * @brief checks if a string contains a character.
+ * @param c - the character to check.
+ * @param str: the string to check.
+ * @return: 1 (SUCCESS), 0 (FAILURE).
  */
 unsigned int check_delim(char c, const char *str) {
     unsigned int i;
@@ -164,10 +162,10 @@ unsigned int check_delim(char c, const char *str) {
 }
 
 /**
- * strtok_skip - split a string into tokens
- * @str: String to split
- * @delim: Delimiter
- * Return: Pointer To The Next Token Or NULL
+ * @brief splits a string into tokens.
+ * @param str: the string to split.
+ * @param delim: the delimiter.
+ * @return: a pointer to the next token or NULL.
  */
 char *_strtok(char *str, const char *delim) {
     static char *ts;
@@ -205,11 +203,11 @@ char *_strtok(char *str, const char *delim) {
 }
 
 /**
- * _strstr - locates a substring
- * @haystack: string in which to check for needle
- * @needle: substring to find in haystack
+ * @brief locates a substring.
+ * @param haystack - string in which to check for needle.
+ * @param needle - substring to find in haystack.
  *
- * Return: pointer to beginning of needle in haystack or NULL if no match
+ * @return a pointer to beginning of needle in haystack or NULL if no match.
  */
 char *_strstr(const char *haystack, const char *needle) {
     unsigned int i = 0, j = 0;
@@ -231,11 +229,11 @@ char *_strstr(const char *haystack, const char *needle) {
 }
 
 /**
- * replace_str - replace a substring in a string.
- * @str: the parent string.
- * @old: the substring in str to be replaced.
- * @new: the string to replace old in str.
- * Return: new str with the old replaced by new.
+ * @brief replaces a substring in a string.
+ * @param str - the parent string.
+ * @param old - the substring in str to be replaced.
+ * @param new - the string to replace old in str.
+ * @return a new str with the old replaced by new.
  */
 char *replace_str(const char *str, const char *old, const char *new) {
     char *result;
@@ -271,6 +269,12 @@ char *replace_str(const char *str, const char *old, const char *new) {
     return result;
 }
 
+/**
+ * @brief tokenizes a string but not within enclosed texts.
+ * @param str - the string to tokenize.
+ * @param delim - the delimiter.
+ * @return a pointer to the next token or NULL.
+ */
 char *strtok_skip(char *str, char *delim) {
     static char *token = NULL;
     char *lead = NULL;

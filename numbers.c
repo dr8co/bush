@@ -1,6 +1,12 @@
 #include <stdlib.h>
 #include "main.h"
 
+/**
+ * @brief performs exponentiation of integers.
+ * @param base - the base
+ * @param exponent - the exponent
+ * @return base to the power of the exponent.
+ */
 int _pow(int base, int exponent) {
 
     int ans = 1;
@@ -20,6 +26,11 @@ int _pow(int base, int exponent) {
     return ans;
 }
 
+/**
+ * @brief converts a string to an integer.
+ * @param str - the string to convert.
+ * @return the string as an integer.
+ */
 int _atoi(const char *str) {
     if (str == NULL) {
         return 0;

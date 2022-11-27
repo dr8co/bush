@@ -4,6 +4,10 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
+/**
+ * @brief execute the 'echo' command.
+ * @param echo_val - the argument(s) of the 'echo' command.
+ */
 void run_echo(char *echo_val) {
     int i, index = 0;
     int environ_flag = 0;
@@ -55,14 +59,17 @@ void run_echo(char *echo_val) {
     else {
         _strcpy(args[1], new_args);
         if (environ_flag == 1) {
-            environ_ment();
+            print_env();
         } else if (environ_flag == 0) {
             printf("%s\n", new_args);
         }
     }
 }
 
-void execute_history() {
+/**
+ * @brief print the history of shell commands.
+ */
+void print_history() {
     int num, i, start_index;
     if (bang_flag == 1) {
         for (i = 0; i < no_of_lines; i++)
@@ -84,9 +91,11 @@ void execute_history() {
             printf("%s\n", history_data[i]);
         printf(" %d %s\n", no_of_lines, his_var);
     }
-
 }
 
+/**
+ * @brief execute events in the shell commands history.
+ */
 void execute_event() {
     char bang_val[1000];
     char *tokenize_bang[100], *num_ch[10];
@@ -117,9 +126,16 @@ void execute_event() {
     _strcpy(bang_val, tokenize_bang[1]);
     printf("%s\n", bang_val);
     _strcpy(input_buffer, bang_val);
-
 }
 
+/**
+ * @brief execute commands.
+ * @param input - the input.
+ * @param first - first piped command.
+ * @param last - last piped command.
+ * @param cmdExec - the command to be executed.
+ * @return 1 (SUCCESS), 0 (FAILURE).
+ */
 int command(int input, int first, int last, char *cmdExec) {
     int my_pipe_fd[2], ret, input_fd, output_fd;
     ret = pipe(my_pipe_fd);
@@ -170,16 +186,15 @@ int command(int input, int first, int last, char *cmdExec) {
             input_redirection = 0;
         }
         if (_strcmp(args[0], "export") == 0) {
-            set_environment_variables();
+            set_environment_vars();
             return 1;
         }
         if (_strcmp(args[0], "echo") == 0) {
             run_echo(cmdExec);
         } else if (_strcmp(args[0], "history") == 0) {
-            execute_history();
+            print_history();
         } else if (execvp(args[0], args) < 0) {
-            printf("burning bush: %i: command not found: %s\n", cmd_count, args[0]);
-
+            printf(" the burning bush: %i: command not found: %s\n", cmd_count, args[0]);
         }
         exit(0);
     } else {
@@ -194,6 +209,9 @@ int command(int input, int first, int last, char *cmdExec) {
     return my_pipe_fd[0];
 }
 
+/**
+ * @brief execute piped commands.
+ */
 void execute_pipe() {
     char *cmd_exec[100];
     int i, n = 1, input, first;

@@ -23,10 +23,15 @@ char *input_redirection_file;
 char *output_redirection_file;
 int cmd_count = 0;
 
-
+/**
+ * @brief the shell entry point.
+ * @param argc - argument count.
+ * @param argv - argument vector.
+ * @return always 0.
+ */
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
     init_shell();
-    signal(SIGINT, sigintHandler);
+    signal(SIGINT, signalHandler);
 
     while (1) {
         clear_variables();

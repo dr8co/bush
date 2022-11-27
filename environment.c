@@ -7,8 +7,10 @@
 char *user, hostname[256], cwd[1024];
 char *home, *prompt;
 
-
-void environ_ment() {
+/**
+ * @brief prints the environment variables.
+ */
+void print_env() {
     int i = 1, index = 0;
     char env_val[1000], *value;
     while (args[1][i] != '\0') {
@@ -24,7 +26,10 @@ void environ_ment() {
     else printf("%s\n", value);
 }
 
-void set_environment_variables() {
+/**
+ * @brief sets environment variables.
+ */
+void set_environment_vars() {
     int n = 1;
     char *left_right[100];
     if (args[1] == NULL) {
@@ -42,6 +47,9 @@ void set_environment_variables() {
     setenv(left_right[0], left_right[1], 0);
 }
 
+/**
+ * @brief clears the global variables.
+ */
 void clear_variables() {
     fd = 0;
     flag = 0;
@@ -57,13 +65,19 @@ void clear_variables() {
     bang_flag = 0;
 }
 
+/**
+ * @brief frees the global variables that were dynamically allocated to the memory.
+ */
 void free_global_vars() {
     free(input_redirection_file);
     free(output_redirection_file);
     free(prompt);
 }
 
-void init_shell(){
+/**
+ * @brief initializes the shell.
+ */
+void init_shell() {
     user = getenv("USER");
     gethostname(hostname, sizeof(hostname));
     getcwd(cwd, sizeof(cwd));
@@ -72,7 +86,4 @@ void init_shell(){
         home = "/home";
     }
     prompt = replace_str(cwd, home, "~");
-
-
-
 }
