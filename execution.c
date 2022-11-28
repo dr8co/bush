@@ -194,7 +194,7 @@ int command(int input, int first, int last, char *cmdExec) {
         } else if (_strcmp(args[0], "history") == 0) {
             print_history();
         } else if (execvp(args[0], args) < 0) {
-            printf(" the burning bush: %i: command not found: %s\n", cmd_count, args[0]);
+            printf("The burning bush: %i: command not found: %s\n", cmd_count, args[0]);
         }
         exit(0);
     } else {
