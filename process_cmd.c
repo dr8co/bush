@@ -54,7 +54,7 @@ int split(char *cmdExec, int input, int first, int last) {
 
     args[0] = _strtok(cmdExec, " ");
 
-    while ((args[m] = strtok_skip(NULL, " ")) != NULL)
+    while ((args[m] = _strtok(NULL, " ")) != NULL)
         m++;
     args[m] = NULL;
 

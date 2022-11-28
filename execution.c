@@ -12,8 +12,8 @@ void run_echo(char *echo_val) {
     int i, index = 0;
     int environ_flag = 0;
     char new_args[1024], env_val[1000], *str[10];
-    str[0] = strtok_skip(echo_val, " ");
-    str[1] = strtok_skip(NULL, "");
+    str[0] = _strtok(echo_val, " ");
+    str[1] = _strtok(NULL, "");
     _strcpy(env_val, args[1]);
     if (str[1] == NULL) {
         printf("\n");
@@ -105,8 +105,8 @@ void execute_event() {
         _strcpy(bang_val, history_data[no_of_lines - 1]);
     } else if (input_buffer[i] == '-') {
         n = 1;
-        num_ch[0] = strtok_skip(input_buffer, "-");
-        while ((num_ch[n] = strtok_skip(NULL, "-")) != NULL)
+        num_ch[0] = _strtok(input_buffer, "-");
+        while ((num_ch[n] = _strtok(NULL, "-")) != NULL)
             n++;
         num_ch[n] = NULL;
         num = _atoi(num_ch[1]);
@@ -115,12 +115,12 @@ void execute_event() {
         _strcpy(bang_val, history_data[index]);
 
     } else {
-        num_ch[0] = strtok_skip(input_buffer, "!");
+        num_ch[0] = _strtok(input_buffer, "!");
         num = _atoi(num_ch[0]);
         _strcpy(bang_val, history_data[num - 1]);
     }
-    tokenize_bang[0] = strtok_skip(bang_val, " ");
-    while ((tokenize_bang[n] = strtok_skip(NULL, "")) != NULL)
+    tokenize_bang[0] = _strtok(bang_val, " ");
+    while ((tokenize_bang[n] = _strtok(NULL, "")) != NULL)
         n++;
     tokenize_bang[n] = NULL;
     _strcpy(bang_val, tokenize_bang[1]);
@@ -219,9 +219,9 @@ void execute_pipe() {
     input = 0;
     first = 1;
 
-    cmd_exec[0] = strtok_skip(input_buffer, "|");
+    cmd_exec[0] = _strtok(input_buffer, "|");
 
-    while ((cmd_exec[n] = strtok_skip(NULL, "|")) != NULL)
+    while ((cmd_exec[n] = _strtok(NULL, "|")) != NULL)
         n++;
     cmd_exec[n] = NULL;
     for (int j = 0; j < n; ++j) {
