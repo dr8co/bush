@@ -103,4 +103,6 @@ void free_global_vars();
 
 void init_shell();
 
+char *trim_leading_trailing(const char *str);
+
 #endif /* MAIN_H */

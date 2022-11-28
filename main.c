@@ -30,21 +30,25 @@ int cmd_count = 0;
  * @return always 0.
  */
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
+    char *cmd = NULL, *cmd2 = NULL;
+
     init_shell();
     signal(SIGINT, signalHandler);
 
     while (1) {
         clear_variables();
         print_prompt1();
-        char *cmd = read_cmd();
+        cmd = read_cmd();
 
         if (cmd) {
             ++cmd_count;
+            cmd2 = trim_leading_trailing(cmd);
         } else {
             exit(0);
         }
-        _strcpy(input_buffer, cmd);
+        _strcpy(input_buffer, cmd2);
         free(cmd);
+        free(cmd2);
 
         if (_strcmp(input_buffer, "\n") == 0 || input_buffer[0] == '#')
             continue;

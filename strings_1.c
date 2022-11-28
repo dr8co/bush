@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 /**
  * @brief calculates length of a string.
@@ -317,4 +318,73 @@ char *strtok_skip(char *str, char *delim) {
         token++;
     }
     return lead;
+}
+
+/**
+ * @brief removes quotation marks from a string.
+ * @param str - the string to process.
+ * @return a string without quotation marks.
+ */
+char *skip_quotes(const char *str) {
+    int i = 0, j = 0;
+    char temp[1024];
+    while (str[i++] != '\0') {
+        if (str[i - 1] != '"')
+            temp[j++] = str[i - 1];
+    }
+    temp[j] = '\0';
+    return _strdup(temp);
+}
+
+/**
+ * @brief checks if a character is a whitespace.
+ * @param c - the character to check.
+ * @return 1 if character is a whitespace, 0 otherwise.
+ */
+int is_space(int c) {
+    return (c == '\t' || c == '\n' ||
+            c == '\v' || c == '\f' || c == '\r' || c == ' ' ? 1 : 0);
+}
+
+/**
+ * @brief skips whitespaces in a string.
+ * @param s - the string to process.
+ * @return a pointer to the first character after whitespace.
+ */
+char *skip_whitespaces(char *s) {
+    while (is_space(*s)) ++s;
+    return s;
+}
+
+/**
+ * @brief trim leading and trailing whitespaces from a string
+ * except the last trailing whitespace. (for the 'enter' after command input).
+ * @param str - the string to process.
+ * @return string without leading whitespaces and with one trailing
+ * whitespace, if one existed before.
+ */
+char *trim_leading_trailing(const char *str) {
+    int i = 0, k = 0, l;
+    char *str2;
+
+    if (!str)
+        return NULL;
+
+    l = _strlen(str);
+    str2 = malloc(sizeof(char) * l + 2);
+
+    while (is_space(str[i]))
+        ++i;
+
+    while (is_space(str[l - 1]))
+        --l;
+
+    for (int j = i; j <= l; ++j) {
+        str2[k] = str[j];
+        ++k;
+    }
+
+    str2[k] = '\0';
+
+    return str2;
 }

@@ -220,9 +220,12 @@ void execute_pipe() {
     first = 1;
 
     cmd_exec[0] = _strtok(input_buffer, "|");
+    cmd_exec[0] = trim_leading_trailing(cmd_exec[0]);
 
-    while ((cmd_exec[n] = _strtok(NULL, "|")) != NULL)
+    while ((cmd_exec[n] = _strtok(NULL, "|")) != NULL) {
+        cmd_exec[n] = trim_leading_trailing(cmd_exec[n]);
         n++;
+    }
     cmd_exec[n] = NULL;
     for (int j = 0; j < n; ++j) {
     }
@@ -232,4 +235,7 @@ void execute_pipe() {
         first = 0;
     }
     split(cmd_exec[i], input, first, 1);
+    for (int j = 0; j <= n; ++j) {
+        free(cmd_exec[j]);
+    }
 }
