@@ -4,8 +4,8 @@
 #include "main.h"
 
 /* Global vars */
-char *user, hostname[256], cwd[1024];
-char *home, *prompt;
+char *user = NULL, hostname[256], cwd[1024];
+char *home, *prompt = NULL;
 
 /**
  * @brief prints the environment variables.

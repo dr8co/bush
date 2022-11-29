@@ -15,7 +15,7 @@ void *_realloc(void *ptr, unsigned int new_size) {
     char *old_ptr = ptr;
 
     if (ptr == NULL) {
-        p = (char *) malloc(new_size);
+        p = malloc(new_size);
         return (p);
     } else if (new_size == 0) {
         free(ptr);
@@ -23,7 +23,7 @@ void *_realloc(void *ptr, unsigned int new_size) {
     } else if (new_size == old_size)
         return (ptr);
 
-    p = (char *) malloc(new_size);
+    p = malloc(new_size);
     if (p == NULL)
         return (NULL);
 
@@ -35,4 +35,21 @@ void *_realloc(void *ptr, unsigned int new_size) {
 
     free(ptr);
     return (p);
+}
+
+/**
+ * @brief fills memory with a constant byte.
+ * @param s - the memory space to be filled.
+ * @param b - the byte to fill with.
+ * @param n - the number of spaces to fill.
+ *
+ * @return a pointer to the filled memory area.
+ */
+char *_memset(char *s, char b, unsigned int n) {
+    unsigned int i;
+
+    for (i = 0; i < n; i++) {
+        *(s + i) = b;
+    }
+    return (s);
 }

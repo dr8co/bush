@@ -1,7 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 /**
  * @brief calculates length of a string.
@@ -30,7 +29,7 @@ int _strlen(const char *s) {
 char *_strcpy(char *dest, const char *src) {
     int i;
     if (!src)
-        dest = NULL;
+        return NULL;
 
     for (i = 0; src[i] != '\0'; ++i) {
         dest[i] = src[i];
@@ -80,23 +79,6 @@ char *_strcat(char *dest, char *src) {
         j++;
     }
     return (dest);
-}
-
-/**
- * @brief fills memory with a constant byte.
- * @param s - the memory space to be filled.
- * @param b - the byte to fill with.
- * @param n - the number of spaces to fill.
- *
- * @return a pointer to the filled memory area.
- */
-char *_memset(char *s, char b, unsigned int n) {
-    unsigned int i;
-
-    for (i = 0; i < n; i++) {
-        *(s + i) = b;
-    }
-    return (s);
 }
 
 /**

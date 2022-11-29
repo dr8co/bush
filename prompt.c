@@ -5,7 +5,7 @@
  * @brief prints the regular prompt string.
  */
 void print_prompt1() {
-    if (*cwd) {
+    if (user && prompt && *hostname) {
         printf("\033[1;34m");
         printf("%s@%s", user, hostname);
 
