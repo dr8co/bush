@@ -1,4 +1,19 @@
+/**
+ * @file tokenize.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for tokenization operations
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "main.h"
+#include <unistd.h>
+
+char *input_redirection_file;
+char *output_redirection_file;
 
 /**
  * @brief tokenizes commands.

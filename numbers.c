@@ -1,3 +1,14 @@
+/**
+ * @file numbers.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for numerical computations
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include <stdlib.h>
 #include "main.h"
 

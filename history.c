@@ -1,8 +1,27 @@
+/**
+ * @file history.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for manipulation of shell history
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "main.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+
+/* Global variables for this file */
+int fd;
+char *history_file;
+extern char *home;
+extern int line_number;
+char history_data[1024][1024];
+
 
 /**
  * @brief process the shell history file.
@@ -50,7 +69,6 @@ void write_history() {
 
     str_len = _strlen(input_data);
     fd_out = open(history_file, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
-    len = _strlen(input_buffer);
     ret_write = write(fd_out, input_data, str_len);
     if (ret_write < 0) {
         printf("Error in writing file\n");
@@ -59,4 +77,8 @@ void write_history() {
     close(fd_out);
     free(history_file);
 
+}
+
+void free_histfile() {
+    free(history_file);
 }

@@ -1,26 +1,25 @@
+/**
+ * @file main.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief entry point to the shell
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 #include "main.h"
 
-/*GLOBAL VARIABLES*/
-int pipe_count = 0, fd;
+/* Global variables for this file */
 char *args[512];
-char *history_file;
 char input_buffer[1024];
-int flag = 0, len;
-int flag_pipe = 1;
-pid_t pid;
-int line_number;
-int flag_without_pipe;
-int output_redirection, input_redirection;
+extern pid_t pid;
 int event_flag;
-int status;//pid, status;
-char history_data[1024][1024];
-char ret_file[3072];
 char his_var[2048];
-char *input_redirection_file;
-char *output_redirection_file;
 int cmd_count = 0;
 
 /**
@@ -30,6 +29,7 @@ int cmd_count = 0;
  * @return always 0.
  */
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
+    int flag = 0, len, status;
     char *cmd = NULL, *cmd2 = NULL;
 
     init_shell();
@@ -68,8 +68,8 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
 
         if (input_buffer[0] == '!') {
             read_history();
-            free(history_file);
             event_flag = 1;
+            free_histfile();
             execute_event();
         }
         execute_pipe();

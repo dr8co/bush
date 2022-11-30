@@ -1,32 +1,23 @@
+/**
+ * @file main.h
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief project header file
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <unistd.h>
-
-/*GLOBAL VARIABLES*/
-extern int pipe_count, fd;
+/* Global Variables */
 extern char *args[512];
-extern char *history_file;
 extern char input_buffer[1024];
-extern int flag, len;
-extern char cwd[1024], *home;
-extern pid_t pid;
-extern int line_number;
-extern int flag_pipe, flag_without_pipe;
-extern int output_redirection, input_redirection;
-extern int event_flag;
-extern int status;
-extern char history_data[1024][1024];
-extern char current_directory[1024];
-extern char ret_file[3072];
-extern char his_var[2048];
-extern char *input_redirection_file;
-extern char *output_redirection_file;
 extern char **environ;
-extern char *user, hostname[256];
-extern int cmd_count;
-extern char *prompt;
 
+/* Function Declarations */
 void clear_variables();
 
 void read_history();
@@ -102,6 +93,8 @@ void signalHandler(int sig_num);
 void free_global_vars();
 
 void init_shell();
+
+void free_histfile();
 
 char *trim_leading_trailing(const char *str);
 

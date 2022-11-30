@@ -1,11 +1,27 @@
+/**
+ * @file environment.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for manipulating shell environment
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "main.h"
 
 /* Global vars */
-char *user = NULL, hostname[256], cwd[1024];
-char *home, *prompt = NULL;
+extern int fd, line_number, event_flag;
+extern pid_t pid;
+extern int output_redirection, input_redirection;
+extern char *input_redirection_file;
+extern char *output_redirection_file;
+extern char *prompt;
+
 
 /**
  * @brief prints the environment variables.
@@ -52,12 +68,7 @@ void set_environment_vars() {
  */
 void clear_variables() {
     fd = 0;
-    flag = 0;
-    len = 0;
     line_number = 0;
-    pipe_count = 0;
-    flag_pipe = 0;
-    flag_without_pipe = 0;
     output_redirection = 0;
     input_redirection = 0;
     input_buffer[0] = '\0';
@@ -72,18 +83,4 @@ void free_global_vars() {
     free(input_redirection_file);
     free(output_redirection_file);
     free(prompt);
-}
-
-/**
- * @brief initializes the shell.
- */
-void init_shell() {
-    user = getenv("USER");
-    gethostname(hostname, sizeof(hostname));
-    getcwd(cwd, sizeof(cwd));
-    home = getenv("HOME");
-    if (home == NULL) {
-        home = "/home";
-    }
-    prompt = replace_str(cwd, home, "~");
 }

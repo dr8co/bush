@@ -1,8 +1,31 @@
+/**
+ * @file execution.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for functions that handle execution of commands
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <unistd.h>
+
+/* Global variables for this file */
+pid_t pid;
+int line_number;
+int output_redirection, input_redirection;
+extern int event_flag, cmd_count;
+extern char history_data[1024][1024];
+extern char his_var[2048];
+extern char *input_redirection_file;
+extern char *output_redirection_file;
+
 
 /**
  * @brief execute the 'echo' command.
@@ -31,7 +54,7 @@ void run_echo(char *echo_val) {
             while (str[1][i] != '\0') {
                 if (str[1][i] != '"') {
                     new_args[index] = str[1][i];
-                    flag = 1;
+                    //flag = 1;
                     ++index;
                 }
                 ++i;
@@ -41,7 +64,7 @@ void run_echo(char *echo_val) {
             while (str[1][i] != '\0') {
                 if (str[1][i] != 39) {
                     new_args[index] = str[1][i];
-                    flag = 1;
+                    //flag = 1;
                     ++index;
                 }
                 ++i;
@@ -228,7 +251,6 @@ void execute_pipe() {
         ++n;
     }
     cmd_exec[n] = NULL;
-    pipe_count = n - 1;
 
     for (i = 0; i < n - 1; ++i) {
         input = split(cmd_exec[i], input, first, 0);

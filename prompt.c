@@ -1,5 +1,19 @@
+/**
+ * @file prompt.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for printing shell prompts
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "main.h"
 #include <stdio.h>
+
+extern char *user, hostname[256];
+extern char *prompt;
 
 /**
  * @brief prints the regular prompt string.

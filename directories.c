@@ -1,6 +1,21 @@
+/**
+ * @file directories.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for directory-related functions
+ * @version 0.1
+ * @date 2022-11-30
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+char *user = NULL, hostname[256], cwd[1024];
+char *home, *prompt = NULL;
+extern int cmd_count;
 
 /**
  * @brief Changes the shell working directory.
@@ -87,3 +102,16 @@ void print_working_dir() {
         perror("error in reading current directory");
 }
 
+/**
+ * @brief initializes the shell.
+ */
+void init_shell() {
+    user = getenv("USER");
+    gethostname(hostname, sizeof(hostname));
+    getcwd(cwd, sizeof(cwd));
+    home = getenv("HOME");
+    if (home == NULL) {
+        home = "/home";
+    }
+    prompt = replace_str(cwd, home, "~");
+}
