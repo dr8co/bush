@@ -7,7 +7,7 @@
 /**
  * @brief process the shell history file.
  */
-void file_process() {
+void read_history() {
     history_file = (char *) malloc(1024 * sizeof(char));
     _strcpy(history_file, home);
     _strcat(history_file, "/.burning_bush_history");
@@ -22,7 +22,7 @@ void file_process() {
             index++;
             if (buffer[i] == '\n') {
                 temp_data[index - 1] = '\0';
-                no_of_lines++;
+                line_number++;
                 index = 0;
                 _strcpy(history_data[x], temp_data);
                 x++;
@@ -36,13 +36,13 @@ void file_process() {
 /**
  * @brief record history of the shell in the history file.
  */
-void file_write() {
+void write_history() {
 
     int fd_out, ret_write, str_len = 0;
     char input_data[2048];
-    no_of_lines++;
+    line_number++;
     char no[10];
-    sprintf(no, "%d", no_of_lines);
+    sprintf(no, "%d", line_number);
     _strcpy(input_data, " ");
     _strcat(input_data, no);
     _strcat(input_data, " ");

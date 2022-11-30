@@ -5,6 +5,6 @@ set(CMAKE_C_STANDARD 17)
 
 add_executable(bush
         directories.c environment.c execution.c
-        file_handling.c input_handling.c main.h
+        history.c input_handling.c main.h
         main.c memory.c numbers.c process_cmd.c
         prompt.c strings_1.c tokenize.c)

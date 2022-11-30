@@ -11,10 +11,10 @@ char input_buffer[1024];
 int flag = 0, len;
 int flag_pipe = 1;
 pid_t pid;
-int no_of_lines;
+int line_number;
 int flag_without_pipe;
 int output_redirection, input_redirection;
-int bang_flag;
+int event_flag;
 int status;//pid, status;
 char history_data[1024][1024];
 char ret_file[3072];
@@ -54,8 +54,8 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
             continue;
 
         if (input_buffer[0] != '!') {
-            file_process();
-            file_write();
+            read_history();
+            write_history();
         }
         len = _strlen(input_buffer);
         input_buffer[len - 1] = '\0';
@@ -67,9 +67,9 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         }
 
         if (input_buffer[0] == '!') {
-            file_process();
+            read_history();
             free(history_file);
-            bang_flag = 1;
+            event_flag = 1;
             execute_event();
         }
         execute_pipe();

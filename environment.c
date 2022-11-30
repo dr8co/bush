@@ -15,8 +15,8 @@ void print_env() {
     char env_val[1000], *value;
     while (args[1][i] != '\0') {
         env_val[index] = args[1][i];
-        index++;
-        i++;
+        ++index;
+        ++i;
     }
     env_val[index] = '\0';
     value = getenv(env_val);
@@ -34,7 +34,7 @@ void set_environment_vars() {
     char *left_right[100];
     if (args[1] == NULL) {
         char **env;
-        for (env = environ; *env != 0; env++) {
+        for (env = environ; *env != 0; ++env) {
             char *value = *env;
             printf("export %s\n", value);
         }
@@ -42,7 +42,7 @@ void set_environment_vars() {
     }
     left_right[0] = _strtok(args[1], "=");
     while ((left_right[n] = _strtok(NULL, "=")) != NULL)
-        n++;
+        ++n;
     left_right[n] = NULL;
     setenv(left_right[0], left_right[1], 0);
 }
@@ -54,7 +54,7 @@ void clear_variables() {
     fd = 0;
     flag = 0;
     len = 0;
-    no_of_lines = 0;
+    line_number = 0;
     pipe_count = 0;
     flag_pipe = 0;
     flag_without_pipe = 0;
@@ -62,7 +62,7 @@ void clear_variables() {
     input_redirection = 0;
     input_buffer[0] = '\0';
     pid = 0;
-    bang_flag = 0;
+    event_flag = 0;
 }
 
 /**

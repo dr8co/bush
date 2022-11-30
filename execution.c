@@ -32,9 +32,9 @@ void run_echo(char *echo_val) {
                 if (str[1][i] != '"') {
                     new_args[index] = str[1][i];
                     flag = 1;
-                    index++;
+                    ++index;
                 }
-                i++;
+                ++i;
             }
         } else if (str[1][i] == 39) {
             index = 0;
@@ -42,15 +42,15 @@ void run_echo(char *echo_val) {
                 if (str[1][i] != 39) {
                     new_args[index] = str[1][i];
                     flag = 1;
-                    index++;
+                    ++index;
                 }
-                i++;
+                ++i;
             }
         } else if (str[1][i] != '"') {
             new_args[index] = str[1][i];
-            index++;
-            i++;
-        } else i++;
+            ++index;
+            ++i;
+        } else ++i;
     }
 
     new_args[index] = '\0';
@@ -71,25 +71,25 @@ void run_echo(char *echo_val) {
  */
 void print_history() {
     int num, i, start_index;
-    if (bang_flag == 1) {
-        for (i = 0; i < no_of_lines; i++)
+    if (event_flag == 1) {
+        for (i = 0; i < line_number; ++i)
             printf("%s\n", history_data[i]);
     } else if (args[1] == NULL) {
-        for (i = 0; i < no_of_lines - 1; i++)
+        for (i = 0; i < line_number - 1; ++i)
             printf("%s\n", history_data[i]);
-        printf(" %d %s\n", no_of_lines, his_var);
+        printf(" %d %s\n", line_number, his_var);
     } else {
         if (args[1] != NULL)
             num = _atoi(args[1]);
-        if (num > no_of_lines) {
-            for (i = 0; i < no_of_lines - 1; i++)
+        if (num > line_number) {
+            for (i = 0; i < line_number - 1; ++i)
                 printf("%s\n", history_data[i]);
-            printf(" %d %s\n", no_of_lines, his_var);
+            printf(" %d %s\n", line_number, his_var);
         }
-        start_index = no_of_lines - num;
-        for (i = start_index; i < no_of_lines - 1; i++)
+        start_index = line_number - num;
+        for (i = start_index; i < line_number - 1; ++i)
             printf("%s\n", history_data[i]);
-        printf(" %d %s\n", no_of_lines, his_var);
+        printf(" %d %s\n", line_number, his_var);
     }
 }
 
@@ -97,35 +97,35 @@ void print_history() {
  * @brief execute events in the shell commands history.
  */
 void execute_event() {
-    char bang_val[1000];
-    char *tokenize_bang[100], *num_ch[10];
-    int i, n = 1, num, index = 0;
-    i = 1;
+    char event_val[1000];
+    char *event_token[100], *num_ch[10];
+    int i = 1, n = 1, num, index = 0;
+
     if (input_buffer[i] == '!') {
-        _strcpy(bang_val, history_data[no_of_lines - 1]);
+        _strcpy(event_val, history_data[line_number - 1]);
     } else if (input_buffer[i] == '-') {
         n = 1;
         num_ch[0] = _strtok(input_buffer, "-");
         while ((num_ch[n] = _strtok(NULL, "-")) != NULL)
-            n++;
+            ++n;
         num_ch[n] = NULL;
         num = _atoi(num_ch[1]);
 
-        index = no_of_lines - num;
-        _strcpy(bang_val, history_data[index]);
+        index = line_number - num;
+        _strcpy(event_val, history_data[index]);
 
     } else {
         num_ch[0] = _strtok(input_buffer, "!");
         num = _atoi(num_ch[0]);
-        _strcpy(bang_val, history_data[num - 1]);
+        _strcpy(event_val, history_data[num - 1]);
     }
-    tokenize_bang[0] = _strtok(bang_val, " ");
-    while ((tokenize_bang[n] = _strtok(NULL, "")) != NULL)
+    event_token[0] = _strtok(event_val, " ");
+    while ((event_token[n] = _strtok(NULL, "")) != NULL)
         n++;
-    tokenize_bang[n] = NULL;
-    _strcpy(bang_val, tokenize_bang[1]);
-    printf("%s\n", bang_val);
-    _strcpy(input_buffer, bang_val);
+    event_token[n] = NULL;
+    _strcpy(event_val, event_token[1]);
+    printf("%s\n", event_val);
+    _strcpy(input_buffer, event_val);
 }
 
 /**
@@ -137,8 +137,9 @@ void execute_event() {
  * @return 1 (SUCCESS), 0 (FAILURE).
  */
 int command(int input, int first, int last, char *cmdExec) {
-    int my_pipe_fd[2], ret, input_fd, output_fd;
-    ret = pipe(my_pipe_fd);
+    int pipedes[2], ret, input_fd, output_fd;
+
+    ret = pipe(pipedes);
     if (ret == -1) {
         perror("pipe error");
         return 1;
@@ -147,10 +148,10 @@ int command(int input, int first, int last, char *cmdExec) {
 
     if (pid == 0) {
         if (first == 1 && last == 0 && input == 0) {
-            dup2(my_pipe_fd[1], 1);
+            dup2(pipedes[1], 1);
         } else if (first == 0 && last == 0 && input != 0) {
             dup2(input, 0);
-            dup2(my_pipe_fd[1], 1);
+            dup2(pipedes[1], 1);
         } else {
             dup2(input, 0);
         }
@@ -202,11 +203,11 @@ int command(int input, int first, int last, char *cmdExec) {
     }
 
     if (last == 1)
-        close(my_pipe_fd[0]);
+        close(pipedes[0]);
     if (input != 0)
         close(input);
-    close(my_pipe_fd[1]);
-    return my_pipe_fd[0];
+    close(pipedes[1]);
+    return pipedes[0];
 }
 
 /**
@@ -224,13 +225,12 @@ void execute_pipe() {
 
     while ((cmd_exec[n] = _strtok(NULL, "|")) != NULL) {
         cmd_exec[n] = trim_leading_trailing(cmd_exec[n]);
-        n++;
+        ++n;
     }
     cmd_exec[n] = NULL;
-    for (int j = 0; j < n; ++j) {
-    }
     pipe_count = n - 1;
-    for (i = 0; i < n - 1; i++) {
+
+    for (i = 0; i < n - 1; ++i) {
         input = split(cmd_exec[i], input, first, 0);
         first = 0;
     }

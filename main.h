@@ -11,10 +11,10 @@ extern char input_buffer[1024];
 extern int flag, len;
 extern char cwd[1024], *home;
 extern pid_t pid;
-extern int no_of_lines;
+extern int line_number;
 extern int flag_pipe, flag_without_pipe;
 extern int output_redirection, input_redirection;
-extern int bang_flag;
+extern int event_flag;
 extern int status;
 extern char history_data[1024][1024];
 extern char current_directory[1024];
@@ -29,9 +29,9 @@ extern char *prompt;
 
 void clear_variables();
 
-void file_process();
+void read_history();
 
-void file_write();
+void write_history();
 
 void execute_event();
 

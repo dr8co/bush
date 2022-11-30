@@ -14,8 +14,8 @@ int _strlen(const char *s) {
         return (l);
 
     while (*s != '\0') {
-        s++;
-        l++;
+        ++s;
+        ++l;
     }
     return (l);
 }
@@ -49,7 +49,7 @@ int _strcmp(const char *s1, const char *s2) {
     int i = 0;
 
     while (*(s1 + i) && *(s2 + i) && (*(s1 + i) == *(s2 + i)))
-        i++;
+        ++i;
     return (*(s1 + i) - *(s2 + i));
 }
 
@@ -73,10 +73,10 @@ char *_strcat(char *dest, char *src) {
     }
     i = j = 0;
     while (*(dest + i))
-        i++;
+        ++i;
     while ((*(dest + i) = *(src + j))) {
-        i++;
-        j++;
+        ++i;
+        ++j;
     }
     return (dest);
 }
@@ -91,7 +91,7 @@ char *_strcat(char *dest, char *src) {
 char *_strchr(char *s, char c) {
     int i;
 
-    for (i = 0; *(s + i); i++) {
+    for (i = 0; *(s + i); ++i) {
         if (*(s + i) == c)
             return (s + i);
     }
@@ -123,7 +123,7 @@ char *_strdup(const char *str) {
         return (NULL);
 
     while ((duplicate[i] = str[i]) != '\0')
-        i++;
+        ++i;
 
     return (duplicate);
 }
@@ -137,7 +137,7 @@ char *_strdup(const char *str) {
 unsigned int check_delim(char c, const char *str) {
     unsigned int i;
 
-    for (i = 0; str[i] != '\0'; i++) {
+    for (i = 0; str[i] != '\0'; ++i) {
         if (c == str[i])
             return (1);
     }
@@ -160,7 +160,7 @@ char *_strtok(char *str, const char *delim) {
     ts = nt;
     if (ts == NULL)
         return (NULL);
-    for (i = 0; ts[i] != '\0'; i++) {
+    for (i = 0; ts[i] != '\0'; ++i) {
         if (!check_delim(ts[i], delim))
             break;
     }
@@ -170,7 +170,7 @@ char *_strtok(char *str, const char *delim) {
     }
     ts = nt + i;
     nt = ts;
-    for (i = 0; nt[i] != '\0'; i++) {
+    for (i = 0; nt[i] != '\0'; ++i) {
         if (check_delim(nt[i], delim))
             break;
     }
@@ -198,12 +198,12 @@ char *_strstr(const char *haystack, const char *needle) {
     while (haystack[i]) {
         while (needle[j] && (haystack[i] == needle[0])) {
             if (haystack[i + j] == needle[j])
-                j++;
+                ++j;
             else
                 break;
         }
         if (needle[j]) {
-            i++;
+            ++i;
             j = 0;
         } else
             return (char *) (haystack + i);
@@ -225,9 +225,9 @@ char *replace_str(const char *str, const char *old, const char *new) {
     int old_len = _strlen(old);
 
     // Count the number of times old word occurs in the string
-    for (i = 0; str[i] != '\0'; i++) {
+    for (i = 0; str[i] != '\0'; ++i) {
         if (_strstr(&str[i], old) == &str[i]) {
-            count++;
+            ++count;
 
             // Jump to index after the old word.
             i += old_len - 1;
@@ -283,21 +283,21 @@ char *strtok_skip(char *str, char *delim) {
             if (close_b[iBlockIndex] == *token) {
                 iBlock = 0;
             }
-            token++;
+            ++token;
             continue;
         }
         if ((block = _strchr(open_b, *token)) != NULL) {
             iBlock = 1;
             iBlockIndex = block - open_b;
-            token++;
+            ++token;
             continue;
         }
         if (_strchr(delim, *token) != NULL) {
             *token = '\0';
-            token++;
+            ++token;
             break;
         }
-        token++;
+        ++token;
     }
     return lead;
 }
