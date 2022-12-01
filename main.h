@@ -12,7 +12,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-/* Global Variables */
+/* Global variables for this file */
 extern char *args[512];
 extern char input_buffer[1024];
 extern char **environ;

@@ -12,6 +12,7 @@
 #include "main.h"
 #include <unistd.h>
 
+/* Global variables for this file */
 char *input_redirection_file;
 char *output_redirection_file;
 

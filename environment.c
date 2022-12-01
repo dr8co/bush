@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "main.h"
 
-/* Global vars */
+/* Global variables for this file */
 extern int fd, line_number, event_flag;
 extern pid_t pid;
 extern int output_redirection, input_redirection;

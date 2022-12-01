@@ -29,7 +29,7 @@ int cmd_count = 0;
  * @return always 0.
  */
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
-    int flag = 0, len, status;
+    int len, status;
     char *cmd = NULL, *cmd2 = NULL;
 
     init_shell();
@@ -62,7 +62,6 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         _strcpy(his_var, input_buffer);
 
         if (_strcmp(input_buffer, "exit") == 0 || _strcmp(input_buffer, "exit\n") == 0) {
-            flag = 1;
             break;
         }
 
@@ -77,9 +76,5 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
     }
 
     free_global_vars();
-
-    if (flag == 1) {
-        exit(0);
-    }
-    return 0;
+    exit(0);
 }

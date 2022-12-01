@@ -35,7 +35,7 @@ void read_history() {
     int bytes_read, i, x = 0, index = 0;
     char buffer[1], temp_data[1000];
     do {
-        bytes_read = read(fd, buffer, sizeof(buffer));
+        bytes_read = (int) read(fd, buffer, sizeof(buffer));
         for (i = 0; i < bytes_read; ++i) {
             temp_data[index] = buffer[i];
             index++;
@@ -57,7 +57,7 @@ void read_history() {
  */
 void write_history() {
 
-    int fd_out, ret_write, str_len = 0;
+    int fd_out, ret_write, str_len;
     char input_data[2048];
     line_number++;
     char no[10];
@@ -69,7 +69,7 @@ void write_history() {
 
     str_len = _strlen(input_data);
     fd_out = open(history_file, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
-    ret_write = write(fd_out, input_data, str_len);
+    ret_write = (int) write(fd_out, input_data, str_len);
     if (ret_write < 0) {
         printf("Error in writing file\n");
         return;
@@ -79,6 +79,9 @@ void write_history() {
 
 }
 
+/**
+ * @brief free history data.
+ */
 void free_histfile() {
     free(history_file);
 }

@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/* Global variables for this file */
 char *user = NULL, hostname[256], cwd[1024];
 char *home, *prompt = NULL;
 extern int cmd_count;

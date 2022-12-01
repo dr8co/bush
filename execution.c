@@ -81,9 +81,9 @@ void run_echo(char *echo_val) {
         printf("%s\n", new_args);
     else {
         _strcpy(args[1], new_args);
-        if (environ_flag == 1) {
+        if (environ_flag) {
             print_env();
-        } else if (environ_flag == 0) {
+        } else {
             printf("%s\n", new_args);
         }
     }
@@ -93,7 +93,7 @@ void run_echo(char *echo_val) {
  * @brief print the history of shell commands.
  */
 void print_history() {
-    int num, i, start_index;
+    int num = 0, i, start_index;
     if (event_flag == 1) {
         for (i = 0; i < line_number; ++i)
             printf("%s\n", history_data[i]);

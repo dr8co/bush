@@ -12,6 +12,7 @@
 #include "main.h"
 #include <stdio.h>
 
+/* Global variables for this file */
 extern char *user, hostname[256];
 extern char *prompt;
 
