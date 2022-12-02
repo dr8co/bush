@@ -12,6 +12,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#define PATH_MAX 4096 // Maximum length of a file path.
+
 /* Global variables for this file */
 extern char *args[512];
 extern char input_buffer[1024];

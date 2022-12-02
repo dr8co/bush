@@ -15,7 +15,7 @@
 #include <pwd.h>
 
 /* Global variables for this file */
-char *user = NULL, hostname[256], cwd[1024];
+char *user = NULL, hostname[256], cwd[PATH_MAX];
 char *home = NULL, *prompt = NULL;
 extern int cmd_count;
 
@@ -78,7 +78,7 @@ void change_directory() {
         }
             // Change working directory to the specified directory in the argument of the 'cd' command.
         else {
-            char new_dir[1024];
+            char new_dir[PATH_MAX];
             getcwd(new_dir, sizeof(new_dir));
             setenv("OLDPWD", cwd, 1);
             setenv("PWD", new_dir, 1);
@@ -104,7 +104,7 @@ void print_working_dir() {
 /**
  * @brief Gets the username (and home directory) of the current user.
  */
-void get_user_name() {
+void get_username() {
     register struct passwd *pw;
     register uid_t uid;
 
@@ -113,7 +113,7 @@ void get_user_name() {
     if (pw) {
         user = pw->pw_name;
         home = pw->pw_dir;
-        if (!user){
+        if (!user) {
             user = getenv("USER");
             if (!user) {
                 user = getenv("USERNAME");
@@ -136,9 +136,9 @@ void get_user_name() {
 /**
  * @brief Gets the machine hostname.
  */
-void get_hostname(){
+void get_hostname() {
     *hostname = '\0';
-    if (gethostname(hostname, sizeof(hostname)) == 0){
+    if (gethostname(hostname, sizeof(hostname)) == -1) {
         _strcpy(hostname, getenv("HOSTNAME"));
         if (*hostname == '\0')
             _strcpy(hostname, "Only_God_knows");
@@ -149,7 +149,7 @@ void get_hostname(){
  * @brief initializes the shell.
  */
 void init_shell() {
-    get_user_name();
+    get_username();
     get_hostname();
     getcwd(cwd, sizeof(cwd));
     if (!home) {

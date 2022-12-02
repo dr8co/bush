@@ -39,7 +39,7 @@ void print_prompt1() {
 }
 
 /**
- * @brief prints the prompt string for multiline input.
+ * @brief prints the secondary prompt.
  */
 void print_prompt2() {
     printf("> ");

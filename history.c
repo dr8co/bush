@@ -76,7 +76,6 @@ void write_history() {
     }
     close(fd_out);
     free(history_file);
-
 }
 
 /**
