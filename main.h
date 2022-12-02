@@ -100,4 +100,6 @@ void free_histfile();
 
 char *trim_leading_trailing(const char *str);
 
+int is_numeric(const char *str);
+
 #endif /* MAIN_H */

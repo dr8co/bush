@@ -22,6 +22,8 @@ int event_flag;
 char his_var[2048];
 int cmd_count = 0;
 
+void exit_shell(int exit_status);
+
 /**
  * @brief the shell entry point.
  * @param argc - argument count.
@@ -31,6 +33,7 @@ int cmd_count = 0;
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
     int len, status;
     char *cmd = NULL, *cmd2 = NULL;
+    char *exit_token[2], exit_buf[1024];
 
     init_shell();
     signal(SIGINT, signalHandler);
@@ -61,7 +64,11 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         input_buffer[len - 1] = '\0';
         _strcpy(his_var, input_buffer);
 
-        if (_strcmp(input_buffer, "exit") == 0 || _strcmp(input_buffer, "exit\n") == 0) {
+        _strcpy(exit_buf, input_buffer);
+        exit_token[0] = _strtok(exit_buf, " ");
+        exit_token[1] = _strtok(NULL, " ");
+
+        if (_strcmp(exit_token[0], "exit") == 0) {
             break;
         }
 
@@ -74,7 +81,23 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         execute_pipe();
         waitpid(pid, &status, 0);
     }
-
     free_global_vars();
-    exit(0);
+
+    // Exit with code 128 if the arguments to 'exit' are not valid
+    if(!is_numeric(exit_token[1]))
+        exit(128);
+
+    // Exit with the provided status
+    exit_shell(_atoi(exit_token[1]));
+}
+
+/**
+ * @brief Exits the shell with an exit code.
+ * @param exit_status - the exit code.
+ */
+void exit_shell(int exit_status){
+    // Exit with exit_status % 256 if the exit code is out of range.
+    if (exit_status < 0 || exit_status > 255)
+        exit_status %= 256;
+    exit(exit_status);
 }

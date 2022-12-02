@@ -38,12 +38,28 @@ int _pow(int base, int exponent) {
 }
 
 /**
+ * @brief Checks if a string is numeric.
+ * @param str - the string to check.
+ * @return 1 if the string is numeric, 0 otherwise.
+ */
+int is_numeric(const char *str)
+{
+    while(*str != '\0')
+    {
+        if(*str < '0' || *str > '9')
+            return 0;
+        str++;
+    }
+    return 1;
+}
+
+/**
  * @brief converts a string to an integer.
  * @param str - the string to convert.
  * @return the string as an integer.
  */
 int _atoi(const char *str) {
-    if (str == NULL) {
+    if (str == NULL || !is_numeric(str)) {
         return 0;
     }
     int j, i, n = 0, k = 1;
