@@ -22,6 +22,7 @@ void signalHandler(int sig_num) {
     if (sig_num == SIGINT) {
         printf("\n");
         print_prompt1();
+        fflush(stdout);
     }
 }
 

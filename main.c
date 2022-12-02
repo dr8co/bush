@@ -12,6 +12,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <stdio.h>
 #include "main.h"
 
 /* Global variables for this file */
@@ -36,10 +38,27 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
     char *exit_token[2], exit_buf[1024];
 
     init_shell();
-    signal(SIGINT, signalHandler);
 
+    /* Handle signals e.g Ctrl+C */
+    struct sigaction act;
+    // Specify the function to handle signals.
+    act.sa_handler = &signalHandler;
+    // Block all other signals while the signal handler is running.
+    sigfillset(&act.sa_mask);
+
+    // Restart functions if interrupted by the signal handler.
+    act.sa_flags = SA_RESTART;
+    // Handle SIGINT (Ctrl+C) signal
+    if (sigaction(SIGINT, &act, NULL) == -1) {
+        // If an error occurs, print the error message and exit the shell.
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+
+    /* The main shell loop to read and execute commands */
     while (1) {
         clear_variables();
+        // TODO: use isatty() to determine the shell mode.
         print_prompt1();
         cmd = read_cmd();
 
@@ -53,7 +72,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         free(cmd);
         free(cmd2);
 
-        if (_strcmp(input_buffer, "\n") == 0 || input_buffer[0] == '#')
+        if (_strcmp(input_buffer, "") == 0 || input_buffer[0] == '#')
             continue;
 
         if (input_buffer[0] != '!') {
