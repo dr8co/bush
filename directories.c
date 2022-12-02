@@ -12,10 +12,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <pwd.h>
 
 /* Global variables for this file */
 char *user = NULL, hostname[256], cwd[1024];
-char *home, *prompt = NULL;
+char *home = NULL, *prompt = NULL;
 extern int cmd_count;
 
 /**
@@ -64,7 +65,6 @@ void change_directory() {
                 free(prompt);
                 prompt = replace_str(cwd, home, "~");
             }
-
         }
     }
         // Handle 'cd .' command.
@@ -88,9 +88,7 @@ void change_directory() {
             free(prompt);
             prompt = replace_str(cwd, home, "~");
         }
-
     }
-
 }
 
 /**
@@ -104,15 +102,60 @@ void print_working_dir() {
 }
 
 /**
+ * @brief Gets the username (and home directory) of the current user.
+ */
+void get_user_name() {
+    register struct passwd *pw;
+    register uid_t uid;
+
+    uid = geteuid();
+    pw = getpwuid(uid);
+    if (pw) {
+        user = pw->pw_name;
+        home = pw->pw_dir;
+        if (!user){
+            user = getenv("USER");
+            if (!user) {
+                user = getenv("USERNAME");
+                if (!user) {
+                    user = "iam_who_iam";
+                }
+            }
+        }
+    } else { // If getpwuid() errored or returned NULL
+        user = getenv("USER");
+        if (!user) {
+            user = getenv("USERNAME");
+            if (!user) {
+                user = "iam_who_iam";
+            }
+        }
+    }
+}
+
+/**
+ * @brief Gets the machine hostname.
+ */
+void get_hostname(){
+    *hostname = '\0';
+    if (gethostname(hostname, sizeof(hostname)) == 0){
+        _strcpy(hostname, getenv("HOSTNAME"));
+        if (*hostname == '\0')
+            _strcpy(hostname, "Only_God_knows");
+    }
+}
+
+/**
  * @brief initializes the shell.
  */
 void init_shell() {
-    user = getenv("USER");
-    gethostname(hostname, sizeof(hostname));
+    get_user_name();
+    get_hostname();
     getcwd(cwd, sizeof(cwd));
-    home = getenv("HOME");
-    if (home == NULL) {
-        home = "/home";
+    if (!home) {
+        home = getenv("HOME");
+        if (!home)
+            home = "/home";
     }
     prompt = replace_str(cwd, home, "~");
 }
