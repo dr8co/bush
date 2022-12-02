@@ -71,7 +71,7 @@ void write_history() {
     fd_out = open(history_file, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
     ret_write = (int) write(fd_out, input_data, str_len);
     if (ret_write < 0) {
-        printf("Error in writing file\n");
+        printf("Error in recording history.\n");
         return;
     }
     close(fd_out);

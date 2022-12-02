@@ -83,6 +83,9 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
     }
     free_global_vars();
 
+    if(!exit_token[1])
+        exit_token[1] = "0";
+
     // Exit with code 128 if the arguments to 'exit' are not valid
     if(!is_numeric(exit_token[1]))
         exit(128);
@@ -99,5 +102,6 @@ void exit_shell(int exit_status){
     // Exit with exit_status % 256 if the exit code is out of range.
     if (exit_status < 0 || exit_status > 255)
         exit_status %= 256;
+
     exit(exit_status);
 }
