@@ -119,7 +119,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
  */
 void exit_shell(int exit_status){
     // Exit with exit_status % 256 if the exit code is out of range.
-    if (exit_status < 0 || exit_status > 255)
+    while (exit_status < 0 || exit_status > 255)
         exit_status %= 256;
 
     exit(exit_status);
