@@ -33,18 +33,18 @@ void read_history() {
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
     int bytes_read, i, x = 0, index = 0;
-    char buffer[1], temp_data[1000];
+    char buffer[1], temp_data[1024];
     do {
         bytes_read = (int) read(fd, buffer, sizeof(buffer));
         for (i = 0; i < bytes_read; ++i) {
             temp_data[index] = buffer[i];
-            index++;
+            ++index;
             if (buffer[i] == '\n') {
                 temp_data[index - 1] = '\0';
-                line_number++;
+                ++line_number;
                 index = 0;
                 _strcpy(history_data[x], temp_data);
-                x++;
+                ++x;
                 temp_data[0] = '\0';
             }
         }

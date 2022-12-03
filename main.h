@@ -14,6 +14,8 @@
 
 #define PATH_MAX 4096 // Maximum length of a file path.
 
+#include <stddef.h>
+
 /* Global variables for this file */
 extern char *args[512];
 extern char input_buffer[1024];
@@ -101,5 +103,9 @@ void free_histfile();
 char *trim_leading_trailing(const char *str);
 
 int is_numeric(const char *str);
+
+char *readfile(const char *filename, size_t *filesize);
+
+void print_file(const char *filename);
 
 #endif /* MAIN_H */
