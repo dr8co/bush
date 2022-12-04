@@ -21,8 +21,9 @@ extern int cmd_count;
 
 /**
  * @brief Changes the shell working directory.
+ * @return 0 if directory is changed, -1 otherwise.
  */
-void change_directory() {
+int change_directory() {
     char *old_dir = getenv("OLDPWD");
 
     // Handle 'cd', 'cd ~' and 'cd ~/' commands to change working directory to home directory.
@@ -35,6 +36,7 @@ void change_directory() {
             // Update the prompt.
             free(prompt);
             prompt = replace_str(cwd, home, "~");
+            return 0;
         }
     }
         // Handle 'cd -' command to change the working directory to the previous directory.
@@ -51,6 +53,7 @@ void change_directory() {
                 // Update the prompt.
                 free(prompt);
                 prompt = replace_str(cwd, home, "~");
+                return 0;
             }
         }
             // change shell working directory to home directory if the old directory does not exist.
@@ -64,6 +67,7 @@ void change_directory() {
                 // Update the prompt.
                 free(prompt);
                 prompt = replace_str(cwd, home, "~");
+                return 0;
             }
         }
     }
@@ -71,10 +75,12 @@ void change_directory() {
     else if (_strcmp(args[1], ".") == 0) {
         setenv("OLDPWD", cwd, 1);
         setenv("PWD", cwd, 1);
+        return 0;
     } else {
         // The directory was not found.
         if (chdir(args[1]) < 0) {
             printf("burning bush: %i: cd: no such file or directory: %s\n", cmd_count, args[1]);
+            return -1;
         }
             // Change working directory to the specified directory in the argument of the 'cd' command.
         else {
@@ -87,6 +93,7 @@ void change_directory() {
             // Update the prompt.
             free(prompt);
             prompt = replace_str(cwd, home, "~");
+            return 0;
         }
     }
 }
