@@ -1,0 +1,9 @@
+The Burning Bush, version 1.0.0
+These shell commands are defined internally.  Type `help' to see this list.
+Use `man -k' or `info' to find out more about commands not in this list.
+
+ cd [dir]
+ echo [arg ...]
+ exit [n]
+ export [-fn] [name[=value] ...] or export -p
+ pwd
