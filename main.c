@@ -35,7 +35,7 @@ void exit_shell(int exit_status);
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
     int len, status;
     char *cmd = NULL, *cmd2 = NULL;
-    char *exit_token[2], exit_buf[1024];
+    char *pre_token[2], pre_buf[1024];
 
     init_shell();
 
@@ -54,11 +54,15 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         perror("sigaction");
         exit(EXIT_FAILURE);
     }
+    // Print help if the shell was called with 'help' argument on the command line.
+    if (argv[1]) {
+        if (_strcmp(argv[1], "help") == 0)
+            find_help(NULL);
+    }
 
     /* The main shell loop to read and execute commands */
     while (1) {
         clear_variables();
-        // TODO: use isatty() to determine the shell mode.
         print_prompt1();
         cmd = read_cmd();
 
@@ -83,11 +87,19 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         input_buffer[len - 1] = '\0';
         _strcpy(his_var, input_buffer);
 
-        _strcpy(exit_buf, input_buffer);
-        exit_token[0] = _strtok(exit_buf, " ");
-        exit_token[1] = _strtok(NULL, " ");
+        // Tokenize the first two args for preprocessing.
+        _strcpy(pre_buf, input_buffer);
+        pre_token[0] = _strtok(pre_buf, " ");
+        pre_token[1] = _strtok(NULL, " ");
 
-        if (_strcmp(exit_token[0], "exit") == 0) {
+        // Handle help.
+        if (_strcmp(pre_token[0], "help") == 0) {
+            find_help(pre_token[1]);
+            continue;
+        }
+
+        // Exit the shell.
+        if (_strcmp(pre_token[0], "exit") == 0) {
             break;
         }
 
@@ -102,22 +114,22 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
     }
     free_global_vars();
 
-    if(!exit_token[1])
-        exit_token[1] = "0";
+    if (!pre_token[1])
+        pre_token[1] = "0";
 
     // Exit with code 128 if the arguments to 'exit' are not valid
-    if(!is_numeric(exit_token[1]))
+    if (!is_numeric(pre_token[1]))
         exit(128);
 
     // Exit with the provided status
-    exit_shell(_atoi(exit_token[1]));
+    exit_shell(_atoi(pre_token[1]));
 }
 
 /**
  * @brief Exits the shell with an exit code.
  * @param exit_status - the exit code.
  */
-void exit_shell(int exit_status){
+void exit_shell(int exit_status) {
     // Exit with exit_status % 256 if the exit code is out of range.
     while (exit_status < 0 || exit_status > 255)
         exit_status %= 256;

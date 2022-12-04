@@ -16,6 +16,12 @@
 #include <stdlib.h>
 #include "main.h"
 
+/* Help Messages */
+extern char *cd_msg;
+extern char *echo_msg;
+extern char *exit_msg;
+extern char *help_msg;
+
 /**
  * @brief Reads the content of a text file.
  * @param filename the name of the file to be read.
@@ -106,5 +112,24 @@ void print_file(const char *filename) {
     if (bytes) {
         fwrite(bytes, 1, size, stdout);
         free(bytes);
+    }
+}
+
+/**
+ * @brief Prints help message to stdout.
+ * @param str the command whose help message is printed.
+ */
+void find_help(const char *str){
+    if (str == NULL)
+        printf("%s\n",help_msg);
+    else {
+        if (_strcmp(str, "cd") == 0)
+            printf("%s\n",cd_msg);
+        else if (_strcmp(str, "echo") == 0)
+            printf("%s\n",echo_msg);
+        else if (_strcmp(str, "exit") == 0)
+            printf("%s\n",exit_msg);
+        else
+            printf("%s\n",help_msg);
     }
 }

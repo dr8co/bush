@@ -16,7 +16,7 @@
 
 #include <stddef.h>
 
-/* Global variables for this file */
+/* Global variables for the entire project */
 extern char *args[512];
 extern char input_buffer[1024];
 extern char **environ;
@@ -34,7 +34,7 @@ void print_env();
 
 void set_environment_vars();
 
-void change_directory();
+int change_directory();
 
 void print_working_dir();
 
@@ -107,5 +107,7 @@ int is_numeric(const char *str);
 char *readfile(const char *filename, size_t *filesize);
 
 void print_file(const char *filename);
+
+void find_help(const char *str);
 
 #endif /* MAIN_H */
