@@ -1,5 +1,5 @@
-<h1 style="text-align: center;"> The Burning Bush: </h1>
-<h1 style="text-align: center;"> A simple UNIX command interpreter </h1>
+# <div style="text-align: center;"> The Burning Bush: </div>
+# <div style="text-align: center;"> A simple UNIX command interpreter </div>
 
 ![The Burning Bush](./media/burning_bush.png "The Burning Bush")
 
@@ -29,7 +29,7 @@ For example,
 
 ```zsh
 gcc -Wall -Werror -Wextra -pedantic -std=gnu2x *.c -o bush
-or
+# or
 clang -Wall -Werror -Wextra -pedantic -std=gnu2x *.c -o bush
 ```
 
