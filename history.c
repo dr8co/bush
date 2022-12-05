@@ -57,7 +57,7 @@ void read_history() {
  */
 void write_history() {
 
-    int fd_out, ret_write, str_len;
+    int fd_out, ret_write, len;
     char input_data[2048];
     line_number++;
     char no[10];
@@ -67,9 +67,9 @@ void write_history() {
     str_cat(input_data, " ");
     str_cat(input_data, input_buffer);
 
-    str_len = str_len(input_data);
+    len = str_len(input_data);
     fd_out = open(history_file, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
-    ret_write = (int) write(fd_out, input_data, str_len);
+    ret_write = (int) write(fd_out, input_data, len);
     if (ret_write < 0) {
         printf("Error in recording history.\n");
         return;
