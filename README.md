@@ -1,4 +1,4 @@
-<h1 style="text-align: center;" The Burning Bush: A simple UNIX command interpreter </h1>
+<h1 style="text-align: center;"> The Burning Bush: A simple UNIX command interpreter </h1>
 
 ![The Burning Bush](./media/burning_bush.png "The Burning Bush")
 
