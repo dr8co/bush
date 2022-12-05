@@ -1,7 +1,7 @@
 /**
  * @file directories.c
  * @author Ian Duncan (dr8co@duck.com)
- * @brief source file for directory-related functions
+ * @brief source file for directory-related functions.
  * @version 0.1
  * @date 2022-11-30
  *
@@ -12,11 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <pwd.h>
 
 /* Global variables for this file */
-char *user = NULL, hostname[256], cwd[PATH_MAX];
-char *home = NULL, *prompt = NULL;
+extern char *user, hostname[256], cwd[PATH_MAX];
+extern char *home, *prompt;
 extern int cmd_count;
 
 /**
@@ -106,63 +105,4 @@ void print_working_dir() {
         printf("%s\n", cwd);
     } else
         perror("error in reading current directory");
-}
-
-/**
- * @brief Gets the username (and home directory) of the current user.
- */
-void get_username() {
-    register struct passwd *pw;
-    register uid_t uid;
-
-    uid = geteuid();
-    pw = getpwuid(uid);
-    if (pw) {
-        user = pw->pw_name;
-        home = pw->pw_dir;
-        if (!user) {
-            user = getenv("USER");
-            if (!user) {
-                user = getenv("USERNAME");
-                if (!user) {
-                    user = "iam_who_iam";
-                }
-            }
-        }
-    } else { // If getpwuid() errored or returned NULL
-        user = getenv("USER");
-        if (!user) {
-            user = getenv("USERNAME");
-            if (!user) {
-                user = "iam_who_iam";
-            }
-        }
-    }
-}
-
-/**
- * @brief Gets the machine hostname.
- */
-void get_hostname() {
-    *hostname = '\0';
-    if (gethostname(hostname, sizeof(hostname)) == -1) {
-        str_cpy(hostname, getenv("HOSTNAME"));
-        if (*hostname == '\0')
-            str_cpy(hostname, "Only_God_knows");
-    }
-}
-
-/**
- * @brief initializes the shell.
- */
-void init_shell() {
-    get_username();
-    get_hostname();
-    getcwd(cwd, sizeof(cwd));
-    if (!home) {
-        home = getenv("HOME");
-        if (!home)
-            home = "/home";
-    }
-    prompt = replace_str(cwd, home, "~");
 }

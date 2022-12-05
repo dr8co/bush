@@ -75,4 +75,5 @@ char *help_msg = "The Burning Bush, version 1.0.0\n"
                  "echo [arg ...]\n"
                  "exit [n]\n"
                  "export [name[=value] ...]\n"
-                 "pwd\n";
+                 "pwd\n"
+                 "history\n";

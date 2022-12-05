@@ -1,7 +1,7 @@
 /**
  * @file environment.c
  * @author Ian Duncan (dr8co@duck.com)
- * @brief source file for manipulating shell environment
+ * @brief source file for manipulating shell environment.
  * @version 0.1
  * @date 2022-11-30
  *

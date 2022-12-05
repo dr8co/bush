@@ -1,7 +1,7 @@
 /**
  * @file history.c
  * @author Ian Duncan (dr8co@duck.com)
- * @brief source file for manipulation of shell history
+ * @brief source file for manipulation of shell history.
  * @version 0.1
  * @date 2022-11-30
  *
@@ -18,8 +18,8 @@
 /* Global variables for this file */
 int fd;
 char *history_file;
-extern char *home;
-extern int line_number;
+extern char *home, his_var[2048];
+extern int line_number, event_flag;
 char history_data[1024][1024];
 
 
@@ -76,6 +76,33 @@ void write_history() {
     }
     close(fd_out);
     free(history_file);
+}
+
+/**
+ * @brief print the history of shell commands.
+ */
+void print_history() {
+    int num = 0, i, start_index;
+    if (event_flag == 1) {
+        for (i = 0; i < line_number; ++i)
+            printf("%s\n", history_data[i]);
+    } else if (args[1] == NULL) {
+        for (i = 0; i < line_number - 1; ++i)
+            printf("%s\n", history_data[i]);
+        printf(" %d %s\n", line_number, his_var);
+    } else {
+        if (args[1] != NULL)
+            num = atoi_(args[1]);
+        if (num > line_number) {
+            for (i = 0; i < line_number - 1; ++i)
+                printf("%s\n", history_data[i]);
+            printf(" %d %s\n", line_number, his_var);
+        }
+        start_index = line_number - num;
+        for (i = start_index; i < line_number - 1; ++i)
+            printf("%s\n", history_data[i]);
+        printf(" %d %s\n", line_number, his_var);
+    }
 }
 
 /**
