@@ -95,6 +95,7 @@ int change_directory() {
             return 0;
         }
     }
+    return -1;
 }
 
 /**

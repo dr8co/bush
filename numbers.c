@@ -59,9 +59,9 @@ int is_numeric(const char *str)
  * @return the string as an integer.
  */
 int atoi_(const char *str) {
-    if (str == NULL || !is_numeric(str)) {
+    if (str == NULL || !is_numeric(str))
         return 0;
-    }
+
     int j, i, n = 0, k = 1;
     char *tmp = str_dup(str);
 
