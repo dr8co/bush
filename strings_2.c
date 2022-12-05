@@ -22,12 +22,12 @@
 char *replace_str(const char *str, const char *old, const char *new) {
     char *result;
     int i, count = 0;
-    int new_len = _strlen(new);
-    int old_len = _strlen(old);
+    int new_len = str_len(new);
+    int old_len = str_len(old);
 
     // Count the number of times old word occurs in the string
     for (i = 0; str[i] != '\0'; ++i) {
-        if (_strstr(&str[i], old) == &str[i]) {
+        if (str_str(&str[i], old) == &str[i]) {
             ++count;
 
             // Jump to index after the old word.
@@ -41,8 +41,8 @@ char *replace_str(const char *str, const char *old, const char *new) {
     i = 0;
     while (*str) {
         // compare the substring with the result
-        if (_strstr(str, old) == str) {
-            _strcpy(&result[i], new);
+        if (str_str(str, old) == str) {
+            str_cpy(&result[i], new);
             i += new_len;
             str += old_len;
         } else
@@ -88,13 +88,13 @@ char *strtok_skip(char *str, char *delim) {
             ++token;
             continue;
         }
-        if ((block = _strchr(open_b, *token)) != NULL) {
+        if ((block = str_chr(open_b, *token)) != NULL) {
             iBlock = 1;
             iBlockIndex = block - open_b;
             ++token;
             continue;
         }
-        if (_strchr(delim, *token) != NULL) {
+        if (str_chr(delim, *token) != NULL) {
             *token = '\0';
             ++token;
             break;
@@ -117,7 +117,7 @@ char *skip_quotes(const char *str) {
             temp[j++] = str[i - 1];
     }
     temp[j] = '\0';
-    return _strdup(temp);
+    return str_dup(temp);
 }
 
 /**
@@ -154,7 +154,7 @@ char *trim_leading_trailing(const char *str) {
     if (!str)
         return NULL;
 
-    l = _strlen(str);
+    l = str_len(str);
     str2 = malloc(sizeof(char) * l + 2);
 
     while (is_space(str[i]))

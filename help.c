@@ -123,11 +123,11 @@ void find_help(const char *str){
     if (str == NULL)
         printf("%s\n",help_msg);
     else {
-        if (_strcmp(str, "cd") == 0)
+        if (str_cmp(str, "cd") == 0)
             printf("%s\n",cd_msg);
-        else if (_strcmp(str, "echo") == 0)
+        else if (str_cmp(str, "echo") == 0)
             printf("%s\n",echo_msg);
-        else if (_strcmp(str, "exit") == 0)
+        else if (str_cmp(str, "exit") == 0)
             printf("%s\n",exit_msg);
         else
             printf("%s\n",help_msg);

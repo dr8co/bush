@@ -17,7 +17,7 @@
  * @param s - input string.
  * @return the length of a string or 0 if string is NULL.
  */
-int _strlen(const char *s) {
+int str_len(const char *s) {
     int l = 0;
 
     if (!s)
@@ -36,7 +36,7 @@ int _strlen(const char *s) {
  * @param src - string to copy.
  * Return: a pointer to the destination.
  */
-char *_strcpy(char *dest, const char *src) {
+char *str_cpy(char *dest, const char *src) {
     int i;
     if (!src)
         return NULL;
@@ -55,7 +55,7 @@ char *_strcpy(char *dest, const char *src) {
  *
  * @return the difference of s1 and s2.
  */
-int _strcmp(const char *s1, const char *s2) {
+int str_cmp(const char *s1, const char *s2) {
     int i = 0;
 
     while (*(s1 + i) && *(s2 + i) && (*(s1 + i) == *(s2 + i)))
@@ -71,7 +71,7 @@ int _strcmp(const char *s1, const char *s2) {
  * @eturn: pointer to the resulting string dest,
  * or NULL if both strings are not present or NULL.
  */
-char *_strcat(char *dest, char *src) {
+char *str_cat(char *dest, char *src) {
     int i, j;
 
     if (!dest && !src) {
@@ -98,7 +98,7 @@ char *_strcat(char *dest, char *src) {
  *
  * @return a pointer to first occurrence of c in s or NULL.
  */
-char *_strchr(char *s, char c) {
+char *str_chr(char *s, char c) {
     int i;
 
     for (i = 0; *(s + i); ++i) {
@@ -117,12 +117,12 @@ char *_strchr(char *s, char c) {
  *
  * @return a pointer to the copied string (Success), NULL (Error).
  */
-char *_strdup(const char *str) {
+char *str_dup(const char *str) {
     char *duplicate;
     unsigned int i, l;
 
     i = 0;
-    l = _strlen(str);
+    l = str_len(str);
 
     if (str == NULL)
         return (NULL);
@@ -160,7 +160,7 @@ unsigned int check_delim(char c, const char *str) {
  * @param delim: the delimiter.
  * @return: a pointer to the next token or NULL.
  */
-char *_strtok(char *str, const char *delim) {
+char *str_tok(char *str, const char *delim) {
     static char *ts;
     static char *nt;
     unsigned int i;
@@ -202,7 +202,7 @@ char *_strtok(char *str, const char *delim) {
  *
  * @return a pointer to beginning of needle in haystack or NULL if no match.
  */
-char *_strstr(const char *haystack, const char *needle) {
+char *str_str(const char *haystack, const char *needle) {
     unsigned int i = 0, j = 0;
 
     while (haystack[i]) {

@@ -18,7 +18,7 @@
  * @param exponent - the exponent
  * @return base to the power of the exponent.
  */
-int _pow(int base, int exponent) {
+int pow_(int base, int exponent) {
 
     int ans = 1;
 
@@ -58,21 +58,21 @@ int is_numeric(const char *str)
  * @param str - the string to convert.
  * @return the string as an integer.
  */
-int _atoi(const char *str) {
+int atoi_(const char *str) {
     if (str == NULL || !is_numeric(str)) {
         return 0;
     }
     int j, i, n = 0, k = 1;
-    char *tmp = _strdup(str);
+    char *tmp = str_dup(str);
 
     if (*str == '-') {
         *tmp = '0';
         k = -1;
     }
-    i = _strlen(str);
+    i = str_len(str);
 
     for (j = 0; j < i; ++j)
-        n += (*(tmp + j) - '0') * _pow(10, i - j - 1);
+        n += (*(tmp + j) - '0') * pow_(10, i - j - 1);
     free(tmp);
 
     return n * k;

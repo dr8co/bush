@@ -19,7 +19,7 @@
  *
  * @return a pointer to newly allocated memory, or NULL if failure.
  */
-void *_realloc(void *ptr, unsigned int new_size) {
+void *re_alloc(void *ptr, unsigned int new_size) {
     char *p;
     unsigned int i, max = new_size;
     unsigned int old_size = sizeof(ptr);
@@ -56,7 +56,7 @@ void *_realloc(void *ptr, unsigned int new_size) {
  *
  * @return a pointer to the filled memory area.
  */
-char *_memset(char *s, char b, unsigned int n) {
+char *mem_set(char *s, char b, unsigned int n) {
     unsigned int i;
 
     for (i = 0; i < n; ++i) {

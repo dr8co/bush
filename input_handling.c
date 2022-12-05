@@ -36,12 +36,12 @@ char *read_cmd(void) {
     char ptr_len = 0;
 
     while (fgets(buff, 1024, stdin) != NULL) {
-        int buff_len = _strlen(buff);
+        int buff_len = str_len(buff);
 
         if (!ptr) {
             ptr = (char *) malloc(sizeof(buff) + 2);
         } else {
-            char *ptr2 = _realloc(ptr, ptr_len + buff_len + 1);
+            char *ptr2 = re_alloc(ptr, ptr_len + buff_len + 1);
 
             if (ptr2) {
                 ptr = ptr2;
@@ -57,7 +57,7 @@ char *read_cmd(void) {
             return NULL;
         }
 
-        _strcpy(ptr + ptr_len, buff);
+        str_cpy(ptr + ptr_len, buff);
 
         if (buff[buff_len - 1] == '\n') {
 

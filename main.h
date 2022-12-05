@@ -66,27 +66,27 @@ void print_prompt1();
 
 void print_prompt2();
 
-int _atoi(const char *str);
+int atoi_(const char *str);
 
-int _strlen(const char *s);
+int str_len(const char *s);
 
-char *_strcpy(char *dest, const char *src);
+char *str_cpy(char *dest, const char *src);
 
-int _strcmp(const char *s1, const char *s2);
+int str_cmp(const char *s1, const char *s2);
 
-char *_strcat(char *dest, char *src);
+char *str_cat(char *dest, char *src);
 
-char *_memset(char *s, char b, unsigned int n);
+char *mem_set(char *s, char b, unsigned int n);
 
-char *_strchr(char *s, char c);
+char *str_chr(char *s, char c);
 
-char *_strdup(const char *str);
+char *str_dup(const char *str);
 
-char *_strtok(char *str, const char *delim);
+char *str_tok(char *str, const char *delim);
 
-void *_realloc(void *ptr, unsigned int new_size);
+void *re_alloc(void *ptr, unsigned int new_size);
 
-char *_strstr(const char *haystack, const char *needle);
+char *str_str(const char *haystack, const char *needle);
 
 char *replace_str(const char *str, const char *old, const char *new);
 

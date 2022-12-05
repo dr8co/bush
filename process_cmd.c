@@ -25,7 +25,7 @@ int split(char *cmdExec, int input, int first, int last) {
     char *new_cmd_exec1;
     int m = 1;
 
-    new_cmd_exec1 = _strdup(cmdExec);
+    new_cmd_exec1 = str_dup(cmdExec);
 
     args[0] = strtok_skip(cmdExec, " ");
 
@@ -41,15 +41,15 @@ int split(char *cmdExec, int input, int first, int last) {
 
     if (args[0] != NULL) {
 
-        if (_strcmp(args[0], "exit") == 0)
+        if (str_cmp(args[0], "exit") == 0)
             exit(0);
 
-        if (_strcmp("cd", args[0]) == 0) {
+        if (str_cmp("cd", args[0]) == 0) {
             change_directory();
             free(new_cmd_exec1);
             cmdExec[0] = '\0';
             return 1;
-        } else if (_strcmp("pwd", args[0]) == 0) {
+        } else if (str_cmp("pwd", args[0]) == 0) {
             print_working_dir();
             free(new_cmd_exec1);
             cmdExec[0] = '\0';

@@ -35,18 +35,18 @@ void run_echo(char *echo_val) {
     int i, index = 0;
     int environ_flag = 0;
     char new_args[1024], env_val[1000], *str[10];
-    str[0] = _strtok(echo_val, " ");
-    str[1] = _strtok(NULL, "");
-    _strcpy(env_val, args[1]);
+    str[0] = str_tok(echo_val, " ");
+    str[1] = str_tok(NULL, "");
+    str_cpy(env_val, args[1]);
     if (str[1] == NULL) {
         printf("\n");
         return;
     }
-    if (_strchr(str[1], '$')) {
+    if (str_chr(str[1], '$')) {
         environ_flag = 1;
     }
 
-    _memset(new_args, '\0', sizeof(new_args));
+    mem_set(new_args, '\0', sizeof(new_args));
     i = 0;
     while (str[1][i] != '\0') {
         if (str[1][i] == '"') {
@@ -77,10 +77,10 @@ void run_echo(char *echo_val) {
     }
 
     new_args[index] = '\0';
-    if ((_strcmp(args[1], new_args) == 0) && (environ_flag == 0))
+    if ((str_cmp(args[1], new_args) == 0) && (environ_flag == 0))
         printf("%s\n", new_args);
     else {
-        _strcpy(args[1], new_args);
+        str_cpy(args[1], new_args);
         if (environ_flag) {
             print_env();
         } else {
@@ -103,7 +103,7 @@ void print_history() {
         printf(" %d %s\n", line_number, his_var);
     } else {
         if (args[1] != NULL)
-            num = _atoi(args[1]);
+            num = atoi_(args[1]);
         if (num > line_number) {
             for (i = 0; i < line_number - 1; ++i)
                 printf("%s\n", history_data[i]);
@@ -125,30 +125,30 @@ void execute_event() {
     int i = 1, n = 1, num, index = 0;
 
     if (input_buffer[i] == '!') {
-        _strcpy(event_val, history_data[line_number - 1]);
+        str_cpy(event_val, history_data[line_number - 1]);
     } else if (input_buffer[i] == '-') {
         n = 1;
-        num_ch[0] = _strtok(input_buffer, "-");
-        while ((num_ch[n] = _strtok(NULL, "-")) != NULL)
+        num_ch[0] = str_tok(input_buffer, "-");
+        while ((num_ch[n] = str_tok(NULL, "-")) != NULL)
             ++n;
         num_ch[n] = NULL;
-        num = _atoi(num_ch[1]);
+        num = atoi_(num_ch[1]);
 
         index = line_number - num;
-        _strcpy(event_val, history_data[index]);
+        str_cpy(event_val, history_data[index]);
 
     } else {
-        num_ch[0] = _strtok(input_buffer, "!");
-        num = _atoi(num_ch[0]);
-        _strcpy(event_val, history_data[num - 1]);
+        num_ch[0] = str_tok(input_buffer, "!");
+        num = atoi_(num_ch[0]);
+        str_cpy(event_val, history_data[num - 1]);
     }
-    event_token[0] = _strtok(event_val, " ");
-    while ((event_token[n] = _strtok(NULL, "")) != NULL)
+    event_token[0] = str_tok(event_val, " ");
+    while ((event_token[n] = str_tok(NULL, "")) != NULL)
         n++;
     event_token[n] = NULL;
-    _strcpy(event_val, event_token[1]);
+    str_cpy(event_val, event_token[1]);
     printf("%s\n", event_val);
-    _strcpy(input_buffer, event_val);
+    str_cpy(input_buffer, event_val);
 }
 
 /**
@@ -178,14 +178,14 @@ int command(int input, int first, int last, char *cmdExec) {
         } else {
             dup2(input, 0);
         }
-        if (_strchr(cmdExec, '<') && _strchr(cmdExec, '>')) {
+        if (str_chr(cmdExec, '<') && str_chr(cmdExec, '>')) {
             input_redirection = 1;
             output_redirection = 1;
             tokenize_redirect_input_output(cmdExec);
-        } else if (_strchr(cmdExec, '<')) {
+        } else if (str_chr(cmdExec, '<')) {
             input_redirection = 1;
             tokenize_redirect_input(cmdExec);
-        } else if (_strchr(cmdExec, '>')) {
+        } else if (str_chr(cmdExec, '>')) {
             output_redirection = 1;
             tokenize_redirect_output(cmdExec);
         }
@@ -209,13 +209,13 @@ int command(int input, int first, int last, char *cmdExec) {
             close(input_fd);
             input_redirection = 0;
         }
-        if (_strcmp(args[0], "export") == 0) {
+        if (str_cmp(args[0], "export") == 0) {
             set_environment_vars();
             return 1;
         }
-        if (_strcmp(args[0], "echo") == 0) {
+        if (str_cmp(args[0], "echo") == 0) {
             run_echo(cmdExec);
-        } else if (_strcmp(args[0], "history") == 0) {
+        } else if (str_cmp(args[0], "history") == 0) {
             print_history();
         } else if (execvp(args[0], args) < 0) {
             printf("The burning bush: %i: command not found: %s\n", cmd_count, args[0]);
@@ -243,10 +243,10 @@ void execute_pipe() {
     input = 0;
     first = 1;
 
-    cmd_exec[0] = _strtok(input_buffer, "|");
+    cmd_exec[0] = str_tok(input_buffer, "|");
     cmd_exec[0] = trim_leading_trailing(cmd_exec[0]);
 
-    while ((cmd_exec[n] = _strtok(NULL, "|")) != NULL) {
+    while ((cmd_exec[n] = str_tok(NULL, "|")) != NULL) {
         cmd_exec[n] = trim_leading_trailing(cmd_exec[n]);
         ++n;
     }

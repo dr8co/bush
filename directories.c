@@ -27,7 +27,7 @@ int change_directory() {
     char *old_dir = getenv("OLDPWD");
 
     // Handle 'cd', 'cd ~' and 'cd ~/' commands to change working directory to home directory.
-    if ((args[1] == NULL) || (_strcmp(args[1], "~") == 0) || (_strcmp(args[1], "~/") == 0)) {
+    if ((args[1] == NULL) || (str_cmp(args[1], "~") == 0) || (str_cmp(args[1], "~/") == 0)) {
         if (chdir(home) == 0) {
             setenv("OLDPWD", cwd, 1);
             setenv("PWD", home, 1);
@@ -40,7 +40,7 @@ int change_directory() {
         }
     }
         // Handle 'cd -' command to change the working directory to the previous directory.
-    else if (_strcmp(args[1], "-") == 0) {
+    else if (str_cmp(args[1], "-") == 0) {
         if (old_dir != NULL) {
 
             // change working dir to previous directory if exists.
@@ -72,7 +72,7 @@ int change_directory() {
         }
     }
         // Handle 'cd .' command.
-    else if (_strcmp(args[1], ".") == 0) {
+    else if (str_cmp(args[1], ".") == 0) {
         setenv("OLDPWD", cwd, 1);
         setenv("PWD", cwd, 1);
         return 0;
@@ -146,9 +146,9 @@ void get_username() {
 void get_hostname() {
     *hostname = '\0';
     if (gethostname(hostname, sizeof(hostname)) == -1) {
-        _strcpy(hostname, getenv("HOSTNAME"));
+        str_cpy(hostname, getenv("HOSTNAME"));
         if (*hostname == '\0')
-            _strcpy(hostname, "Only_God_knows");
+            str_cpy(hostname, "Only_God_knows");
     }
 }
 

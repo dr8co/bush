@@ -32,7 +32,7 @@ void exit_shell(int exit_status);
  * @param argv - argument vector.
  * @return always 0.
  */
-int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
+int main(__attribute__((unused)) int argc, char **argv) {
     int len, status;
     char *cmd = NULL, *cmd2 = NULL;
     char *pre_token[2], pre_buf[1024];
@@ -56,7 +56,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
     }
     // Print help if the shell was called with 'help' argument on the command line.
     if (argv[1]) {
-        if (_strcmp(argv[1], "help") == 0)
+        if (str_cmp(argv[1], "help") == 0)
             find_help(NULL);
     }
 
@@ -72,34 +72,34 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         } else {
             exit(0);
         }
-        _strcpy(input_buffer, cmd2);
+        str_cpy(input_buffer, cmd2);
         free(cmd);
         free(cmd2);
 
-        if (_strcmp(input_buffer, "") == 0 || input_buffer[0] == '#')
+        if (str_cmp(input_buffer, "") == 0 || input_buffer[0] == '#')
             continue;
 
         if (input_buffer[0] != '!') {
             read_history();
             write_history();
         }
-        len = _strlen(input_buffer);
+        len = str_len(input_buffer);
         input_buffer[len - 1] = '\0';
-        _strcpy(his_var, input_buffer);
+        str_cpy(his_var, input_buffer);
 
         // Tokenize the first two args for preprocessing.
-        _strcpy(pre_buf, input_buffer);
-        pre_token[0] = _strtok(pre_buf, " ");
-        pre_token[1] = _strtok(NULL, " ");
+        str_cpy(pre_buf, input_buffer);
+        pre_token[0] = str_tok(pre_buf, " ");
+        pre_token[1] = str_tok(NULL, " ");
 
         // Handle help.
-        if (_strcmp(pre_token[0], "help") == 0) {
+        if (str_cmp(pre_token[0], "help") == 0) {
             find_help(pre_token[1]);
             continue;
         }
 
         // Exit the shell.
-        if (_strcmp(pre_token[0], "exit") == 0) {
+        if (str_cmp(pre_token[0], "exit") == 0) {
             break;
         }
 
@@ -122,7 +122,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) 
         exit(128);
 
     // Exit with the provided status
-    exit_shell(_atoi(pre_token[1]));
+    exit_shell(atoi_(pre_token[1]));
 }
 
 /**

@@ -28,8 +28,8 @@ char history_data[1024][1024];
  */
 void read_history() {
     history_file = (char *) malloc(1024 * sizeof(char));
-    _strcpy(history_file, home);
-    _strcat(history_file, "/.burning_bush_history");
+    str_cpy(history_file, home);
+    str_cat(history_file, "/.burning_bush_history");
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
     int bytes_read, i, x = 0, index = 0;
@@ -43,7 +43,7 @@ void read_history() {
                 temp_data[index - 1] = '\0';
                 ++line_number;
                 index = 0;
-                _strcpy(history_data[x], temp_data);
+                str_cpy(history_data[x], temp_data);
                 ++x;
                 temp_data[0] = '\0';
             }
@@ -62,12 +62,12 @@ void write_history() {
     line_number++;
     char no[10];
     sprintf(no, "%d", line_number);
-    _strcpy(input_data, " ");
-    _strcat(input_data, no);
-    _strcat(input_data, " ");
-    _strcat(input_data, input_buffer);
+    str_cpy(input_data, " ");
+    str_cat(input_data, no);
+    str_cat(input_data, " ");
+    str_cat(input_data, input_buffer);
 
-    str_len = _strlen(input_data);
+    str_len = str_len(input_data);
     fd_out = open(history_file, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR);
     ret_write = (int) write(fd_out, input_data, str_len);
     if (ret_write < 0) {
