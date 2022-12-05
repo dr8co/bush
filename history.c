@@ -18,18 +18,15 @@
 /* Global variables for this file */
 int fd;
 char *history_file;
-extern char *home, his_var[2048];
+extern char *home, his_var[HIST_MAX * 2];
 extern int line_number, event_flag;
-char history_data[1024][1024];
+char history_data[HIST_MAX][HIST_MAX];
 
 
 /**
  * @brief process the shell history file.
  */
 void read_history() {
-    history_file = (char *) malloc(1024 * sizeof(char));
-    str_cpy(history_file, home);
-    str_cat(history_file, "/.burning_bush_history");
     fd = open(history_file, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
     int bytes_read, i, x = 0, index = 0;
@@ -75,7 +72,6 @@ void write_history() {
         return;
     }
     close(fd_out);
-    free(history_file);
 }
 
 /**
@@ -110,4 +106,51 @@ void print_history() {
  */
 void free_histfile() {
     free(history_file);
+}
+
+/**
+ * @brief Checks if the history file has reached its limit.
+ * @return 1 if history file is full, 0 otherwise.
+ */
+int is_histfile_full() {
+    int file, r, line = 0;
+    char b[1];
+
+    history_file = (char *) malloc(1024 * sizeof(char));
+    str_cpy(history_file, home);
+    str_cat(history_file, "/.burning_bush_history2");
+
+    file = open(history_file, O_RDONLY, S_IRUSR);
+
+    if (file < 0) {
+        close(file);
+        return 0;
+    }
+
+    do {
+        r = (int) read(file, b, sizeof(b));
+        for (int i = 0; i < r; ++i) {
+            if (b[i] == '\n') {
+                ++line;
+            }
+        }
+    } while (r == sizeof(b));
+
+    if (line >= HIST_MAX - 2) {
+        close(file);
+        return 1;
+    }
+    close(file);
+
+    return 0;
+}
+
+/**
+ * @brief Deletes shell command history.
+ */
+void delete_histfile() {
+    if (unlink(history_file) < 0) {
+        printf("Maximum history record reached. Please delete history file\n");
+        printf("at %s to avoid unnecessary errors/bugs\n", history_file);
+    }
 }

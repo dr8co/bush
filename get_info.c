@@ -64,6 +64,8 @@ void init_shell() {
             home = "/home";
     }
     prompt = replace_str(cwd, home, "~");
+    if (is_histfile_full())
+        delete_histfile();
 }
 
 /**

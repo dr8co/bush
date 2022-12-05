@@ -13,6 +13,7 @@
 #define MAIN_H
 
 #define PATH_MAX 4096 // Maximum length of a file path.
+#define HIST_MAX 1024 // Maximum number of commands to store in shell history file.
 
 #include <stddef.h>
 
@@ -60,6 +61,8 @@ void execute_event();
 void execute_pipe();
 
 /* history.c */
+int is_histfile_full();
+void delete_histfile();
 void write_history();
 void print_history();
 void free_histfile();
