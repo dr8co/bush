@@ -27,7 +27,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 ### Requirements
 
-* UNIX-like evironment, like macOS and Linux.
+* UNIX-like environment, like macOS and Linux.
 * gcc C compiler, or clang C compiler.
 
 ### Compilation
