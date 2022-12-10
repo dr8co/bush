@@ -19,6 +19,9 @@ The Burning bush is a simple shell for
 [UNIX-like operating systems](https://en.wikipedia.org/wiki/List_of_Unix_systems#Unix-like_operating_systems).
 It is a bash (Bourne-Again Shell)-like, and is implemented in C.
 
+Some string functions found in `<string.h>` header have been re-implemented in this project
+(for learning purposes).
+
 This project is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -76,7 +79,8 @@ Prints the shell working directory.
 Export attribute for shell variables.
 
 * `history`\
-Display history of commands. '!' operator is also supported for executing
+Display history of commands.\
+The `!` operator is also supported for executing
 commands in the shell history. (eg `!!`, `!23`, `!3`).
 
 * `help [command]`\
@@ -156,9 +160,9 @@ ian@github:bush$ whoami > me.txt
 ian@github:bush$ cat me.txt
 ian
 
-ian@github:bush$ echo $U\
->SER
-ian
+ian@github:bush$ echo "This is a \
+> multi-line command."
+This is a multi-line command.
 
 ian@github:bush$ tail main.h
 void print_prompt1();

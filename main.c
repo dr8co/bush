@@ -21,7 +21,7 @@ char *args[512];
 char input_buffer[1024];
 extern pid_t pid;
 int event_flag;
-char his_var[2048];
+char his_var[HIST_MAX * 2];
 int cmd_count = 0;
 
 void exit_shell(int exit_status);

@@ -21,8 +21,8 @@ pid_t pid;
 int line_number;
 int output_redirection, input_redirection;
 extern int cmd_count;
-extern char history_data[1024][1024];
-extern char his_var[2048];
+extern char history_data[HIST_MAX][HIST_MAX];
+extern char his_var[HIST_MAX * 2];
 extern char *input_redirection_file;
 extern char *output_redirection_file;
 

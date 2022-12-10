@@ -64,6 +64,7 @@ void init_shell() {
             home = "/home";
     }
     prompt = replace_str(cwd, home, "~");
+    // Empty history if full
     if (is_histfile_full())
         delete_histfile();
 }

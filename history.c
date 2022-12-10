@@ -78,7 +78,15 @@ void write_history() {
  * @brief print the history of shell commands.
  */
 void print_history() {
+    if (args[1]) {
+        if (str_cmp(args[1], "-c") == 0) {
+            delete_histfile();
+            return;
+        }
+    }
+
     int num = 0, i, start_index;
+
     if (event_flag == 1) {
         for (i = 0; i < line_number; ++i)
             printf("%s\n", history_data[i]);
@@ -99,6 +107,7 @@ void print_history() {
             printf("%s\n", history_data[i]);
         printf(" %d %s\n", line_number, his_var);
     }
+
 }
 
 /**
@@ -118,7 +127,7 @@ int is_histfile_full() {
 
     history_file = (char *) malloc(1024 * sizeof(char));
     str_cpy(history_file, home);
-    str_cat(history_file, "/.burning_bush_history2");
+    str_cat(history_file, "/.burning_bush_history");
 
     file = open(history_file, O_RDONLY, S_IRUSR);
 
@@ -151,6 +160,6 @@ int is_histfile_full() {
 void delete_histfile() {
     if (unlink(history_file) < 0) {
         printf("Maximum history record reached. Please delete history file\n");
-        printf("at %s to avoid unnecessary errors/bugs\n", history_file);
+        printf("at %s to avoid unnecessary errors/bugs.\n", history_file);
     }
 }

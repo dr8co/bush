@@ -77,3 +77,38 @@ char *help_msg = "The Burning Bush, version 1.0.0\n"
                  "export [name[=value] ...]\n"
                  "pwd\n"
                  "history\n";
+
+
+/* 'help history' */
+char *history_msg = "history: history [-c]\n"
+                    "\tDisplay or manipulate the history list.\n\n"
+                    "\tOptions:\n"
+                    "\t\t-c	clear the history list by deleting all of the entries\n\n"
+                    "\tExit Status:\n"
+                    "\tReturns success unless an invalid option is given or an error occurs.\n";
+
+
+/* 'help export' */
+char *export_msg = "export: export [-fn] [name[=value] ...] or export -p\n"
+                   "\tSet export attribute for shell variables.\n\n"
+
+                   "\tMarks each NAME for automatic export to the environment of subsequently\n"
+                   "\texecuted commands.  If VALUE is supplied, assign VALUE before exporting.\n\n"
+
+                   "\tExit Status:\n"
+                   "\tReturns success unless an invalid option is given or NAME is invalid.\n";
+
+
+/* 'help help' */
+char *help_help = "help: help [pattern ...]\n"
+                  "\tDisplay information about builtin commands.\n\n"
+
+                  "\tDisplays brief summaries of builtin commands.  If PATTERN is\n"
+                  "\tspecified, gives detailed help on all commands matching PATTERN,\n"
+                  "\totherwise the list of help topics is printed.\n\n"
+
+                  "\tArguments:\n"
+                  "\t  PATTERN 	Pattern specifying a help topic\n\n"
+
+                  "\tExit Status:\n"
+                  "\tReturns success unless PATTERN is not found or an invalid option is given.\n";
