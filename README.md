@@ -12,6 +12,7 @@
   * [Supported Commands](#supported-commands)
   * [Other Features](#other-features)
 * [Examples](#examples)
+* [Unsupported Functionalities](#unsupported-functionalities-yet)
 
 ## Introduction
 
@@ -181,3 +182,8 @@ ian@github:bush$ exit 98
 normal@prompt:bush$ echo $?
 98
 ```
+
+## Unsupported Functionalities (yet)
+
+* Command separators `;`, `||`, `&&`.
+* Background jobs.
