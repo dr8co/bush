@@ -1,4 +1,4 @@
-name: compile_and_test
+name: tests on macOS and Ubuntu Linux
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
     
     steps:
       - name: Install Clang
-        run: sudo apt-get update && sudo apt-get install clang-14
+        run: command -v clang || (sudo apt-get update && sudo apt-get install clang-14)
       
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
     
     steps:
       - name: Install gcc
-        run: sudo apt-get update && sudo apt-get install gcc-11
+        run: command -v gcc || (sudo apt-get update && sudo apt-get install gcc-11)
       
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -65,7 +65,7 @@ jobs:
     
     steps:
       - name: Install Clang
-        run: brew update && brew install llvm
+        run: command -v clang || (brew update && brew install llvm)
       
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -88,7 +88,7 @@ jobs:
     
     steps:
       - name: Install gcc
-        run: brew update && brew install gcc@11
+        run: command -v gcc || (brew update && brew install gcc@11)
       
       - name: Checkout Repository
         uses: actions/checkout@v3
