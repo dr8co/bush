@@ -1,6 +1,6 @@
 # The Burning Bush: A simple UNIX command interpreter
 
-![The Burning Bush](./media/burning_bush.png "The Burning Bush")
+![The Burning Bush](./media/mother-earth-burning.gif "Mother Earth Burning Sticker")
 
 ## Table of Content
 
@@ -14,6 +14,7 @@
 * [Uninstallation](#uninstallation)
 * [Examples](#examples)
 * [Unsupported Functionalities](#unsupported-functionalities-yet)
+* [Acknowledgement](#acknowledgement)
 
 ## Introduction
 
@@ -223,3 +224,12 @@ normal@prompt:bush$ echo $?
 * Command separators `;`, `||`, `&&`.
 * globs `*`, etc.
 * Background jobs.
+
+## Acknowledgement
+
+Repository author: [Ian Duncan](github.com/der8co "Ian")
+
+Mother Earth Burning Sticker courtesy of [Tenor](https://tenor.com/ "Tenor")
+and [intoaction](https://tenor.com/official/intoaction "intoaction").
+It can be found
+[here](https://tenor.com/view/mother-earth-burning-fire-on-fire-wildfire-gif-18417870).
