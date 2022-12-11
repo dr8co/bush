@@ -1,0 +1,106 @@
+name: compile_and_test
+
+on:
+  push:
+    branches: [ "main" ]
+    
+  pull_request:
+    branches: [ "main" ]
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
+jobs:
+  ubuntu_clang:
+    name: Build and test The Burning Bush on Ubuntu with clang
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Install Clang
+        run: sudo apt-get update && sudo apt-get install clang-14
+      
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+    
+      - name: Install bush
+        run: sudo ./install.sh
+    
+      - name: Test installation
+        run: bush help
+        
+      - name: Test2
+        run: man burning-bush
+    
+      - name: Uninstallation
+        run: sudo ./uninstall.sh
+      
+  ubuntu_gcc:
+    name: Build and test The Burning Bush on Ubuntu with gcc
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Install gcc
+        run: sudo apt-get update && sudo apt-get install gcc-11
+      
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+    
+      - name: Install bush
+        run: sudo ./install.sh
+    
+      - name: Test installation
+        run: bush help
+        
+      - name: Test2
+        run: man burning-bush
+    
+      - name: Uninstallation
+        run: sudo ./uninstall.sh
+      
+  mac_clang:
+    name: Build and test The Burning Bush on macOS with clang
+    runs-on: macos-latest
+    
+    steps:
+      - name: Install Clang
+        run: brew update && brew install llvm
+      
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+    
+      - name: Install bush
+        run: sudo ./install.sh
+    
+      - name: Test installation
+        run: bush help
+      
+      - name: Test2
+        run: man burning-bush
+    
+      - name: Uninstallation
+        run: sudo ./uninstall.sh
+      
+  macos_gcc:
+    name: Build and test The Burning Bush on macOS with gcc
+    runs-on: macos-latest
+    
+    steps:
+      - name: Install gcc
+        run: brew update && brew install llvm
+      
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+    
+      - name: Install bush
+        run: sudo ./install.sh
+    
+      - name: Test installation
+        run: bush help
+      
+      - name: Test2
+        run: man burning-bush
+    
+      - name: Uninstallation
+        run: sudo ./uninstall.sh
