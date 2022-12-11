@@ -18,19 +18,19 @@ jobs:
     
     steps:
       - name: Install Clang
-      - run: sudo apt-get update && apt-get install clang-14
+        run: sudo apt-get update && apt-get install clang-14
       
       - name: Checkout Repository
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
     
       - name: Install bush
-      - run: sudo ./install.sh
+        run: sudo ./install.sh
     
       - name: Test installation
-      - run: bush help
+        run: bush help
     
       - name: Uninstallation
-      - run: sudo ./uninstall.sh
+        run: sudo ./uninstall.sh
       
   ubuntu_gcc:
     name: Build and test The Burning Bush on Ubuntu with gcc
@@ -38,21 +38,21 @@ jobs:
     
     steps:
       - name: Install gcc
-      - run: |
+        run: |
           sudo apt-get update && apt-get install gcc-11
           sudo apt-get uninstall clang
       
       - name: Checkout Repository
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
     
       - name: Install bush
-      - run: sudo ./install.sh
+        run: sudo ./install.sh
     
       - name: Test installation
-      - run: bush help
+        run: bush help
     
       - name: Uninstallation
-      - run: sudo ./uninstall.sh
+        run: sudo ./uninstall.sh
       
   mac_clang:
     name: Build and test The Burning Bush on macOS with clang
@@ -60,19 +60,19 @@ jobs:
     
     steps:
       - name: Install Clang
-      - run: brew update && brew install llvm
+        run: brew update && brew install llvm
       
       - name: Checkout Repository
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
     
       - name: Install bush
-      - run: sudo ./install.sh
+        run: sudo ./install.sh
     
       - name: Test installation
-      - run: bush help
+        run: bush help
     
       - name: Uninstallation
-      - run: sudo ./uninstall.sh
+        run: sudo ./uninstall.sh
       
   macos_gcc:
     name: Build and test The Burning Bush on macOS with gcc
@@ -80,17 +80,17 @@ jobs:
     
     steps:
       - name: Install gcc
-      - run: brew update && brew install llvm
+        run: brew update && brew install llvm
       
       - name: Checkout Repository
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
     
       - name: Install bush
-      - run: sudo ./install.sh
+        run: sudo ./install.sh
     
       - name: Test installation
-      - run: bush help
+        run: bush help
     
       - name: Uninstallation
-      - run: sudo ./uninstall.sh
+        run: sudo ./uninstall.sh
 
