@@ -88,7 +88,7 @@ jobs:
     
     steps:
       - name: Install gcc
-        run: brew update && brew install gcc-11
+        run: brew update && brew install gcc@11
       
       - name: Checkout Repository
         uses: actions/checkout@v3
