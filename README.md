@@ -5,12 +5,13 @@
 ## Table of Content
 
 * [About](#introduction)
-* [Usage](#usage)
+* [Installation](#installation)
   * [Requirements](#requirements)
-  * [Compilation](#compilation)
-* [Features](#features)
+  * [How to install](#how-to-install)
+* [Usage](#usage)
   * [Supported Commands](#supported-commands)
-  * [Other Features](#other-features)
+  * [Other features](#other-features)
+* [Uninstallation](#uninstallation)
 * [Examples](#examples)
 * [Unsupported Functionalities](#unsupported-functionalities-yet)
 
@@ -27,16 +28,26 @@ This project is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-## Usage
+## Installation
 
 ### Requirements
 
-* UNIX-like environment, like macOS and Linux.
-* gcc C compiler, or clang C compiler.
+* **UNIX-like environment**, like macOS and Linux.
+* GNU **GCC**, or **clang** LLVM compiler.
 
-### Compilation
+### How to install
 
-Compile with `-Wall -Werror -Wextra -pedantic` flags to generate warnings for potential issues/bugs.
+Run the install.sh script with root privileges to install:
+
+```zsh
+sudo ./install.sh
+```
+
+Additionally, you can compile The Burning Bush instead of installing it in your system
+using the compile.sh script.
+
+Also, you can compile it on the command-line with
+`-Wall -Werror -Wextra -pedantic` flags to generate warnings for potential issues/bugs.
 
 Use option `-std=gnuXX` where `XX` can be `99`, `11`, `17` or `2x`, depending on the
 latest version of C supported by your compiler
@@ -50,9 +61,27 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu2x *.c -o bush
 clang -Wall -Werror -Wextra -pedantic -std=gnu2x *.c -o bush
 ```
 
-Alternatively, you can build using CMake.
+Alternatively, you can build using CMake and Ninja:
 
-## Features
+```zsh
+mkdir -p cmake-bush
+
+"$(which cmake)" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="$(which ninja)" -G Ninja -S . -B cmake-bush
+
+"$(which cmake)" --build cmake-bush --target bush -j 3
+
+# You can now run
+# cd cmake-bush && ./bush
+
+```
+
+## Usage
+
+Run the compiled executable to invoke the shell on the terminal,
+or invoke with `bush` command on the terminal to initiate a session
+if the program was successfully installed in your system.
+
+Terminate with `exit`.
 
 ### Supported Commands
 
@@ -90,9 +119,6 @@ can be `cd`, `echo`, and `exit`. `help`.
 Without any argument, (or with an invalid argument),
 the general shell help is printed.
 
-* `env`\
-Prints environment variables.
-
 ### Other Features
 
 * Piped commands (eg `ls | sort -r`).
@@ -107,6 +133,15 @@ Prints environment variables.
 username@hostname:current_working_directory$
 # secondary:
 >
+```
+
+## Uninstallation
+
+Run the uninstall.sh script with root privileges to uninstall
+The Burning Bush from your system:
+
+```zsh
+sudo ./uninstall.sh
 ```
 
 ## Examples
@@ -186,4 +221,5 @@ normal@prompt:bush$ echo $?
 ## Unsupported Functionalities (yet)
 
 * Command separators `;`, `||`, `&&`.
+* globs `*`, etc.
 * Background jobs.
