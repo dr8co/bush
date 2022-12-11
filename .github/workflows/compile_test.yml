@@ -1,0 +1,49 @@
+name: compile_and_test
+
+on:
+  push:
+    branches: [ "main" ]
+    
+  pull_request:
+    branches: [ "main" ]
+    
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build_and_test:
+    name: Build and test The Burning Bush on ${{ matrix.os }} with ${{ matrix.compiler }}.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        compiler: [gcc, clang]
+        include:
+          - os: ubuntu-latest
+            compiler: clang
+            
+          - os: macos-latest
+            compiler: clang
+            
+          - os: ubuntu-latest
+            compiler: gcc
+            
+          - os: macos-latest
+            compiler: gcc
+            
+    steps:
+    - name: Checkout Repository
+    - uses: actions/checkout@v3
+    
+    - name: Install bush
+    - run: sudo ./install.sh
+    
+    - name: Test installation
+    - run: bush help
+    
+    - name: Uninstallation
+    - run: sudo ./uninstall.sh
+
