@@ -35,15 +35,15 @@ jobs:
             compiler: gcc
             
     steps:
-    - name: Checkout Repository
-    - uses: actions/checkout@v3
+      - name: Checkout Repository
+      - uses: actions/checkout@v3
     
-    - name: Install bush
-    - run: sudo ./install.sh
+      - name: Install bush
+      - run: sudo ./install.sh
     
-    - name: Test installation
-    - run: bush help
+      - name: Test installation
+      - run: bush help
     
-    - name: Uninstallation
-    - run: sudo ./uninstall.sh
+      - name: Uninstallation
+      - run: sudo ./uninstall.sh
 
