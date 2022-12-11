@@ -74,3 +74,6 @@ _deps
 
 # Other Files
 bush
+
+# Github workflows
+.github/
