@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   ubuntu_clang:
-    name: Build and test The Burning Bush on Ubuntu with clang
+    name: Ubuntu with clang
     runs-on: ubuntu-latest
     
     steps:
@@ -30,14 +30,14 @@ jobs:
       - name: Test installation
         run: bush help
         
-      - name: Test2
+      - name: Test man page installation
         run: man burning-bush
     
       - name: Uninstallation
         run: sudo ./uninstall.sh
       
   ubuntu_gcc:
-    name: Build and test The Burning Bush on Ubuntu with gcc
+    name: Ubuntu with gcc
     runs-on: ubuntu-latest
     
     steps:
@@ -53,14 +53,14 @@ jobs:
       - name: Test installation
         run: bush help
         
-      - name: Test2
+      - name: Test man page installation
         run: man burning-bush
     
       - name: Uninstallation
         run: sudo ./uninstall.sh
       
   mac_clang:
-    name: Build and test The Burning Bush on macOS with clang
+    name: macOS with clang
     runs-on: macos-latest
     
     steps:
@@ -76,19 +76,19 @@ jobs:
       - name: Test installation
         run: bush help
       
-      - name: Test2
+      - name: Test man page installation
         run: man burning-bush
     
       - name: Uninstallation
         run: sudo ./uninstall.sh
       
   macos_gcc:
-    name: Build and test The Burning Bush on macOS with gcc
+    name: macOS with gcc
     runs-on: macos-latest
     
     steps:
       - name: Install gcc
-        run: brew update && brew install llvm
+        run: brew update && brew install gcc-11
       
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -99,7 +99,7 @@ jobs:
       - name: Test installation
         run: bush help
       
-      - name: Test2
+      - name: Test man page installation
         run: man burning-bush
     
       - name: Uninstallation
