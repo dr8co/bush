@@ -227,7 +227,7 @@ normal@prompt:bush$ echo $?
 
 ## Acknowledgement
 
-Repository author: [Ian Duncan](github.com/der8co "Ian")
+Repository author: [Ian Duncan](https://github.com/dr8co "Ian")
 
 The **"Mother Earth Burning Sticker"** courtesy of [Tenor](https://tenor.com/ "Tenor")
 and [intoaction](https://tenor.com/official/intoaction "intoaction").
