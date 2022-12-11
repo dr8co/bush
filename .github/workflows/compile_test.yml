@@ -6,35 +6,82 @@ on:
     
   pull_request:
     branches: [ "main" ]
-    
-  workflow_dispatch:
 
 defaults:
   run:
     shell: bash
 
 jobs:
-  build_and_test:
-    name: Build and test The Burning Bush on ${{ matrix.os }} with ${{ matrix.compiler }}.
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        compiler: [gcc, clang]
-        include:
-          - os: ubuntu-latest
-            compiler: clang
-            
-          - os: macos-latest
-            compiler: clang
-            
-          - os: ubuntu-latest
-            compiler: gcc
-            
-          - os: macos-latest
-            compiler: gcc
-            
+  ubuntu_clang:
+    name: Build and test The Burning Bush on Ubuntu with clang
+    runs-on: ubuntu-latest
+    
     steps:
+      - name: Install Clang
+      - run: sudo apt-get update && apt-get install clang-14
+      
+      - name: Checkout Repository
+      - uses: actions/checkout@v3
+    
+      - name: Install bush
+      - run: sudo ./install.sh
+    
+      - name: Test installation
+      - run: bush help
+    
+      - name: Uninstallation
+      - run: sudo ./uninstall.sh
+      
+  ubuntu_gcc:
+    name: Build and test The Burning Bush on Ubuntu with gcc
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Install gcc
+      - run: |
+          sudo apt-get update && apt-get install gcc-11
+          sudo apt-get uninstall clang
+      
+      - name: Checkout Repository
+      - uses: actions/checkout@v3
+    
+      - name: Install bush
+      - run: sudo ./install.sh
+    
+      - name: Test installation
+      - run: bush help
+    
+      - name: Uninstallation
+      - run: sudo ./uninstall.sh
+      
+  mac_clang:
+    name: Build and test The Burning Bush on macOS with clang
+    runs-on: macos-latest
+    
+    steps:
+      - name: Install Clang
+      - run: brew update && brew install llvm
+      
+      - name: Checkout Repository
+      - uses: actions/checkout@v3
+    
+      - name: Install bush
+      - run: sudo ./install.sh
+    
+      - name: Test installation
+      - run: bush help
+    
+      - name: Uninstallation
+      - run: sudo ./uninstall.sh
+      
+  macos_gcc:
+    name: Build and test The Burning Bush on macOS with gcc
+    runs-on: macos-latest
+    
+    steps:
+      - name: Install gcc
+      - run: brew update && brew install llvm
+      
       - name: Checkout Repository
       - uses: actions/checkout@v3
     
