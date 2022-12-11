@@ -1,3 +1,14 @@
+/**
+ * @file fileops.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for file operations
+ * @version 1.0
+ * @date 2022-12-11
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>

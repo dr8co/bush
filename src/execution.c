@@ -2,8 +2,8 @@
  * @file execution.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief source file for functions that handle execution of commands.
- * @version 0.1
- * @date 2022-11-30
+ * @version 1.0
+ * @date 2022-12-11
  *
  * @copyright Copyright (c) 2022
  *

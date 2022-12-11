@@ -2,8 +2,8 @@
  * @file help_msgs.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief file for help messages.
- * @version 0.1
- * @date 2022-12-05
+ * @version 1.0
+ * @date 2022-12-11
  *
  * @copyright Copyright (c) 2022
  *
@@ -71,12 +71,14 @@ char *help_msg = "The Burning Bush, version 1.0.0\n"
                  "These shell commands are defined internally.  Type 'help' to see this list.\n"
                  "Use 'man -k' or 'info' to find out more about commands not in this list.\n\n"
 
-                 "cd [dir]\n"
-                 "echo [arg ...]\n"
-                 "exit [n]\n"
-                 "export [name[=value] ...]\n"
-                 "pwd\n"
-                 "history\n";
+                 "\tcd [dir]\n"
+                 "\techo [arg ...]\n"
+                 "\texit [n]\n"
+                 "\texport [name[=value] ...]\n"
+                 "\tpwd\n"
+                 "\thistory\n\n"
+
+                 "Use 'man burning-bush to learn more.\n";
 
 
 /* 'help history' */

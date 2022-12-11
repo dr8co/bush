@@ -2,8 +2,8 @@
  * @file help.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief source file for help-related functions.
- * @version 0.1
- * @date 2022-12-03
+ * @version 1.0
+ * @date 2022-12-11
  *
  * @copyright Copyright (c) 2022
  *

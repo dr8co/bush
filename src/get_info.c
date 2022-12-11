@@ -1,3 +1,14 @@
+/**
+ * @file get_info.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for functions to extract information.
+ * @version 1.0
+ * @date 2022-12-11
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "main.h"
 #include <stdlib.h>
 #include <unistd.h>

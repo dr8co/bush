@@ -2,8 +2,8 @@
  * @file memory.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief source file for memory management and related functions
- * @version 0.1
- * @date 2022-11-30
+ * @version 1.0
+ * @date 2022-12-11
  *
  * @copyright Copyright (c) 2022
  *
