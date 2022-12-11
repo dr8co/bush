@@ -230,6 +230,6 @@ normal@prompt:bush$ echo $?
 Repository author: [Ian Duncan](https://github.com/dr8co "Ian")
 
 The **"Mother Earth Burning Sticker"** courtesy of [Tenor](https://tenor.com/ "Tenor")
-and [intoaction](https://tenor.com/official/intoaction "intoaction").
+and [INTO ACTION](https://tenor.com/official/intoaction "intoaction").
 It can be found
 [here](https://tenor.com/view/mother-earth-burning-fire-on-fire-wildfire-gif-18417870).
