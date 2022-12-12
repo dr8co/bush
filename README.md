@@ -65,14 +65,14 @@ clang -Wall -Werror -Wextra -pedantic -std=gnu2x *.c -o bush
 Alternatively, you can build using CMake and Ninja:
 
 ```zsh
-mkdir -p cmake-bush
+mkdir -p ./cmake-bush
 
-"$(which cmake)" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="$(which ninja)" -G Ninja -S . -B cmake-bush
+"$(command -v cmake)" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="$(command -v ninja)" -G Ninja -S . -B ./cmake-bush
 
-"$(which cmake)" --build cmake-bush --target bush -j 3
+"$(command -v cmake)" --build ./cmake-bush --target bush -j 3
 
 # You can now run
-# cd cmake-bush && ./bush
+# cd cmake-bush/src && ./bush
 
 ```
 
