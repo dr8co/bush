@@ -2,10 +2,10 @@ name: tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "stable" ]
     
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "stable" ]
 
 defaults:
   run:
