@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Run from this directory
+cd "${0%/*}" || exit 1
+
 # Default standards
 CLANG_VERSION=4
 GCC_VERSION=3

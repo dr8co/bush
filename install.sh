@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Run from this directory
+cd "${0%/*}" || exit 1
+
 if [ "$(id -u)" != "0" ]; then
   echo "Sorry, you are not root."
   exit 1
