@@ -40,6 +40,7 @@ char *trim_leading_trailing(const char *str);
 char *strtok_skip(char *str, char *delim);
 char *skip_quotes(const char *str);
 char *skip_whitespaces(char *s);
+int is_space(int c);
 
 /* process_cmd.c */
 void tokenize_redirect_input_output(char *cmdExec);
