@@ -24,11 +24,8 @@ int pow_(int base, int exponent) {
 
     while (exponent > 0) {
 
-        int last_bit = (exponent & 1);
-
-        if (last_bit) {
+        if (exponent & 1)
             ans *= base;
-        }
 
         base *= base;
         exponent >>= 1;
