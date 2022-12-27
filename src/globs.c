@@ -2,7 +2,6 @@
 #include <glob.h>
 #include <stdio.h>
 
-char *expanded[1024];
 
 /**
  * @brief Check if a string contains a wildcard character.
@@ -41,18 +40,20 @@ int replace_pattern(const char *str, glob_t *glob_buf) {
 /**
  * @brief expand wildcards in a string to successful matches.
  * @param string the string with wildcards to be expanded.
- * @return 0 on success, -1 if no matches were found.
+ * @return a string of all the matches.
  */
-int expand_globs(const char *string) {
+char *expand_globs(const char *string) {
     glob_t globBuff;
+    char exp[1024];
 
+    str_cpy(exp, "");
     replace_pattern(string, &globBuff);
 
     for (unsigned int i = 0; i < globBuff.gl_pathc; ++i) {
-        expanded[i] = globBuff.gl_pathv[i];
-        printf("%s\n", globBuff.gl_pathv[i]);
+        str_cat(exp, globBuff.gl_pathv[i]);
+        str_cat(exp, " ");
     }
     globfree(&globBuff);
 
-    return globBuff.gl_pathc != 0 ? 0 : -1;
+    return str_dup(exp);
 }
