@@ -1,6 +1,7 @@
 #include "main.h"
 #include <glob.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 /**
@@ -47,11 +48,20 @@ char *expand_globs(const char *string) {
     char exp[1024];
 
     str_cpy(exp, "");
-    replace_pattern(string, &globBuff);
-
-    for (unsigned int i = 0; i < globBuff.gl_pathc; ++i) {
-        str_cat(exp, globBuff.gl_pathv[i]);
-        str_cat(exp, " ");
+    switch (replace_pattern(string, &globBuff)){
+        case 0:
+            for (unsigned int i = 0; i < globBuff.gl_pathc; ++i) {
+                str_cat(exp, globBuff.gl_pathv[i]);
+                str_cat(exp, " ");
+            }
+        case GLOB_NOMATCH:
+            str_cpy(exp, string);
+        case GLOB_NOSPACE:
+            fprintf(stderr, "No enough memory");
+            exit(1);
+        case GLOB_ABORTED:
+            fprintf(stderr, "Read error");
+            exit(1);
     }
     globfree(&globBuff);
 
