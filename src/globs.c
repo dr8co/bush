@@ -4,6 +4,11 @@
 
 char *expanded[1024];
 
+/**
+ * @brief Check if a string contains a wildcard character.
+ * @param str the string to check.
+ * @return 1 if a wildcard character is present, 0 otherwise.
+ */
 int has_wildcard(const char *str) {
     if (!str)
         return 0;
@@ -22,10 +27,22 @@ int has_wildcard(const char *str) {
     return 0;
 }
 
+/**
+ * @brief Replaces a wildcard pattern with matches.
+ * @param str a string containing a wildcard character.
+ * @param glob_buf a buffer to store the matches.
+ * @return 0 on success, others in failure
+ * (see documentation of 'glob' function, e.g `man 3 glob`).
+ */
 int replace_pattern(const char *str, glob_t *glob_buf) {
     return (glob(str, GLOB_ERR | GLOB_APPEND, NULL, glob_buf));
 }
 
+/**
+ * @brief expand wildcards in a string to successful matches.
+ * @param string the string with wildcards to be expanded.
+ * @return 0 on success, -1 if no matches were found.
+ */
 int expand_globs(const char *string) {
     glob_t globBuff;
 
@@ -37,5 +54,5 @@ int expand_globs(const char *string) {
     }
     globfree(&globBuff);
 
-    return globBuff.gl_pathc != 0 ? 0 : 1;
+    return globBuff.gl_pathc != 0 ? 0 : -1;
 }
