@@ -48,7 +48,7 @@ char *expand_globs(const char *string) {
     char exp[1024];
 
     str_cpy(exp, "");
-    switch (replace_pattern(string, &globBuff)){
+    switch (replace_pattern(string, &globBuff)) {
         case 0:
             for (unsigned int i = 0; i < globBuff.gl_pathc; ++i) {
                 str_cat(exp, globBuff.gl_pathv[i]);
