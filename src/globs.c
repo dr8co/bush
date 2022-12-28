@@ -54,8 +54,10 @@ char *expand_globs(const char *string) {
                 str_cat(exp, globBuff.gl_pathv[i]);
                 str_cat(exp, " ");
             }
+            break;
         case GLOB_NOMATCH:
             str_cpy(exp, string);
+            break;
         case GLOB_NOSPACE:
             fprintf(stderr, "No enough memory");
             exit(1);
