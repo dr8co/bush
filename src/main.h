@@ -77,6 +77,14 @@ char *mem_set(char *s, char b, unsigned int n);
 char *readfile(const char *filename, size_t *filesize);
 void print_file(const char *filename);
 
+/* arrays.c */
+char **merge_arrays(char **arr1, char **arr2, int index);
+char **remove_element(char **arr, int index);
+
+/* globs.c */
+char **expand_globs(const char *string);
+int has_wildcard(const char *str);
+
 /* directories.c */
 void print_working_dir();
 int change_directory();
