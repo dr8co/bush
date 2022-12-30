@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "main.h"
 
+/**
+ * @brief get the number of items in an array.
+ * @param arr the array to evaluate.
+ * @return the number of items in the array.
+ */
 int get_size(char **arr) {
     int size = 0;
     for (int i = 0; arr[i]; ++i) {
@@ -10,6 +15,12 @@ int get_size(char **arr) {
     return size;
 }
 
+/**
+ * @brief remove an item from an array (in place).
+ * @param arr the array to evaluate.
+ * @param index the index of the item to be removed from the array.
+ * @return the new array with the element removed.
+ */
 char **remove_element(char **arr, int index) {
     int size = get_size(arr);
 
@@ -25,6 +36,13 @@ char **remove_element(char **arr, int index) {
     return arr;
 }
 
+/**
+ * @brief merge two arrays.
+ * @param arr1 the parent array.
+ * @param arr2 the child array to be inserted into the parent array.
+ * @param index the index in parent array at which the child array is to be inserted.
+ * @return the merged array.
+ */
 char **merge_arrays(char **arr1, char **arr2, int index) {
     int size1 = get_size(arr1);
     int size2 = get_size(arr2);
