@@ -48,7 +48,7 @@ char **merge_arrays(char **arr1, char **arr2, int index) {
     int size2 = get_size(arr2);
 
     int i = 0, j = 0, pos = index;
-    char **arr3 = (char **) malloc(sizeof(arr1) + sizeof(arr2) + 100);
+    char **arr3 = (char **) malloc(sizeof(arr1) * 1024);
 
     if (index > size1 || index <= -2) {
         fprintf(stderr, "Invalid index");
