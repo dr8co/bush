@@ -35,7 +35,7 @@ int has_wildcard(const char *str) {
  * (see documentation of 'glob' function, e.g `man 3 glob`).
  */
 int replace_pattern(const char *str, glob_t *glob_buf) {
-    return (glob(str, GLOB_ERR | GLOB_APPEND, NULL, glob_buf));
+    return (glob(str, GLOB_ERR, NULL, glob_buf));
 }
 
 /**
@@ -47,19 +47,21 @@ char **expand_globs(const char *string) {
     glob_t globBuff;
     char **exp;
     int ret;
+    unsigned int i = 0;
 
     ret = replace_pattern(string, &globBuff);
-    exp = (char **) malloc(sizeof(globBuff.gl_pathv));
+    exp = (char **) malloc(sizeof(char *) * 1024);
 
     switch (ret) {
         case 0:
-            for (unsigned int i = 0; i < globBuff.gl_pathc; ++i) {
-                str_cpy(exp[i], globBuff.gl_pathv[i]);
+            for (; i < globBuff.gl_pathc; ++i) {
+                exp[i] = str_dup(globBuff.gl_pathv[i]);
             }
+            exp[i] = NULL;
             break;
         case GLOB_NOMATCH:
-            exp = re_alloc(exp, 1024);
-            str_cpy(exp[0], string);
+            exp[0] = (char *) string;
+            exp[1] = NULL;
             break;
         case GLOB_NOSPACE:
             fprintf(stderr, "No enough memory");
