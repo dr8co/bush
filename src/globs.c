@@ -77,3 +77,22 @@ char **expand_globs(const char *string) {
 
     return exp;
 }
+
+void process_globs() {
+    char **expanded, **args_expanded;
+
+    for (int i = 0; args[i]; ++i) {
+        if (has_wildcard(args[i])) {
+            expanded = expand_globs(args[i]);
+
+            args_expanded = merge_arrays(args, expanded, i);
+            remove_element(args_expanded, i);
+
+            for (int j = 0; args_expanded[j]; ++j) {
+                args[j] = args_expanded[j];
+            }
+            free(expanded);
+            free(args_expanded);
+        }
+    }
+}
