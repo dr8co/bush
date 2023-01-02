@@ -107,4 +107,7 @@ void find_help(const char *str);
 /* signal_handler.c */
 void signalHandler(int sig_num);
 
+/* globs.c */
+void process_globs();
+
 #endif /* MAIN_H */
