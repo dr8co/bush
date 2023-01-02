@@ -76,6 +76,9 @@ char **expand_globs(const char *string) {
     return exp;
 }
 
+/**
+ * @brief finds wildcards in args[] and expands them to successful matches.
+ */
 void process_globs() {
     char **expanded, **args_expanded;
 

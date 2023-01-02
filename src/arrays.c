@@ -3,7 +3,7 @@
 #include "main.h"
 
 /**
- * @brief get the number of items in an array.
+ * @brief finds the number of items (strings) in an array of strings.
  * @param arr the array to evaluate.
  * @return the number of items in the array.
  */
@@ -16,7 +16,7 @@ int get_size(char **arr) {
 }
 
 /**
- * @brief remove an item from an array (in place).
+ * @brief removes an item from an array (in place).
  * @param arr the array to evaluate.
  * @param index the index of the item to be removed from the array.
  * @return the new array with the element removed.
@@ -37,11 +37,14 @@ char **remove_element(char **arr, int index) {
 }
 
 /**
- * @brief merge two arrays.
+ * @brief merges two arrays (of strings).
  * @param arr1 the parent array.
  * @param arr2 the child array to be inserted into the parent array.
  * @param index the index in parent array at which the child array is to be inserted.
  * @return the merged array.
+ * @note Calling the function with an index of -1 prepends the
+ * second array (the second argument) to the first array (the first argument).\n
+ * The second array is merged AFTER the index (index + 1), NOT AT the index.
  */
 char **merge_arrays(char **arr1, char **arr2, int index) {
     int size1 = get_size(arr1);
