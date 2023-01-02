@@ -20,8 +20,8 @@ int get_length(char **arr) {
  * @param arr the array of arrays of characters (array of strings).
  * @return the total memory occupied by the array, in bytes.
  */
-unsigned long get_size(char **arr){
-    unsigned long size = 0;
+size_t get_size(char **arr){
+    size_t size = 0;
     for (int i = 0; i < get_length(arr); ++i) {
         size += str_len(arr[i]); // memory occupied by every character in the string.
         ++size;                     // null terminating character at the end of each string ('\0').

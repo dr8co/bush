@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /**
  * @brief Check if a string contains a wildcard character.
  * @param str the string to check.
@@ -48,16 +47,17 @@ char **expand_globs(const char *string) {
     char **exp;
     unsigned int i = 0;
 
-    exp = (char **) malloc(sizeof(char *) * 1024);
-
     switch (replace_pattern(string, &globBuff)) {
         case 0:
+            exp = (char **) malloc(get_size(globBuff.gl_pathv));
             for (; i < globBuff.gl_pathc; ++i) {
                 exp[i] = str_dup(globBuff.gl_pathv[i]);
             }
             exp[i] = NULL;
             break;
         case GLOB_NOMATCH:
+            // sizeof(char *) x 2 for exp[0] and exp[1], and the (last) 1 for '\0' in exp[0].
+            exp = (char **) malloc(sizeof(char *) * 2 + str_len(string) + 1);
             exp[0] = (char *) string;
             exp[1] = NULL;
             break;

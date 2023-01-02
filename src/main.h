@@ -42,6 +42,14 @@ char *skip_quotes(const char *str);
 char *skip_whitespaces(char *s);
 int is_space(int c);
 
+/* history.c */
+int is_histfile_full();
+void delete_histfile();
+void write_history();
+void print_history();
+void free_histfile();
+void read_history();
+
 /* process_cmd.c */
 void tokenize_redirect_input_output(char *cmdExec);
 void tokenize_redirect_output(char *cmdExec);
@@ -61,13 +69,10 @@ void run_echo(char *echo_val);
 void execute_event();
 void execute_pipe();
 
-/* history.c */
-int is_histfile_full();
-void delete_histfile();
-void write_history();
-void print_history();
-void free_histfile();
-void read_history();
+/* arrays.c */
+char **merge_arrays(char **arr1, char **arr2, int index);
+char **remove_element(char **arr, int index);
+size_t get_size(char **arr);
 
 /* memory.c */
 void *re_alloc(void *ptr, unsigned int new_size);
@@ -76,10 +81,6 @@ char *mem_set(char *s, char b, unsigned int n);
 /* fileops.c */
 char *readfile(const char *filename, size_t *filesize);
 void print_file(const char *filename);
-
-/* arrays.c */
-char **merge_arrays(char **arr1, char **arr2, int index);
-char **remove_element(char **arr, int index);
 
 /* globs.c */
 char **expand_globs(const char *string);
