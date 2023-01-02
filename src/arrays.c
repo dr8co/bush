@@ -7,11 +7,27 @@
  * @param arr the array to evaluate.
  * @return the number of items in the array.
  */
-int get_size(char **arr) {
+int get_length(char **arr) {
     int size = 0;
     for (int i = 0; arr[i]; ++i) {
         ++size;
     }
+    return size;
+}
+
+/**
+ * @brief finds the total memory used by an array of arrays of characters.
+ * @param arr the array of arrays of characters (array of strings).
+ * @return the total memory occupied by the array, in bytes.
+ */
+unsigned long get_size(char **arr){
+    unsigned long size = 0;
+    for (int i = 0; i < get_length(arr); ++i) {
+        size += str_len(arr[i]); // memory occupied by every character in the string.
+        ++size;                     // null terminating character at the end of each string ('\0').
+        size += sizeof(char *);     // memory occupied by the pointer to the first character in each string.
+    }
+    size += sizeof(char **);        // memory occupied by the pointer pointing to the first string.
     return size;
 }
 
@@ -22,7 +38,7 @@ int get_size(char **arr) {
  * @return the new array with the element removed.
  */
 char **remove_element(char **arr, int index) {
-    int size = get_size(arr);
+    int size = get_length(arr);
 
     if (index >= size || index < 0) {
         fprintf(stderr, "Operation not possible: index out of range.");
@@ -47,11 +63,11 @@ char **remove_element(char **arr, int index) {
  * The second array is merged AFTER the index (index + 1), NOT AT the index.
  */
 char **merge_arrays(char **arr1, char **arr2, int index) {
-    int size1 = get_size(arr1);
-    int size2 = get_size(arr2);
+    int size1 = get_length(arr1);
+    int size2 = get_length(arr2);
 
     int i = 0, j = 0, pos = index;
-    char **arr3 = (char **) malloc(sizeof(arr1) * 1024);
+    char **arr3 = (char **) malloc(get_size(arr1) + get_size(arr2));
 
     if (index > size1 || index <= -2) {
         fprintf(stderr, "Invalid index");
