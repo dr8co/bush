@@ -41,18 +41,16 @@ int replace_pattern(const char *str, glob_t *glob_buf) {
 /**
  * @brief expand wildcards in a string to successful matches.
  * @param string the string with wildcards to be expanded.
- * @return a string of all the matches.
+ * @return an array of strings that match the wildcard(s).
  */
 char **expand_globs(const char *string) {
     glob_t globBuff;
     char **exp;
-    int ret;
     unsigned int i = 0;
 
-    ret = replace_pattern(string, &globBuff);
     exp = (char **) malloc(sizeof(char *) * 1024);
 
-    switch (ret) {
+    switch (replace_pattern(string, &globBuff)) {
         case 0:
             for (; i < globBuff.gl_pathc; ++i) {
                 exp[i] = str_dup(globBuff.gl_pathv[i]);
@@ -64,13 +62,13 @@ char **expand_globs(const char *string) {
             exp[1] = NULL;
             break;
         case GLOB_NOSPACE:
-            fprintf(stderr, "No enough memory");
+            fprintf(stderr, "No enough memory\n");
             exit(-1);
         case GLOB_ABORTED:
-            fprintf(stderr, "Read error");
+            fprintf(stderr, "Read error\n");
             exit(-1);
         default:
-            fprintf(stderr, "Something went wrong");
+            fprintf(stderr, "Something went wrong\n");
             exit(-1);
     }
     globfree(&globBuff);
