@@ -62,7 +62,6 @@ void set_environment_vars();
 void free_global_vars();
 void clear_variables();
 void print_env();
-void free_args();
 
 /* execution.c */
 int command(int, int, int, char *cmd_exec);

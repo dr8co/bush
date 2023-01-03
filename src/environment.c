@@ -90,12 +90,3 @@ void free_global_vars() {
     free(prompt);
 }
 
-/**
- * @brief frees the dynamically allocated strings in args[].
- */
-void free_args(){
-    for (int i = 0; i < element; ++i) {
-        if (args[i] != NULL)
-            free(args[i]);
-    }
-}

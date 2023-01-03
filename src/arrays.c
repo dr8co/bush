@@ -74,15 +74,15 @@ char **merge_arrays(char **arr1, char **arr2, int index) {
         exit(-1);
     } else {
         for (; i <= index; ++i) {
-            arr3[i] = arr1[i];
+            arr3[i] = str_dup(arr1[i]);
         }
         for (; j < size2; ++j) {
-            arr3[i] = arr2[j];
+            arr3[i] = str_dup(arr2[j]);
             ++i;
         }
         ++pos;
         for (int k = index + size2 + 1; k < size2 + size1 && arr1[pos]; ++k) {
-            arr3[k] = arr1[pos];
+            arr3[k] = str_dup(arr1[pos]);
             ++pos;
         }
     }
