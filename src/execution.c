@@ -231,4 +231,5 @@ void execute_pipe() {
     for (int j = 0; j <= n; ++j) {
         free(cmd_exec[j]);
     }
+    free_args();
 }
