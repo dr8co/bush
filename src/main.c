@@ -38,6 +38,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
     char *pre_token[2], pre_buf[1024];
 
     init_shell();
+    setenv("SHELL", argv[0], 1);
 
     /* Handle signals e.g Ctrl+C */
     struct sigaction act;

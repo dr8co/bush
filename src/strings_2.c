@@ -113,7 +113,7 @@ char *skip_quotes(const char *str) {
     int i = 0, j = 0;
     char temp[1024];
     while (str[i++] != '\0') {
-        if (str[i - 1] != '"')
+        if (str[i - 1] != '"' && str[i - 1] != '\'')
             temp[j++] = str[i - 1];
     }
     temp[j] = '\0';

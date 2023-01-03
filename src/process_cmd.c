@@ -43,6 +43,8 @@ int split(char *cmdExec, int input, int first, int last) {
             args[i] = skip_quotes(args[i]);
     }
 
+    process_globs();
+
     if (args[0] != NULL) {
 
         if (str_cmp(args[0], "exit") == 0)

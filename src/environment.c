@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include "main.h"
 
+int element = 0;
+
 /* Global variables for this file */
 extern int fd, line_number, event_flag;
 extern pid_t pid;
@@ -73,6 +75,10 @@ void clear_variables() {
     input_buffer[0] = '\0';
     pid = 0;
     event_flag = 0;
+
+    for (; args[element]; ++element) {
+        args[element] = NULL;
+    }
 }
 
 /**
@@ -83,3 +89,4 @@ void free_global_vars() {
     free(output_redirection_file);
     free(prompt);
 }
+

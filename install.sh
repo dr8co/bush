@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Run from this directory
+cd "${0%/*}" || exit 1
+
+# The script must be run with superuser powers.
 if [ "$(id -u)" != "0" ]; then
   echo "Sorry, you are not root."
   exit 1
@@ -21,6 +25,7 @@ echo -e "Compiling..\n"
 
 CODE=$?
 
+# Exit if compilation failed.
 if [ $CODE == $EXIT_CODE ]; then
   echo -e "Compilation Failed. Please resolve the issue and try again."
   exit 1

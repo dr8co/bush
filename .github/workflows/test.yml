@@ -2,10 +2,10 @@ name: tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "stable", "feature-glob-patterns" ]
     
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "stable" ]
 
 defaults:
   run:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Install Clang
+      - name: Check installation/install clang
         run: command -v clang || (sudo apt-get update && sudo apt-get install clang-14)
       
       - name: Checkout Repository
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Install gcc
+      - name: Check installation/install gcc
         run: command -v gcc || (sudo apt-get update && sudo apt-get install gcc-11)
       
       - name: Checkout Repository
@@ -64,7 +64,7 @@ jobs:
     runs-on: macos-latest
     
     steps:
-      - name: Install Clang
+      - name: Check installation/install clang
         run: command -v clang || (brew update && brew install llvm)
       
       - name: Checkout Repository
@@ -87,7 +87,7 @@ jobs:
     runs-on: macos-latest
     
     steps:
-      - name: Install gcc
+      - name: Check installation/install gcc
         run: command -v gcc || (brew update && brew install gcc@11)
       
       - name: Checkout Repository

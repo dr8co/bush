@@ -65,14 +65,14 @@ clang -Wall -Werror -Wextra -pedantic -std=gnu2x *.c -o bush
 Alternatively, you can build using CMake and Ninja:
 
 ```zsh
-mkdir -p cmake-bush
+mkdir -p ./cmake-bush
 
-"$(which cmake)" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="$(which ninja)" -G Ninja -S . -B cmake-bush
+"$(command -v cmake)" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="$(command -v ninja)" -G Ninja -S . -B ./cmake-bush
 
-"$(which cmake)" --build cmake-bush --target bush -j 3
+"$(command -v cmake)" --build ./cmake-bush --target bush -j 3
 
 # You can now run
-# cd cmake-bush && ./bush
+# cd cmake-bush/src && ./bush
 
 ```
 
@@ -127,6 +127,7 @@ the general shell help is printed.
 * I/O redirection (<, >).
 * `EOF` (Ctrl-D) exits the shell.
 * Bash-style multiline commands (commands ending with '\\').
+* Glob expansion (**experimental**).
 * The primary and secondary prompts are similar to the defaults of bash:
 
 ```console
@@ -164,30 +165,27 @@ export [name[=value] ...]
 pwd
 history
 
-ian@github:bush$ ls -l | sort -r
-total 104
--rw-rw-r-- 1 ian ian  834 Dec  5 18:44 help.c
--rw-rw-r-- 1 ian ian  801 Dec  2 21:51 prompt.c
--rw-rw-r-- 1 ian ian 6381 Dec  5 18:44 execution.c
--rw-rw-r-- 1 ian ian  463 Dec  5 18:44 signal_handler.c
--rw-rw-r-- 1 ian ian 4608 Dec  5 18:44 strings_1.c
--rw-rw-r-- 1 ian ian 4032 Dec  5 18:44 strings_2.c
--rw-rw-r-- 1 ian ian 3844 Dec  5 21:33 history.c
--rw-rw-r-- 1 ian ian 3502 Dec  5 18:44 process_cmd.c
--rw-rw-r-- 1 ian ian 3452 Dec  5 21:32 main.c
--rw-rw-r-- 1 ian ian 3323 Dec  5 18:44 help_msgs.c
--rw-rw-r-- 1 ian ian  328 Dec  5 18:44 CMakeLists.txt
--rw-rw-r-- 1 ian ian 3277 Dec  5 22:08 README.md
--rw-rw-r-- 1 ian ian 3222 Dec  5 18:44 directories.c
--rw-rw-r-- 1 ian ian 2657 Dec  5 21:11 get_info.c
--rw-rw-r-- 1 ian ian 2419 Dec  5 18:44 fileops.c
--rw-rw-r-- 1 ian ian 2386 Dec  5 21:23 main.h
--rw-rw-r-- 1 ian ian 1827 Dec  5 18:44 environment.c
--rw-rw-r-- 1 ian ian 1454 Dec  5 18:44 memory.c
--rw-rw-r-- 1 ian ian 1426 Dec  5 18:44 numbers.c
--rw-rw-r-- 1 ian ian  108 Nov 21 15:43 AUTHORS
--rw-rw-r-- 1 ian ian 1067 Nov 21 15:43 LICENSE
-drwxrwxr-x 2 ian ian 4096 Nov 28 17:13 media
+ian@github:bush$ ls -l src/ | grep "a" | sort -r
+total 88
+-rw-rw-r-- 1 ian ian  973 Dec 12 23:29 globs.c
+-rw-rw-r-- 1 ian ian  801 Dec 11 16:02 prompt.c
+-rw-rw-r-- 1 ian ian 6397 Dec 11 16:02 execution.c
+-rw-rw-r-- 1 ian ian 4918 Dec 11 16:02 help_msgs.c
+-rw-rw-r-- 1 ian ian  463 Dec 11 16:02 signal_handler.c
+-rw-rw-r-- 1 ian ian 4608 Dec 11 16:02 strings_1.c
+-rw-rw-r-- 1 ian ian 4032 Dec 11 16:02 strings_2.c
+-rw-rw-r-- 1 ian ian 3976 Dec 11 16:02 history.c
+-rw-rw-r-- 1 ian ian 3502 Dec 16 22:50 process_cmd.c
+-rw-rw-r-- 1 ian ian 3460 Dec 11 16:02 main.c
+-rw-rw-r-- 1 ian ian 3222 Dec 11 16:02 directories.c
+-rw-rw-r-- 1 ian ian  294 Dec 12 16:48 CMakeLists.txt
+-rw-rw-r-- 1 ian ian 2889 Dec 11 16:02 get_info.c
+-rw-rw-r-- 1 ian ian 2603 Dec 11 16:02 fileops.c
+-rw-rw-r-- 1 ian ian 2407 Dec 12 19:24 main.h
+-rw-rw-r-- 1 ian ian 1807 Dec 11 16:02 environment.c
+-rw-rw-r-- 1 ian ian 1454 Dec 11 16:02 memory.c
+-rw-rw-r-- 1 ian ian 1378 Dec 17 23:49 numbers.c
+-rw-rw-r-- 1 ian ian 1243 Dec 11 16:02 help.c
 
 ian@github:bush$ echo $HOME
 home/ian
@@ -213,6 +211,9 @@ void signalHandler(int sig_num);
 
 #endif /* MAIN_H */
 
+ian@github:bush$ ls *.sh
+compile.sh  install.sh	uninstall.sh
+
 ian@github:bush$ exit 98
 
 normal@prompt:bush$ echo $?
@@ -222,7 +223,6 @@ normal@prompt:bush$ echo $?
 ## Unsupported Functionalities (yet)
 
 * Command separators `;`, `||`, `&&`.
-* globs `*`, etc.
 * Background jobs.
 
 ## Acknowledgement
