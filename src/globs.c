@@ -46,19 +46,20 @@ char **expand_globs(const char *string) {
     glob_t globBuff;
     char **exp;
     unsigned int i = 0;
+    int ret;
 
-    switch (replace_pattern(string, &globBuff)) {
+    ret = replace_pattern(string, &globBuff);
+    exp = malloc(sizeof(char *) * 1024 * 2);
+
+    switch (ret) {
         case 0:
-            exp = (char **) malloc(get_size(globBuff.gl_pathv));
             for (; i < globBuff.gl_pathc; ++i) {
                 exp[i] = str_dup(globBuff.gl_pathv[i]);
             }
             exp[i] = NULL;
             break;
         case GLOB_NOMATCH:
-            // sizeof(char *) x 2 for exp[0] and exp[1], and the (last) 1 for '\0' in exp[0].
-            exp = (char **) malloc(sizeof(char *) * 2 + str_len(string) + 1);
-            exp[0] = (char *) string;
+            exp[0] = str_dup(string);
             exp[1] = NULL;
             break;
         case GLOB_NOSPACE:
@@ -90,8 +91,13 @@ void process_globs() {
             remove_element(args_expanded, i);
 
             for (int j = 0; args_expanded[j]; ++j) {
-                args[j] = args_expanded[j];
+                args[j] = str_dup(args_expanded[j]);
             }
+
+            for (int j = 0; expanded[j]; ++j) {
+                free(expanded[j]);
+            }
+
             free(expanded);
             free(args_expanded);
         }

@@ -73,6 +73,9 @@ void clear_variables() {
     input_buffer[0] = '\0';
     pid = 0;
     event_flag = 0;
+    for (int i = 0; args[i]; ++i) {
+        args[i] = NULL;
+    }
 }
 
 /**
