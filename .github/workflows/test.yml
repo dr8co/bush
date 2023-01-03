@@ -2,7 +2,7 @@ name: tests
 
 on:
   push:
-    branches: [ "main", "stable" ]
+    branches: [ "main", "stable", "feature-glob-patterns" ]
     
   pull_request:
     branches: [ "main", "stable" ]
