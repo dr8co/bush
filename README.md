@@ -127,6 +127,7 @@ the general shell help is printed.
 * I/O redirection (<, >).
 * `EOF` (Ctrl-D) exits the shell.
 * Bash-style multiline commands (commands ending with '\\').
+* Glob expansion (**experimental**).
 * The primary and secondary prompts are similar to the defaults of bash:
 
 ```console
@@ -210,6 +211,9 @@ void signalHandler(int sig_num);
 
 #endif /* MAIN_H */
 
+ian@github:bush$ ls *.sh
+compile.sh  install.sh	uninstall.sh
+
 ian@github:bush$ exit 98
 
 normal@prompt:bush$ echo $?
@@ -219,7 +223,6 @@ normal@prompt:bush$ echo $?
 ## Unsupported Functionalities (yet)
 
 * Command separators `;`, `||`, `&&`.
-* globs `*`, etc.
 * Background jobs.
 
 ## Acknowledgement
