@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 char *user = NULL, hostname[256], cwd[PATH_MAX];
-char *home = NULL, *prompt = NULL;
+char *home = NULL, *prompt = NULL, *ret_dir;
 
 /**
  * @brief Gets the username (and home directory) of the current user.
@@ -68,7 +68,7 @@ void get_hostname() {
 void init_shell() {
     get_username();
     get_hostname();
-    getcwd(cwd, sizeof(cwd));
+    ret_dir = getcwd(cwd, sizeof(cwd));
     if (!home) {
         home = getenv("HOME");
         if (!home)

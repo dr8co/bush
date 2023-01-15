@@ -57,7 +57,7 @@ void write_history() {
     int fd_out, ret_write, len;
     char input_data[2048];
     line_number++;
-    char no[10];
+    char no[12];
     sprintf(no, "%d", line_number);
     str_cpy(input_data, " ");
     str_cat(input_data, no);
