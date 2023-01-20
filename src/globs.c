@@ -96,8 +96,8 @@ void process_globs() {
                 args[j] = str_dup(args_expanded[j]);
             }
 
-            for (int j = 0; expanded[j]; ++j) {
-                free(expanded[j]);
+            for (int k = 0; expanded[k]; ++k) {
+                free(expanded[k]);
             }
 
             free(expanded);
