@@ -159,7 +159,7 @@ int is_histfile_full() {
  */
 void delete_histfile() {
     if (unlink(history_file) < 0) {
-        printf("Maximum history record reached. Please delete history file\n");
-        printf("at %s to avoid unnecessary errors/bugs.\n", history_file);
+        printf("An error occurred while deleting the shell history\n. Please delete it manually"
+               "at %s to avoid unnecessary errors/bugs.\n", history_file);
     }
 }
