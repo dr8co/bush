@@ -1,3 +1,14 @@
+/**
+ * @file globs.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for glob operations.
+ * @version 2.1
+ * @date 2023-01-21
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include "main.h"
 #include <glob.h>
 #include <stdio.h>

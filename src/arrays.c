@@ -1,3 +1,14 @@
+/**
+ * @file arrays.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for functions to manipulate arrays.
+ * @version 2.1
+ * @date 2023-01-21
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
