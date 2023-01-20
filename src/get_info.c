@@ -2,10 +2,10 @@
  * @file get_info.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief source file for functions to extract information.
- * @version 1.0
- * @date 2022-12-11
+ * @version 2.1
+ * @date 2023-01-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  *
  */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 char *user = NULL, hostname[256], cwd[PATH_MAX];
-char *home = NULL, *prompt = NULL;
+char *home = NULL, *prompt = NULL, *ret_dir;
 
 /**
  * @brief Gets the username (and home directory) of the current user.
@@ -68,7 +68,7 @@ void get_hostname() {
 void init_shell() {
     get_username();
     get_hostname();
-    getcwd(cwd, sizeof(cwd));
+    ret_dir = getcwd(cwd, sizeof(cwd));
     if (!home) {
         home = getenv("HOME");
         if (!home)

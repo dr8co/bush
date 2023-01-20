@@ -2,10 +2,10 @@
  * @file history.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief source file for manipulation of shell history.
- * @version 1.0
- * @date 2022-12-11
+ * @version 2.1
+ * @date 2023-01-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  *
  */
 
@@ -57,7 +57,7 @@ void write_history() {
     int fd_out, ret_write, len;
     char input_data[2048];
     line_number++;
-    char no[10];
+    char no[12];
     sprintf(no, "%d", line_number);
     str_cpy(input_data, " ");
     str_cat(input_data, no);
@@ -159,7 +159,7 @@ int is_histfile_full() {
  */
 void delete_histfile() {
     if (unlink(history_file) < 0) {
-        printf("Maximum history record reached. Please delete history file\n");
-        printf("at %s to avoid unnecessary errors/bugs.\n", history_file);
+        printf("An error occurred while deleting the shell history\n. Please delete it manually"
+               "at %s to avoid unnecessary errors/bugs.\n", history_file);
     }
 }

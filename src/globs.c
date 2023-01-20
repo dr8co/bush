@@ -1,3 +1,14 @@
+/**
+ * @file globs.c
+ * @author Ian Duncan (dr8co@duck.com)
+ * @brief source file for glob operations.
+ * @version 2.1
+ * @date 2023-01-21
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include "main.h"
 #include <glob.h>
 #include <stdio.h>
@@ -7,6 +18,8 @@
  * @brief Check if a string contains a wildcard character.
  * @param str the string to check.
  * @return 1 if a wildcard character is present, 0 otherwise.
+ * @note This is a minimal function, and might return 1 for a string
+ * without a wildcard character.
  */
 int has_wildcard(const char *str) {
     if (!str)
@@ -17,7 +30,7 @@ int has_wildcard(const char *str) {
             return 1;
 
         if (*(str + i) == '[') {
-            for (unsigned int j = i + 1; *(str + j) != '\0' && !is_space(*(str + j)); ++j) {
+            for (unsigned int j = i + 2; *(str + j) != '\0' && !is_space(*(str + j)); ++j) {
                 if (*(str + j) == ']')
                     return 1;
             }
@@ -45,11 +58,11 @@ int replace_pattern(const char *str, glob_t *glob_buf) {
 char **expand_globs(const char *string) {
     glob_t globBuff;
     char **exp;
-    unsigned int i = 0;
+    size_t i = 0;
     int ret;
 
     ret = replace_pattern(string, &globBuff);
-    exp = malloc(sizeof(char *) * 1024 * 2);
+    exp = malloc(sizeof(char *) * 4096);
 
     switch (ret) {
         case 0:
@@ -94,8 +107,8 @@ void process_globs() {
                 args[j] = str_dup(args_expanded[j]);
             }
 
-            for (int j = 0; expanded[j]; ++j) {
-                free(expanded[j]);
+            for (int k = 0; expanded[k]; ++k) {
+                free(expanded[k]);
             }
 
             free(expanded);

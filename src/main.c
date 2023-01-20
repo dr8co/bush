@@ -2,10 +2,10 @@
  * @file main.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief entry point to the shell
- * @version 1.0
- * @date 2022-12-11
+ * @version 2.1
+ * @date 2023-01-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  *
  */
 
@@ -24,13 +24,15 @@ int event_flag;
 char his_var[HIST_MAX * 2];
 int cmd_count = 0;
 
+/* Function prototypes */
 void exit_shell(int exit_status);
 
 /**
  * @brief the shell entry point.
  * @param argc - argument count.
  * @param argv - argument vector.
- * @return always 0.
+ * @return 0 if everything runs fine, or the exit code
+ * of a process that gets terminated, or EXIT_FAILURE in case of a failure.
  */
 int main(__attribute__((unused)) int argc, char **argv) {
     int len, status;
@@ -42,13 +44,15 @@ int main(__attribute__((unused)) int argc, char **argv) {
 
     /* Handle signals e.g Ctrl+C */
     struct sigaction act;
-    // Specify the function to handle signals.
+    // Function to handle the signal.
     act.sa_handler = &signalHandler;
+
     // Block all other signals while the signal handler is running.
     sigfillset(&act.sa_mask);
 
     // Restart functions if interrupted by the signal handler.
     act.sa_flags = SA_RESTART;
+
     // Handle SIGINT (Ctrl+C) signal
     if (sigaction(SIGINT, &act, NULL) == -1) {
         // If an error occurs, print the error message and exit the shell.
@@ -77,6 +81,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
         free(cmd);
         free(cmd2);
 
+        // Skip empty strings and comments
         if (str_cmp(input_buffer, "") == 0 || input_buffer[0] == '#')
             continue;
 
@@ -104,6 +109,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
             break;
         }
 
+        // Execute history events
         if (input_buffer[0] == '!') {
             read_history();
             event_flag = 1;
