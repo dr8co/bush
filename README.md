@@ -13,7 +13,7 @@
   * [Other features](#other-features)
 * [Uninstallation](#uninstallation)
 * [Examples](#examples)
-* [Unsupported Functionalities](#unsupported-functionalities-yet)
+* [Caveats](#caveats)
 * [Acknowledgement](#acknowledgement)
 
 ## Introduction
@@ -220,10 +220,11 @@ normal@prompt:bush$ echo $?
 98
 ```
 
-## Unsupported Functionalities (yet)
+## Caveats
 
-* Command separators `;`, `||`, `&&`.
-* Background jobs.
+* Command separators `;`, `||`, `&&` are not supported.
+* No support for background jobs.
+* Wildcard expansion/ matching is not fully stable.
 
 ## Acknowledgement
 
