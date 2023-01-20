@@ -19,7 +19,7 @@ int has_wildcard(const char *str) {
             return 1;
 
         if (*(str + i) == '[') {
-            for (unsigned int j = i + 1; *(str + j) != '\0' && !is_space(*(str + j)); ++j) {
+            for (unsigned int j = i + 2; *(str + j) != '\0' && !is_space(*(str + j)); ++j) {
                 if (*(str + j) == ']')
                     return 1;
             }
