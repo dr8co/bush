@@ -7,6 +7,8 @@
  * @brief Check if a string contains a wildcard character.
  * @param str the string to check.
  * @return 1 if a wildcard character is present, 0 otherwise.
+ * @note This is a minimal function, and might return 1 for a string
+ * without a wildcard character.
  */
 int has_wildcard(const char *str) {
     if (!str)
@@ -45,11 +47,11 @@ int replace_pattern(const char *str, glob_t *glob_buf) {
 char **expand_globs(const char *string) {
     glob_t globBuff;
     char **exp;
-    unsigned int i = 0;
+    size_t i = 0;
     int ret;
 
     ret = replace_pattern(string, &globBuff);
-    exp = malloc(sizeof(char *) * 1024 * 2);
+    exp = malloc(sizeof(char *) * 4096);
 
     switch (ret) {
         case 0:
