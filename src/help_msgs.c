@@ -67,7 +67,7 @@ char *exit_msg = "exit: exit [n]\n"
 
 
 /* 'help' */
-char *help_msg = "The Burning Bush, version 1.0.0\n"
+char *help_msg = "The Burning Bush, version 2.1\n"
                  "These shell commands are defined internally.  Type 'help' to see this list.\n"
                  "Use 'man -k' or 'info' to find out more about commands not in this list.\n\n"
 
