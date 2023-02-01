@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Run from this directory
 cd "${0%/*}" || exit 1
 
-# The script must be run with superuser powers.
+# sudo powers required.
 if [ "$(id -u)" != "0" ]; then
   echo "Sorry, you are not root."
   exit 1
@@ -17,7 +17,7 @@ APP_PATH="/opt/burning_bush"
 BIN_PATH="/usr/local/bin"
 MAN_PATH="/usr/local/share/man/man1"
 
-echo -e "Installing The Burning Bush.."
+echo -e "Installing The Burning Bush..\n"
 
 echo -e "Compiling..\n"
 
@@ -37,7 +37,7 @@ if [ ! -d "$APP_PATH" ]; then
   mkdir -p "$APP_PATH"
 fi
 
-cp "$BUSH" "$APP_PATH/$BUSH"
+mv "$BUSH" "$APP_PATH/$BUSH"
 
 chmod +x "$APP_PATH/$BUSH"
 
@@ -55,6 +55,6 @@ gzip "$MAN_PATH/burning-bush.1"
 
 echo -e "Updating man database..\n"
 
-mandb > /dev/null 2>&1
+mandb >/dev/null 2>&1
 
 echo "All set."

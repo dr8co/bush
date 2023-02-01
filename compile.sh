@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Run from this directory.
 cd "${0%/*}" || exit 1
@@ -34,14 +34,14 @@ if [ -x "$(command -v clang)" ]; then
   CLANG_VERSION=$(clang --version | grep -n 1 | awk '{split($4, ver, "."); print ver[1]}')
   set_std_flag
   clang -Wall -Werror -pedantic "$C_STD" ./src/*.c -o bush
-  echo "Compiled with Clang $CLANG_VERSION with C standard $C_STD"
+  echo -e "Compiled with Clang $CLANG_VERSION with C standard $C_STD\n"
 else
   # Compile with GCC if Clang is not found.
   if [ -x "$(command -v gcc)" ]; then
     GCC_VERSION=$(gcc --version | grep gcc | awk '{split($3, ver, "."); print ver[1]}')
     set_std_flag
     gcc -Wall -Werror -pedantic "$C_STD" ./src/*.c -o bush
-    echo -e "Compiled with GCC $GCC_VERSION with C standard $C_STD"
+    echo -e "Compiled with GCC $GCC_VERSION with C standard $C_STD\n"
   else
     # Both Clang and GCC are not present in the system.
     echo "clang and gcc compilers not found in your system. Please compile manually."
@@ -51,7 +51,7 @@ fi
 
 # Report the outcome of compilation.
 if [ -f bush ]; then
-  echo "Compilation successful."
+  echo -e "Compilation successful.\n"
 else
   echo "Something went wrong, compilation failed."
   exit "$EXIT_CODE"
