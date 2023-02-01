@@ -109,7 +109,7 @@ void print_working_dir() {
     if (*cwd) {
         printf("%s\n", cwd);
     } else if (*ret_dir){
-        printf("%s", ret_dir);
+        printf("%s\n", ret_dir);
     }
     else
         perror("error in reading current directory");

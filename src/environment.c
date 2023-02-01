@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include "main.h"
 
-int element = 0;
 
 /* Global variables for this file */
 extern int fd, line_number, event_flag;
@@ -22,6 +21,7 @@ extern int output_redirection, input_redirection;
 extern char *input_redirection_file;
 extern char *output_redirection_file;
 extern char *prompt;
+int element = 0;
 
 
 /**

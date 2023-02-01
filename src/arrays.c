@@ -46,7 +46,7 @@ size_t get_size(char **arr){
  * @brief removes an item from an array (in place).
  * @param arr the array to evaluate.
  * @param index the index of the item to be removed from the array.
- * @return the new array with the element removed.
+ * @return a pointer to the array itself.
  */
 char **remove_element(char **arr, int index) {
     int size = get_length(arr);
