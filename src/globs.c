@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 /**
- * @brief Check if a string contains a wildcard character.
+ * @brief Check if a string contains a basic wildcard character.
  * @param str the string to check.
  * @return 1 if a wildcard character is present, 0 otherwise.
  * @note This is a minimal function, and might return 1 for a string

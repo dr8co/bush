@@ -113,4 +113,4 @@ char *help_help = "help: help [pattern ...]\n"
                   "\t  PATTERN 	Pattern specifying a help topic\n\n"
 
                   "\tExit Status:\n"
-                  "\tReturns success unless PATTERN is not found or an invalid option is given.\n";
+                  "\t  Returns success unless PATTERN is not found or an invalid option is given.\n";
