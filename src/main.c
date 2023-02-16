@@ -60,7 +60,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
     // Print help if the shell was called with 'help' argument on the command line.
-    if (argv[1]) {
+    if (argc > 1) {
         if (str_cmp(argv[1], "help") == 0)
             find_help(NULL);
     }
