@@ -15,7 +15,7 @@ APP_PATH="/opt/burning_bush"
 BIN_PATH="/usr/local/bin"
 MAN_PATH="/usr/local/share/man/man1"
 
-echo -e "Uninstalling The Burning Bush..\n"
+echo -e "Uninstalling The Burning Bush 3.0 ..\n"
 
 echo -e "Cleaning man page..\n"
 
@@ -47,4 +47,4 @@ echo -e "Updating man database..\n"
 
 mandb >/dev/null 2>&1
 
-echo "Successfully uninstalled The Burning Bush. Thank you, Bye! |(•◡•)|."
+echo "Successfully uninstalled The Burning Bush 3.0. Thank you, Bye! |(•◡•)|."

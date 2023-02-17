@@ -17,7 +17,7 @@ APP_PATH="/opt/burning_bush"
 BIN_PATH="/usr/local/bin"
 MAN_PATH="/usr/local/share/man/man1"
 
-echo -e "Installing The Burning Bush..\n"
+echo -e "Installing The Burning Bush 3.0 ..\n"
 
 echo -e "Compiling..\n"
 
