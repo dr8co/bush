@@ -2,8 +2,8 @@
  * @file main.h
  * @author Ian Duncan (dr8co@duck.com)
  * @brief project header file
- * @version 2.1
- * @date 2023-01-21
+ * @version 3.0
+ * @date 2023-02-18
  *
  * @copyright Copyright (c) 2023
  *

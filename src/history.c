@@ -2,8 +2,8 @@
  * @file history.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief source file for manipulation of shell history.
- * @version 2.1
- * @date 2023-01-21
+ * @version 3.0
+ * @date 2023-02-18
  *
  * @copyright Copyright (c) 2023
  *
