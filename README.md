@@ -1,18 +1,21 @@
-# The Burning Bush: A simple UNIX command interpreter
+<h1 align="center">The Burning Bush</h1>
+<h2 align="center">A simple UNIX command interpreter</h2>
 
-![The Burning Bush](./media/mother-earth-burning.gif "Mother Earth Burning Sticker")
+<p align="center">
+<img alt="The Burning Bush" src="./media/mother-earth-burning.gif" title="Mother Earth Burning Sticker" width="491" height="495"/>
+</p>
 
-## Table of Content
+## Table of Contents
 
 * [About](#introduction)
 * [Installation](#installation)
-  * [Requirements](#requirements)
-  * [How to install](#how-to-install)
+    * [Requirements](#requirements)
+    * [How to install](#how-to-install)
 * [Usage](#usage)
-  * [Supported Commands](#supported-commands)
-  * [Other features](#other-features)
-* [Uninstallation](#uninstallation)
+    * [Supported Commands](#supported-commands)
+    * [Other features](#other-features)
 * [Examples](#examples)
+* [Uninstallation](#uninstallation)
 * [Caveats](#caveats)
 * [Acknowledgement](#acknowledgement)
 
@@ -34,11 +37,11 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ### Requirements
 
 * **UNIX-like environment**, like macOS and Linux.
-* GNU **GCC**, or **clang** LLVM compiler.
+* GNU **GCC**, or LLVM **Clang** compiler.
 
 ### How to install
 
-Run the install.sh script with root privileges to install:
+Run the [installation script](./install.sh) with root privileges to install:
 
 ```zsh
 sudo ./install.sh
@@ -51,8 +54,7 @@ Also, you can compile it on the command-line with
 `-Wall -Werror -Wextra -pedantic` flags to generate warnings for potential issues/bugs.
 
 Use option `-std=gnuXX` where `XX` can be `99`, `11`, `17` or `2x`, depending on the
-latest version of C supported by your compiler
-(it is advisable to compile with the latest stable standards).
+latest version of C supported by your compiler.
 
 For example,
 
@@ -69,7 +71,7 @@ mkdir -p ./cmake-bush
 
 "$(command -v cmake)" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="$(command -v ninja)" -G Ninja -S . -B ./cmake-bush
 
-"$(command -v cmake)" --build ./cmake-bush --target bush -j 3
+"$(command -v cmake)" --build ./cmake-bush --target bush -j 4
 
 # You can now run
 # cd cmake-bush/src && ./bush
@@ -89,36 +91,33 @@ Terminate with `exit`.
 The Burning Bush supports all the standard UNIX commands (every program in PATH)
 as well as a few builtin commands.
 
-The builtins supported are:
+The **builtins** supported are:
 
 * `cd [directory]`\
-Changes the shell working directory. With no argument
-(or with `~` or `~/` arg), the working directory
-is changed to $HOME.
-`cd -` changes the working directory to the previous working directory.
-
-* `echo [args]`\
-Writes arguments to the standard output.
+  Changes the shell working directory. With no argument
+  (or with `~` or `~/` arg), the working directory
+  is changed to $HOME.
+  `cd -` changes the working directory to the previous working directory.
 
 * `exit [status]`\
-Exits the shell with status (0 by default or if called with no argument).
+  Exits the shell with status (0 by default or if called with no argument).
 
 * `pwd`\
-Prints the shell working directory.
+  Prints the shell working directory.
 
 * `export [name[=value]]`\
-Export attribute for shell variables.
+  Export attribute for shell variables.
 
 * `history`\
-Display history of commands.\
-The `!` operator is also supported for executing
-commands in the shell history. (eg `!!`, `!23`, `!3`).
+  Display history of commands.\
+  The `!` operator is also supported for executing
+  commands in the shell history. (eg `!!`, `!23`, `!3`).
 
 * `help [command]`\
-Displays help. `help command` displays help for `command`, where `command`
-can be `cd`, `echo`, and `exit`. `help`.
-Without any argument, (or with an invalid argument),
-the general shell help is printed.
+  Displays help. `help command` displays help for `command`, where `command`
+  can be `cd`, `echo`, and `exit`. `help`.
+  Without any argument, (or with an invalid argument),
+  the general shell help is printed.
 
 ### Other Features
 
@@ -135,15 +134,6 @@ the general shell help is printed.
 username@hostname:current_working_directory$
 # secondary:
 >
-```
-
-## Uninstallation
-
-Run the uninstall.sh script with root privileges to uninstall
-The Burning Bush from your system:
-
-```zsh
-sudo ./uninstall.sh
 ```
 
 ## Examples
@@ -220,6 +210,15 @@ normal@prompt:bush$ echo $?
 98
 ```
 
+## Uninstallation
+
+Run the [uninstallation script](./uninstall.sh) with root privileges to uninstall
+The Burning Bush from your system:
+
+```zsh
+sudo ./uninstall.sh
+```
+
 ## Caveats
 
 * Command separators `;`, `||`, `&&` are not supported.
@@ -228,7 +227,7 @@ normal@prompt:bush$ echo $?
 
 ## Acknowledgement
 
-Repository author: [Ian Duncan](https://github.com/dr8co "Ian")
+Project author: [Ian Duncan](https://github.com/dr8co "Ian")
 
 The **"Mother Earth Burning Sticker"** courtesy of [Tenor](https://tenor.com/ "Tenor")
 and [INTO ACTION](https://tenor.com/official/intoaction "intoaction").

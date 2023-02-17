@@ -2,8 +2,8 @@
  * @file main.c
  * @author Ian Duncan (dr8co@duck.com)
  * @brief entry point to the shell
- * @version 2.1
- * @date 2023-01-21
+ * @version 3.0
+ * @date 2023-02-18
  *
  * @copyright Copyright (c) 2023
  *
@@ -60,7 +60,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
     // Print help if the shell was called with 'help' argument on the command line.
-    if (argv[1]) {
+    if (argc > 1) {
         if (str_cmp(argv[1], "help") == 0)
             find_help(NULL);
     }
