@@ -227,7 +227,7 @@ sudo ./uninstall.sh
 
 ## Acknowledgement
 
-Repository author: [Ian Duncan](https://github.com/dr8co "Ian")
+Project author: [Ian Duncan](https://github.com/dr8co "Ian")
 
 The **"Mother Earth Burning Sticker"** courtesy of [Tenor](https://tenor.com/ "Tenor")
 and [INTO ACTION](https://tenor.com/official/intoaction "intoaction").
