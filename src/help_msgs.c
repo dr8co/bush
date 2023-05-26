@@ -119,7 +119,7 @@ char *help_help = "help: help [pattern ...]\n"
 char *version = "The Burning Bush 3.0, February 2023.\n"
                 "Maintained by Ian Duncan at github.com/dr8co/bush\n"
                 "License: MIT License. Use command 'license' to view the license.\n\n"
-                "This is free software; you are free to change and redistribute it.\n"
+                "This is a free software; you are free to change and redistribute it.\n"
                 "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
 
 char *LICENSE = "MIT License\n"
