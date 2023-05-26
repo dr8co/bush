@@ -3,7 +3,7 @@
  * @author Ian Duncan (dr8co@duck.com)
  * @brief entry point to the shell
  * @version 3.0
- * @date 2023-02-18
+ * @date 2023-05-26
  *
  * @copyright Copyright (c) 2023
  *
@@ -61,8 +61,10 @@ int main(__attribute__((unused)) int argc, char **argv) {
     }
     // Print help if the shell was called with 'help' argument on the command line.
     if (argc > 1) {
-        if (str_cmp(argv[1], "help") == 0)
+        if ((str_cmp(argv[1], "help") == 0) || (str_cmp(argv[1], "--help") == 0) || (str_cmp(argv[1], "-h") == 0)) {
             find_help(NULL);
+            exit(0);
+        }
     }
 
     /* The main shell loop to read and execute commands */
