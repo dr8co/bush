@@ -3,7 +3,7 @@
  * @author Ian Duncan (dr8co@duck.com)
  * @brief file for help messages.
  * @version 3.0
- * @date 2023-02-18
+ * @date 2023-05-27
  *
  * @copyright Copyright (c) 2023
  *
@@ -114,3 +114,32 @@ char *help_help = "help: help [pattern ...]\n"
 
                   "\tExit Status:\n"
                   "\t  Returns success unless PATTERN is not found or an invalid option is given.\n";
+
+/* version string */
+char *version = "The Burning Bush 3.0, February 2023.\n"
+                "Maintained by Ian Duncan at github.com/dr8co/bush\n"
+                "License: MIT License. Use command 'license' to view the license.\n\n"
+                "This is free software; you are free to change and redistribute it.\n"
+                "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
+
+char *LICENSE = "MIT License\n"
+                "\n"
+                "Copyright (c) 2023 Ian Duncan\n"
+                "\n"
+                "Permission is hereby granted, free of charge, to any person obtaining a copy\n"
+                "of this software and associated documentation files (the \"Software\"), to deal\n"
+                "in the Software without restriction, including without limitation the rights\n"
+                "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n"
+                "copies of the Software, and to permit persons to whom the Software is\n"
+                "furnished to do so, subject to the following conditions:\n"
+                "\n"
+                "The above copyright notice and this permission notice shall be included in all\n"
+                "copies or substantial portions of the Software.\n"
+                "\n"
+                "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n"
+                "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
+                "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n"
+                "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n"
+                "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n"
+                "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n"
+                "SOFTWARE.\n";

@@ -3,7 +3,7 @@
  * @author Ian Duncan (dr8co@duck.com)
  * @brief entry point to the shell
  * @version 3.0
- * @date 2023-05-26
+ * @date 2023-05-27
  *
  * @copyright Copyright (c) 2023
  *
@@ -39,11 +39,13 @@ int main(__attribute__((unused)) int argc, char **argv) {
     char *cmd = NULL, *cmd2 = NULL;
     char *pre_token[2], pre_buf[1024];
 
+    // Initialize the shell
     init_shell();
     setenv("SHELL", argv[0], 1);
 
     /* Handle signals e.g Ctrl+C */
     struct sigaction act;
+
     // Function to handle the signal.
     act.sa_handler = &signalHandler;
 
@@ -55,14 +57,19 @@ int main(__attribute__((unused)) int argc, char **argv) {
 
     // Handle SIGINT (Ctrl+C) signal
     if (sigaction(SIGINT, &act, NULL) == -1) {
-        // If an error occurs, print the error message and exit the shell.
         perror("sigaction");
         exit(EXIT_FAILURE);
     }
-    // Print help if the shell was called with 'help' argument on the command line.
+
+    // Help & Version when invoked as command-line args
     if (argc > 1) {
-        if ((str_cmp(argv[1], "help") == 0) || (str_cmp(argv[1], "--help") == 0) || (str_cmp(argv[1], "-h") == 0)) {
-            find_help(NULL);
+        if ((str_cmp(argv[1], "help") == 0) || (str_cmp(argv[1], "--help") == 0) ||
+            (str_cmp(argv[1], "-h") == 0)) {
+            print_help(NULL);
+            exit(0);
+        } else if ((str_cmp(argv[1], "version") == 0) || (str_cmp(argv[1], "--version") == 0) ||
+                   (str_cmp(argv[1], "-v") == 0)) {
+            print_help("version");
             exit(0);
         }
     }
@@ -102,7 +109,7 @@ int main(__attribute__((unused)) int argc, char **argv) {
 
         // Handle help.
         if (str_cmp(pre_token[0], "help") == 0) {
-            find_help(pre_token[1]);
+            print_help(pre_token[1]);
             continue;
         }
 
