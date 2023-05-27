@@ -41,8 +41,6 @@ int main(__attribute__((unused)) int argc, char **argv) {
 
     // Initialize the shell
     init_shell();
-    setenv("SHELL", argv[0], 1);
-
     /* Handle signals e.g Ctrl+C */
     struct sigaction act;
 
