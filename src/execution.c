@@ -3,7 +3,7 @@
  * @author Ian Duncan (dr8co@duck.com)
  * @brief source file for functions that handle execution of commands.
  * @version 3.0
- * @date 2023-02-18
+ * @date 2023-05-27
  *
  * @copyright Copyright (c) 2023
  *
@@ -188,6 +188,10 @@ int command(int input, int first, int last, char *cmdExec) {
             run_echo(cmdExec);
         } else if (str_cmp(args[0], "history") == 0) {
             print_history();
+        }else if (str_cmp(args[0], "version") == 0) {
+            print_help("version");
+        }else if (str_cmp(args[0], "license") == 0) {
+            print_help("license");
         } else if (execvp(args[0], args) < 0) {
             printf("The burning bush: %i: command not found: %s\n", cmd_count, args[0]);
         }

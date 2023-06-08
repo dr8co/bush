@@ -209,7 +209,7 @@ void print_prompt1();
 void print_prompt2();
 
 /* help.c */
-void find_help(const char *str);
+void print_help(const char *str);
 
 /* signal_handler.c */
 void signalHandler(int sig_num);

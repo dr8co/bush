@@ -9,6 +9,12 @@ if [ "$(id -u)" != "0" ]; then
   exit 1
 fi
 
+# Uninstall previous version(s)
+if [ -x "$(command -v bush)" ]; then
+  echo -e "Uninstalling previous version ..\n"
+  ./uninstall.sh
+fi
+
 BUSH="bush"
 MAN="man/burning-bush.1"
 EXIT_CODE=13
