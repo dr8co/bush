@@ -78,3 +78,6 @@ bush
 # Github workflows
 .github/
 .github
+
+# Ninja configs
+*.ninja*
