@@ -12,6 +12,9 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#ifdef PATH_MAX
+#undef PATH_MAX
+#endif
 #define PATH_MAX 4096 // Maximum length of a file path.
 #define HIST_MAX 1024 // Maximum number of commands to store in shell history file.
 
