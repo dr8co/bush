@@ -3,7 +3,7 @@
  * @author Ian Duncan (dr8co@duck.com)
  * @brief project header file
  * @version 3.0
- * @date 2023-02-18
+ * @date 2023-05-27
  *
  * @copyright Copyright (c) 2023
  *
@@ -24,6 +24,7 @@
 extern char *args[512];
 extern char input_buffer[1024];
 extern char **environ;
+extern char* LICENSE;
 
 /******* Function Declarations *******/
 
@@ -106,7 +107,7 @@ void print_prompt1();
 void print_prompt2();
 
 /* help.c */
-void find_help(const char *str);
+void print_help(const char *str);
 
 /* signal_handler.c */
 void signalHandler(int sig_num);

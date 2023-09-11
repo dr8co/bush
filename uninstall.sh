@@ -47,4 +47,5 @@ echo -e "Updating man database..\n"
 
 mandb >/dev/null 2>&1
 
-echo "Successfully uninstalled The Burning Bush 3.0. Thank you, Bye! |(•◡•)|."
+echo -e "Successfully uninstalled The Burning Bush 3.0.\n"
+echo -e "Thank you, Bye! |(•◡•)|.\n"
