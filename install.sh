@@ -11,7 +11,7 @@ fi
 
 # Uninstall previous version(s)
 if [ -x "$(command -v bush)" ]; then
-  echo -e "Uninstalling previous version ..\n"
+  echo -e "Uninstalling previous version...\n"
   ./uninstall.sh
 fi
 
