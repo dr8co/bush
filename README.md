@@ -11,6 +11,7 @@
 * [Installation](#installation)
     * [Requirements](#requirements)
     * [How to install](#how-to-install)
+* [Run on Docker](#run-on-docker)
 * [Usage](#usage)
     * [Supported Commands](#supported-commands)
     * [Other features](#other-features)
@@ -76,6 +77,20 @@ mkdir -p ./cmake-bush
 # You can now run
 # cd cmake-bush/src && ./bush
 
+```
+
+## Run on Docker
+
+Pull the image from Docker Hub:
+
+```zsh
+docker pull dr8co/bush
+```
+
+Run the image:
+
+```zsh
+docker run -it dr8co/bush
 ```
 
 ## Usage
